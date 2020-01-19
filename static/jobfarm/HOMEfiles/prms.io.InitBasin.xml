@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.InitBasin" name="InitBasin" author="hzfwhy@lzb.ac.cn" keyword="initialize" description="Basin setup initialize,Check for validity of basin parameters and compute reservoir areas.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="ngw" dataType="PoolInteger" size="0" unit="" description="Number of Ground water reservoirs."/>
+    <var name="nssr" dataType="PoolInteger" size="0" unit="" description="Number of subsurface reservoirs."/>
+    <var name="hru_percent_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area"/>
+    <var name="hru_ssres" dataType="PoolIntegerArray" size="0" unit="" description="Index of subsurface reservoir receiving excess water from HRU soil zone"/>
+    <var name="hru_gwres" dataType="PoolIntegerArray" size="0" unit="" description="Index of groundwater reservoir receiving excess soil water from each HRU"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="dprst_flag" dataType="PoolInteger" size="0" unit="" description="Selection flag for depression storage computation. 0=No; 1=Yes"/>
+    <var name="hru_percent_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area as a decimal percent of the total HRU area"/>
+    <var name="dprst_pct_open" dataType="PoolDoubleArray" size="0" unit="" description="Decimal fraction of depression storage area that can flow to a stream channel. Amount of flow is a  function of storage."/>
+    <var name="land_area" dataType="PoolDouble" size="0" unit="" description="Basin area composed of land."/>
+    <var name="water_area" dataType="PoolDouble" size="0" unit="" description="Basin area composed of water bodies"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="active_gwrs" dataType="PoolInteger" size="0" unit="" description="Number of active  GWRs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="gwr_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for ground-water reservoirs"/>
+    <var name="ssres_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each subsurface reservoir; computed by summing areas of HRUs that contribute to it"/>
+    <var name="gwres_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each groundwater reservoir. Computed by summing areas of HRUs that contribute to it"/>
+    <var name="hru_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area"/>
+    <var name="dem_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area defined by DEM"/>
+    <var name="dprst_open" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area that can flow to a stream"/>
+    <var name="dprst_clos" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area that is closed and can  only spill"/>
+    <var name="hru_percent_impv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="hru_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Impervious area of each HRU"/>
+    <var name="hru_percent_perv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is perviou"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="Pervious area of each HRU"/>
+  </varMeta>
+</moduleMeta>

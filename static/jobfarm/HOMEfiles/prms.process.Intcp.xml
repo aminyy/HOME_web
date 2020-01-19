@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Intcp" name="Intcp" author="hzfwhy@lzb.ac.cn" keyword="Interception" description="Interception calculation.Computes amount of intercepted rain and snow, evaporationfrom intercepted rain and snow, and net rain and snow that reaches the soil or snowpack.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nevap" dataType="PoolInteger" size="0" unit="" description="Number of evaporation pan stations."/>
+    <var name="epan_coef" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation pan coefficient Evaporation pan coefficient"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="snow_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Snow interception storage capacity for the major vegetation type in each HRU"/>
+    <var name="srain_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Winter rain interception storage capacity for the major vegetation type in the HRU"/>
+    <var name="wrain_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Winter rain interception storage capacity for the major vegetation type in the HRU"/>
+    <var name="cov_type" dataType="PoolIntegerArray" size="0" unit="" description="Vegetation cover type designation for each HRU (0=bare soil; 1=grasses; 2=shrubs; 3=trees)"/>
+    <var name="covden_sum" dataType="PoolDoubleArray" size="0" unit="" description="Summer vegetation cover density for the major vegetation type on each HRU"/>
+    <var name="covden_win" dataType="PoolDoubleArray" size="0" unit="" description="Winter vegetation cover density for the major vegetation type on each HRU"/>
+    <var name="potet_sublim" dataType="PoolDouble" size="0" unit="" description="Proportion of potential ET that is sublimated from snow surface"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="pkwater_equiv" dataType="PoolDoubleArray" size="0" unit="" description="Psuedo parameter, snow pack water equivalent from previous time step"/>
+    <var name="hru_rain" dataType="PoolDoubleArray" size="0" unit="" description="Rain on HRU. [precip]"/>
+    <var name="hru_snow" dataType="PoolDoubleArray" size="0" unit="" description="Snow on HRU. [precip]"/>
+    <var name="hru_ppt" dataType="PoolDoubleArray" size="0" unit="" description="Precipitation on HRU, rain and snow. [precip]"/>
+    <var name="basin_ppt" dataType="PoolDouble" size="0" unit="" description="basin_ppt"/>
+    <var name="transp_on" dataType="PoolIntegerArray" size="0" unit="" description="Indicator for whether transpiration is occurring, 0=no, 1=yes. [potet]"/>
+    <var name="tmaxf" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tavgc" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="swrad" dataType="PoolDoubleArray" size="0" unit="" description="The computed solar radiation for each HRU [solrad]"/>
+    <var name="pan_evap" dataType="PoolDoubleArray" size="0" unit="" description="Measured pan evaporation. [obs]"/>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="public Calendar date"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="hru_intcpevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from interception on each HR"/>
+    <var name="hru_intcpstor" dataType="PoolDoubleArray" size="0" unit="" description="Storage in canopy on each HRU"/>
+    <var name="last_intcp_stor" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average changeover interception"/>
+    <var name="net_rain" dataType="PoolDoubleArray" size="0" unit="" description="hru_rain minus interception"/>
+    <var name="net_snow" dataType="PoolDoubleArray" size="0" unit="" description="hru_snow minus interception"/>
+    <var name="net_ppt" dataType="PoolDoubleArray" size="0" unit="" description="HRU precipitation (rain and/or snow) with  interception removed"/>
+    <var name="basin_net_ppt" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average net_ppt"/>
+    <var name="intcp_stor" dataType="PoolDoubleArray" size="0" unit="" description="Current interception storage on each HRU"/>
+    <var name="basin_intcp_stor" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average interception storage"/>
+    <var name="intcp_evap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from interception on canopy of each HRU"/>
+    <var name="basin_intcp_evap" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted evaporation from interception"/>
+    <var name="intcp_form" dataType="PoolIntegerArray" size="0" unit="" description="Form (rain or snow) of interception (0=rain; 1=snow)"/>
+    <var name="intcp_on" dataType="PoolIntegerArray" size="0" unit="" description="Whether there is interception in the canopy (0=no; 1=yes)"/>
+    <var name="newsnow" dataType="PoolIntegerArray" size="0" unit="" description="New snow on HRU (0=no; 1=yes)"/>
+    <var name="pptmix" dataType="PoolIntegerArray" size="0" unit="" description="Precipitation is mixture of rain and snow (0=no; 1=yes)"/>
+  </varMeta>
+</moduleMeta>

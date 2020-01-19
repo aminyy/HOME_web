@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.SheetFlow" name="sheetFlow" author="longyinping11@lzb.ac.cn" keyword="SheetFlow" description="calculation of surface routing: steady constant sheet flow,using Manning's equation">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="Dr" dataType="PoolDouble" size="0" unit="" description="depth of river (m)"/>
+    <var name="Drw" dataType="PoolDouble" size="0" unit="" description="depth of river water (m)"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="surface water storage(mm H2O)"/>
+    <var name="q_hillslope" dataType="PoolDouble" size="0" unit="" description="surface runoff(m3/s)"/>
+    <var name="soil_con_f" dataType="PoolDouble" size="0" unit="" description="soil water conservation factor"/>
+    <var name="Sstmax" dataType="PoolDouble" size="0" unit="" description="maximum surface water detension (mm)"/>
+    <var name="LAI" dataType="PoolDouble" size="0" unit="" description="Leaf Area Index"/>
+    <var name="LAImax" dataType="PoolDouble" size="0" unit="" description="maximum LAI in a year, varied by landuse type"/>
+    <var name="surfn" dataType="PoolDouble" size="0" unit="" description="surface roughness (Manning's coefficient)"/>
+    <var name="slp" dataType="PoolDouble" size="0" unit="" description="average slope of the current simulation grid"/>
+    <var name="landuse" dataType="PoolString" size="0" unit="" description="landuse type"/>
+    <var name="length" dataType="PoolDouble" size="0" unit="" description="average hillslope length (m)"/>
+    <var name="area" dataType="PoolDouble" size="0" unit="" description="area of the current simulation grid (m2)"/>
+  </varMeta>
+</moduleMeta>

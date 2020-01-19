@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.HamonET" name="HamonET" author="Lihui Luo" keyword="Hamon Evapotranspiration" description="Compute the Hamon Evapotranspiration">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="time" dataType="PoolInteger" size="0" unit="" description="time"/>
+    <var name="temp" dataType="PoolDouble" size="0" unit="" description="temperature"/>
+    <var name="daylength" dataType="PoolDouble" size="0" unit="" description="day length"/>
+    <var name="potET" dataType="PoolDouble" size="0" unit="" description="Potential Evapotranspiration"/>
+  </varMeta>
+</moduleMeta>

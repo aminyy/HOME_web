@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.TemporalContextInfo" name="temporalContextInfo" author="longyinping11@lzb.ac.cn" keyword="date" description="getting current simulation date from the temporal context">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+  </varMeta>
+</moduleMeta>

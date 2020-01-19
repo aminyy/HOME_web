@@ -1,0 +1,714 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.metadata" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+    <link href="/static/assets/components/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css"/>
+    <link href="/static/assets/components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"/>
+
+    <style type="text/css">
+        .popbox {
+            width: 276px;
+            position: relative;
+        }
+
+        .popover {
+            width: 276px !important;
+        }
+
+        .popover-content {
+            width: 276px !important;
+        }
+
+        .form-group .input-group {
+            margin-bottom: 10px;
+        }
+
+        .zlist input {
+            width: 100% !important;
+            height: 100% !important;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    <div class="body-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'auth/nav_tabs.html' %}
+            </div>
+            <div class="col-md-12" style="margin-top: 20px;">
+                {% if is_copy %}
+                    <div class="alert alert-info" role="alert">
+                        复制元数据内容，你可以修改后提交。
+                    </div>
+                {% endif %}
+                <div class="stepwizard col-md-offset-2">
+                    <div class="stepwizard-row setup-panel">
+                        <div class="stepwizard-step">
+                            <a href="{{ url_for('auth.metadata_edit', cid=meta.id) }}" type="button"
+                               class="btn btn-primary btn-circle">1</a>
+                            <p>填写元数据</p>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="{{ url_for('auth.metadata_data', id=meta.id) }}" type="button"
+                               class="btn btn-default btn-circle disabled">2</a>
+                            <p>上传数据实体</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="formEditMetadata" class="from form-horizontal form-validate"
+                      action="{{ url_for('auth.metadata_do_' + ('new' if is_copy else 'edit')) }}"
+                      method="POST"
+                      enctype="multipart/form-data" onsubmit="onSubmitMetadataForm()">
+                    <input type="hidden" name="id" value="{{ meta.id }}"/>
+                    <div class="form-group">
+                        <label for="title_cn" class="control-label col-sm-2">中文标题</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="txt_title_cn" name="title_cn" minlength="2"
+                                   maxlength="128"
+                                   value="{{ meta.title_cn or '' }}" required>
+                        </div>
+                        <label for="ds_category" class="control-label col-sm-2">数据分类</label>
+                        <div class="col-sm-2">
+                            <select class="form-control selectpicker" name="ds_category" data-live-search="true">
+                                {% if meta.ds_category==None %}
+                                    <option value="" selected="selected">--无--</option>
+                                {% else %}
+                                    <option value="">--无--</option>
+                                {% endif %}
+                                {% for group in opts['category'] %}
+                                    <optgroup label="{{ group.name }}">
+                                        {% for opt in group.children %}
+                                            {% if opt.id==meta.ds_category %}
+                                                <option value="{{ opt.id }}"
+                                                        selected="selected">{{ opt.name }}</option>
+                                            {% else %}
+                                                <option value="{{ opt.id }}">{{ opt.name }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </optgroup>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="title_en" class="control-label col-sm-2">英文标题</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" id="txt_title_en" name="title_en"
+                                   value="{{ meta.title_en or '' }}"
+                                   minlength="2" maxlength="128">
+                        </div>
+                        <label for="meta_code" class="control-label col-sm-2">元数据编码</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="txt_meta_code" name="meta_code"
+                                   value="{{ meta.meta_code or '' }}"
+                                   minlength="8" maxlength="20">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ds_abstract" class="control-label col-sm-2">数据集摘要</label>
+                        <div class="col-sm-10">
+                    <textarea class="form-control" name="ds_abstract" placeholder="数据集摘要(2000字以内)"
+                              rows="3">{{ meta.ds_abstract or '' }}</textarea>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ds_source" class="control-label col-sm-2">数据源描述</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" name="ds_source" placeholder="数据源描述(2000字以内)"
+                                  rows="3">{{ meta.ds_source  or '' }}</textarea>
+                            </textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ds_process_way" class="control-label col-sm-2">数据加工方法</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" name="ds_process_way" placeholder="数据加工方法(500字以内)"
+                                  rows="2">{{ meta.ds_process_way or '' }}</textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ds_quality" class="control-label col-sm-2">数据质量描述</label>
+                        <div class="col-sm-10">
+                        <textarea class="form-control" name="ds_quality" placeholder="数据质量描述(2000字以内)"
+                                  rows="2">{{ meta.ds_quality or '' }}</textarea>
+                            </textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class=" control-label col-sm-2">采集时间</label>
+                        <div class="col-sm-2">
+                            <input class="form-control date-picker" name="ds_acq_start_time"
+                                   value="{{ meta.ds_acq_start_time|dt or '' }}">
+                        </div>
+                        <div class="col-md-2 text-center">-</div>
+                        <div class="col-sm-2">
+                            <input class="form-control date-picker" name="ds_acq_end_time"
+                                   value="{{ meta.ds_acq_end_time|dt or '' }}">
+                        </div>
+                    </div>
+                    <div class=" form-group">
+                        <label class=" control-label col-sm-2">采集地点</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ds_acq_place"
+                                   value="{{ meta.ds_acq_place or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_acq_lon_east" class="control-label col-sm-2">地理范围东</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control inputmask"
+                                   name="ds_acq_lon_east"
+                                   value="{{ meta.ds_acq_lon_east|degree or '' }}"
+                                   data-inputmask="'alias': 'longtitude'"
+                                   data-rule-longtitude="true">
+                        </div>
+                        <label for="ds_acq_lon_west" class="control-label col-sm-2">地理范围西</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control inputmask"
+                                   name="ds_acq_lon_west"
+                                   value="{{ meta.ds_acq_lon_west|degree or '' }}"
+                                   data-inputmask="'alias': 'longtitude'"
+                                   data-rule-longtitude="true"/>
+                        </div>
+                        <label for="ds_acq_alt_low" class="control-label col-sm-2">海拔下界(m)</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="ds_acq_alt_low"
+                                   value="{{ meta.ds_acq_alt_low or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_acq_lat_south" class="control-label col-sm-2">地理范围南</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control inputmask"
+                                   name="ds_acq_lat_south"
+                                   value="{{ meta.ds_acq_lat_south|degree or '' }}"
+                                   data-inputmask="'alias': 'latitude'"
+                                   data-rule-latitude="true"/>
+                        </div>
+                        <label for="ds_acq_lat_north" class="control-label col-sm-2">地理范围北</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control inputmask"
+                                   name="ds_acq_lat_north"
+                                   value="{{ meta.ds_acq_lat_north|degree or '' }}"
+                                   data-inputmask="'alias': 'latitude'"
+                                   data-rule-latitude="true"/>
+                        </div>
+                        <label for="ds_acq_alt_high" class="control-label col-sm-2">海拔上界(m)</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="ds_acq_alt_high"
+                                   value="{{ meta.ds_acq_alt_high or '' }}">
+                        </div>
+                    </div>
+
+                    <div class=" form-group">
+                        <label for="ds_format" class=" control-label col-sm-2">数据格式</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ds_format" value="{{ meta.ds_format or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_space_res" class="control-label col-sm-2">数据空间分辨率(/米)</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="ds_space_res"
+                                   value="{{ meta.ds_space_res or '' }}">
+                        </div>
+                        <label for="ds_time_res" class="control-label col-sm-2">数据时间分辨率</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="ds_time_res" placeholder="年、月、日、时、分、秒..."
+                                   value="{{ meta.ds_time_res or '' }}">
+                        </div>
+                    </div>
+
+                    <div class=" form-group">
+                        <label for="ds_coordinate" class=" control-label col-sm-2">地理坐标系</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="ds_coordinate">
+                                {% for opt in opts['geo_coordinate'] %}
+                                    {% if opt.opt_value==meta.ds_coordinate %}
+                                        <option value="{{ opt.opt_value }}"
+                                                selected="selected">{{ opt.opt_text }}</option>
+                                    {% else %}
+                                        <option value="{{ opt.opt_value }}">{{ opt.opt_text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <label for="ds_projection" class="control-label col-sm-2">投影方式</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="ds_projection"
+                                   value="{{ meta.ds_projection or '' }}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="file_thumbnail" class="control-label col-sm-2">缩略图</label>
+                        {% if meta.ds_thumbnail %}
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-md btn-info btn-thumb-popover"
+                                        data-toggle="popover"
+                                        data-placement="right" data-trigger="hover">
+                                    当前图片
+                                </button>
+                            </div>
+                            {% if is_copy %}
+                                <input type="hidden" name="thumbnail_old" value="{{ meta.ds_thumbnail or '' }}">
+                            {% endif %}
+                        {% endif %}
+                        <div class="col-sm-6">
+                            <input type="file" class="form-control filestyle" name="file_thumbnail"
+                                   data-buttonBefore="true"
+                                   data-buttonText="{{ '更换图片' if meta.ds_thumbnail and not is_copy else '选择图片' }}"
+                                   accept="image/jpeg,image/png,image/gif">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_subject_tags" class="control-label col-sm-2">标签</label>
+                        <div class="col-sm-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">主题</span>
+                                <input type="text" class="form-control tokenfield" placeholder="输入标签，用英文逗号或回车分割"
+                                       name="ds_topic_tags"
+                                       value="{{ meta.ds_topic_tags | join(",", attribute="text") }}">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">学科</span>
+                                <input type="text" class="form-control tokenfield" placeholder="输入标签，用英文逗号或回车分割"
+                                       name="ds_subject_tags"
+                                       value="{{ meta.ds_subject_tags | join(",", attribute="text") }}">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">分类</span>
+                                <input type="text" class="form-control tokenfield" placeholder="输入标签，用英文逗号或回车分割"
+                                       name="ds_class_tags"
+                                       value="{{ meta.ds_class_tags | join(",", attribute="text") }}">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">时间</span>
+                                <input type="text" class="form-control tokenfield" placeholder="输入标签，用英文逗号或回车分割"
+                                       name="ds_time_tags"
+                                       value="{{ meta.ds_time_tags | join(",", attribute="text") }}">
+                            </div>
+                            <div class="input-group">
+                                <span class="input-group-addon">地点</span>
+                                <input type="text" class="form-control tokenfield" placeholder="输入标签，用英文逗号或回车分割"
+                                       name="ds_locus_tags"
+                                       value="{{ meta.ds_locus_tags | join(",", attribute="text") }}">
+                            </div>
+                        </div>
+                    </div>
+
+                    <input type="hidden" id="hid_ds_projects" name="ds_projects"/>
+                    <input type="hidden" id="hid_ds_data_contributors" name="ds_data_contributors"/>
+                    <input type="hidden" id="hid_ds_meta_authors" name="ds_meta_authors"/>
+                    <input type="hidden" id="hid_ds_data_managers" name="ds_data_managers"/>
+                    <input type="hidden" id="hid_ds_outcomes" name="ds_outcomes"/>
+                    <div class=" form-group">
+                        {% with meta=meta %}
+                            {% include 'manage/metadata/project.html' %}
+                        {% endwith %}
+                    </div>
+
+                    <div class=" form-group">
+                        {% with meta=meta %}
+                            {% include  'manage/metadata/contributor.html' %}
+                        {% endwith %}
+                    </div>
+
+                    <div class=" form-group">
+                        {% with meta=meta %}
+                            {% include 'manage/metadata/author.html' %}
+                        {% endwith %}
+                    </div>
+
+                    <div class=" form-group">
+                        {% with meta=meta %}
+                            {% include 'manage/metadata/manager.html' %}
+                        {% endwith %}
+                    </div>
+
+                    <div class=" form-group">
+                        {% with meta=meta %}
+                            {% include 'manage/metadata/outcome.html' %}
+                        {% endwith %}
+                    </div>
+
+                    <div class=" form-group">
+                        <label for="ds_share_type" class=" control-label col-sm-2">数据共享方式</label>
+                        <div class="col-sm-2">
+                            <select name="ds_share_type" class="form-control">
+                                {% for opt in opts['ds_share_type'] %}
+                                    {% if opt.opt_value==meta.ds_share_type %}
+                                        <option value="{{ opt.opt_value }}"
+                                                selected="selected">{{ opt.opt_text }}</option>
+                                    {% else %}
+                                        <option value="{{ opt.opt_value }}">{{ opt.opt_text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <label for="ds_total_size" class=" control-label col-sm-2">数据量(M字节)</label>
+                        <div class="col-sm-2">
+                            <input type="number" class="form-control" name="ds_total_size"
+                                   value="{{ meta.ds_total_size  or '' }}">
+                        </div>
+                        <label for="quality_level" class=" control-label col-sm-2">数据质量等级</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="quality_level">
+                                {% for opt in opts['ds_quality_level'] %}
+                                    {% if opt.opt_value==meta.ds_quality_level %}
+                                        <option value="{{ opt.opt_value }}"
+                                                selected="selected">{{ opt.opt_text }}</option>
+                                    {% else %}
+                                        <option value="{{ opt.opt_value }}">{{ opt.opt_text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_ref_way" class="control-label col-sm-2">数据引用方式</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="ds_ref_way"
+                                   value="{{ meta.ds_ref_way  or '' }}"
+                                   maxlength="500">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_ref_instruction" class="control-label col-sm-2">数据使用说明</label>
+                        <div class="col-sm-10">
+                <textarea class="form-control" name="ds_ref_instruction"
+                          maxlength="2000">{{ meta.ds_ref_instruction }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_from_station" class="control-label col-sm-2">数据来源站点</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="ds_from_station">
+                                {% for opt in opts['station_name'] %}
+                                    {% if opt.opt_value==meta.ds_from_station %}
+                                        <option value="{{ opt.opt_value }}"
+                                                selected="selected">{{ opt.opt_text }}</option>
+                                    {% else %}
+                                        <option value="{{ opt.opt_value }}">{{ opt.opt_text }}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ds_serv_man" class="control-label col-sm-2">数据服务联系人</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="ds_serv_man"
+                                   value="{{ meta.ds_serv_man or '' }}"
+                                   maxlength="500"/>
+                        </div>
+                        <label for="ds_serv_phone" class="control-label col-sm-2">数据服务电话</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="ds_serv_phone"
+                                   value="{{ meta.ds_serv_phone  or '' }}"
+                                   maxlength="128"/>
+                        </div>
+                        <label for="ds_serv_mail" class="control-label  col-sm-2">数据服务邮箱</label>
+                        <div class="col-sm-2">
+                            <input type="email" class="form-control" name="ds_serv_mail"
+                                   value="{{ meta.ds_serv_mail or '' }}"
+                                   maxlength="128"/>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary">提交</button>
+                        <button type="reset" class="btn btn-default col-sm-offset-1">重置</button>
+                    </div>
+                </form>
+
+                <div class="popover popover-default" id="pickWorker">
+                    <div class="popover-title"><span class="close" data-dismiss="popover-x">&times;</span>Title</div>
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                        <div style="padding: 15px;">
+                            <form class="from form-horizontal" action="{{ url_for('manage.worker_save') }}"
+                                  method="post">
+                                <div class="form-group">
+                                    <label for="true_name" class="control-label">姓名</label>
+                                    <input type="text" class="form-control typeahead" name="true_name"
+                                           data-provide="typeahead"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit" class="control-label">单位</label>
+                                    <input type="text" class="form-control" name="unit"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mailbox" class="control-label">邮箱</label>
+
+                                    <input type="email" class="form-control" name="mailbox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phonecode" class="control-label">电话</label>
+
+                                    <input type="text" class="form-control" name="phonecode"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="popover-footer">
+                        <button type="submit" class="btn btn-primary">新增</button>
+                        <button type="reset" class="btn btn-default" id="worker_new_popover_cancel_button">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                <div class="popover popover-default" id="pickAuthor">
+                    <div class="popover-title"><span class="close" data-dismiss="popover-x">&times;</span>Title</div>
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                        <div style="padding: 15px;">
+                            <form class="from form-horizontal" action="{{ url_for('manage.author_save') }}"
+                                  method="post">
+                                <div class="form-group">
+                                    <label for="true_name" class="control-label">姓名</label>
+                                    <input type="text" class="form-control typeahead" name="true_name"
+                                           data-provide="typeahead"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit" class="control-label">单位</label>
+                                    <input type="text" class="form-control" name="unit"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mailbox" class="control-label">邮箱</label>
+
+                                    <input type="email" class="form-control" name="mailbox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phonecode" class="control-label">电话</label>
+
+                                    <input type="text" class="form-control" name="phonecode"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="popover-footer">
+                        <button type="submit" class="btn btn-primary">新增</button>
+                        <button type="reset" class="btn btn-default" id="author_new_popover_cancel_button">
+                            取消
+                        </button>
+                    </div>
+                </div>
+                <div class="popover popover-default" id="pickManager">
+                    <div class="popover-title"><span class="close" data-dismiss="popover-x">&times;</span>Title</div>
+                    <div class="arrow"></div>
+                    <div class="popover-content">
+                        <div style="padding: 15px;">
+                            <form class="from form-horizontal" action="{{ url_for('manage.manager_save') }}"
+                                  method="post">
+                                <div class="form-group">
+                                    <label for="true_name" class="control-label">姓名</label>
+                                    <input type="text" class="form-control typeahead" name="true_name"
+                                           data-provide="typeahead"
+                                           autocomplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="unit" class="control-label">单位</label>
+                                    <input type="text" class="form-control" name="unit"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mailbox" class="control-label">邮箱</label>
+
+                                    <input type="email" class="form-control" name="mailbox"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="phonecode" class="control-label">电话</label>
+
+                                    <input type="text" class="form-control" name="phonecode"/>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="popover-footer">
+                        <button type="submit" class="btn btn-primary">新增</button>
+                        <button type="reset" class="btn btn-default" id="manager_new_popover_cancel_button">
+                            取消
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block foot_script %}
+    <script src="/static/assets/components/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="/static/assets/components/bootstrap-tokenfield/dist/bootstrap-tokenfield.min.js"></script>
+    <script src="/static/assets/components/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+    <script src="/static/assets/components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+    <script src="/static/assets/components/bootstrap-filestyle/src/bootstrap-filestyle.min.js"></script>
+    <script src="/static/assets/components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        var getIds = function (tid) {
+            var ids = [];
+            var table = $("#" + tid);
+            var elem = $("#" + tid + ">tr");
+            if (table.has('tbody')) {
+                elem = $("#" + tid + ">tbody>tr");
+            }
+            $("#" + tid + ">tbody>tr").each(function () {
+                var pid = $(this).data("pid");
+                if (!!pid) {
+                    ids.push(pid);
+                }
+            });
+            return ids.join(",");
+        };
+
+        var onSubmitMetadataForm = function () {
+            $("#hid_ds_projects").val(getIds("project_table"));
+            $("#hid_ds_data_contributors").val(getIds("worker_table"));
+            $("#hid_ds_meta_authors").val(getIds("author_table"));
+            $("#hid_ds_data_managers").val(getIds("manager_table"));
+            $("#hid_ds_outcomes").val(getIds("outcome_table"));
+            return true;
+        };
+
+        $.validator.setDefaults({
+            highlight: function (element) {
+                $(element).closest('.form-group').addClass('has-error');
+            },
+            unhighlight: function (element) {
+                $(element).closest('.form-group').removeClass('has-error');
+            },
+            errorElement: 'span',
+            errorClass: 'help-block',
+            errorPlacement: function (error, element) {
+                if (element.parent('.input-group').length) {
+                    error.insertAfter(element.parent());
+                } else {
+                    error.insertAfter(element);
+                }
+            }
+        });
+        // input mask for longtitude and latitude
+        Inputmask.extendAliases({
+            'longtitude': {
+                autoUnmask: false,
+                mask: "[+][1]9{1,2}°59'59\"",
+                definitions: {
+                    "1": {
+                        validator: "[0-1]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                    "5": {
+                        validator: "[0-5]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                    "+": {
+                        validator: "[+-]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                }
+            },
+            'latitude': {
+                autoUnmask: false,
+                mask: "[+]9{1,2}°59'59\"",
+                definitions: {
+                    "1": {
+                        validator: "[0-1]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                    "5": {
+                        validator: "[0-5]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                    "+": {
+                        validator: "[+-]",
+                        cardinality: 1,
+                        greddy: false
+                    },
+                }
+            },
+        });
+
+        //字符串格式化
+        String.prototype.format = function () {
+            var args = arguments;
+            return this.replace(/\{(\d+)\}/g,
+                    function (m, i) {
+                        return args[i];
+                    });
+        };
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "必选字段",
+            remote: "请修正该字段",
+            email: "请输入正确格式的电子邮件",
+            url: "请输入合法的网址",
+            date: "请输入合法的日期",
+            dateISO: "请输入合法的日期 (ISO).",
+            number: "请输入合法的数字",
+            digits: "只能输入整数",
+            creditcard: "请输入合法的信用卡号",
+            equalTo: "请再次输入相同的值",
+            accept: "请输入拥有合法后缀名的字符串",
+            maxlength: jQuery.validator.format("请输入一个长度最多是 {0} 的字符串"),
+            minlength: jQuery.validator.format("请输入一个长度最少是 {0} 的字符串"),
+            rangelength: jQuery.validator.format("请输入一个长度介于 {0} 和 {1} 之间的字符串"),
+            range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+            max: jQuery.validator.format("请输入一个最大为 {0} 的值"),
+            min: jQuery.validator.format("请输入一个最小为 {0} 的值")
+        });
+        $(function () {
+
+            $(".btn-thumb-popover").popover({
+                html: true,
+                content: "<img class='ds_thumb-small' src={{ (url_for("manage.get_ds_thumb_fn") + "?w=120&h=90&f={0}".format(meta.ds_thumbnail or ''))  if is_copy else (url_for('manage.get_ds_thumb', meta_id=meta.id) + "?w=120&h=90&v={0}".format(meta.updated|dt('%f'))) }} alt='数据集缩略图' />"
+            }).click(function () {
+                window.open("{{ (url_for("manage.get_ds_thumb_fn") + "?f={0}".format(meta.ds_thumbnail or ''))  if is_copy else (url_for('manage.get_ds_thumb', meta_id=meta.id) + "?v={0}".format(meta.updated|dt('%f'))) }}");
+            });
+
+
+            $(".inputmask").inputmask();
+
+            $(".tokenfield").tokenfield();
+
+            $(".selectpicker").selectpicker();
+
+            $(".date-picker").datepicker({
+                format: 'yyyy-mm-dd',
+                language: "zh-CN"
+            });
+
+            $("#formEditMetadata").validate({
+                submitHandler: function (form) {
+                    onSubmitMetadataForm();
+                    form.submit();
+                }
+            });
+
+
+        });
+    </script>
+
+{% endblock %}

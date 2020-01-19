@@ -1,0 +1,123 @@
+{% extends "auth/layout.html" %}
+
+{% block head2 %}
+<style type="text/css">
+    .main {
+        margin-top: 80px;
+    }
+    .forgot-passwd {
+        width: 400px;
+    }
+    input {
+        border: 1px solid;
+        border-color: #888888;
+        width: 320px;
+        height: 40px;
+    }
+    input:hover {
+        border-color:#000000;
+        box-shadow: inset 0 1px 1px #888888;
+    }
+    h2 {
+        width: 320px;
+        margin-bottom: 10px;
+    }
+    p {
+        color:gray;
+        margin-bottom: 20px;
+    }
+ 
+    .login {
+        margin-left: 70px; 
+        margin-top: -10px; 
+        font-size: 16px;
+        color: #ff0000;
+    }
+    .email {
+        height: 80px;
+    }
+    .btn-submit {
+        color:white;
+        width: 320px;
+        margin-top: 10px;
+        height: 40px;
+        border: 0;
+        background-color: #ff0000;
+        border-radius: 0;
+    }
+    .btn-submit:hover {
+        background-color:#f05d5a ;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="row main">
+    <div class="col-md-12 col-md-offset-5 forgot-passwd">
+        <h2>忘记密码</h2>
+        <p style="float:left">通过注册邮箱重设密码</p>
+        <a href="{{ url_for('auth.login', next='/portal/') }}" class="login">返回登录</a>       
+        <div class="email">
+            <input type="email" name="email" id="user_email" placeholder="请输入邮箱"/>
+        </div>
+        <button id="commit" type="submit" class="button btn-submit">提交</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+    <script type="text/javascript">
+        $(function(){
+            $("#user_email").bind('input propertychange', function() {
+                $(".check-error").remove();
+                $(".send-success").remove();
+                var email = $("#user_email").val();
+                var error = $(".error");
+                if ( email.length == 0 ) {
+                    if ( error.length == 0) {
+                        $(".email").append("<p class='error' style='color:red; font-size:13px;'>邮箱不能为空！</p>");
+                        document.getElementById("user_email").style.borderColor = "#ff0000";
+                    } 
+                } else {
+                    document.getElementById("user_email").style.borderColor = "#888888";
+                    $(".error").remove();
+                }
+            });
+        })
+
+        $("#commit").click(function (){
+            var email = $("#user_email").val();
+            var error = $(".error");
+            if ( email.length == 0 ) {
+                if ( error.length == 0) {
+                    $(".email").append("<p class='error' style='color:red; font-size:13px;'>邮箱不能为空！</p>");
+                    document.getElementById("user_email").style.borderColor = "#ff0000";
+                } 
+                return false;
+            } else {
+                document.getElementById("user_email").style.borderColor = "#888888";
+                $(".error").remove();
+               
+                var result = false;
+                var checkerror = $(".check-error");
+                var sendsuccess = $(".send-success");
+                $.ajaxSettings.async = false; 
+                $.getJSON('{{ url_for("auth.check_email")}}',{user_email: email},
+                    function(data) {
+                        if (data.success){
+                            if ( sendsuccess.length == 0) {
+                                $(".email").append("<p class='send-success' font-size:13px;'>请登录邮箱重置密码后登录！<a href='{{ url_for('auth.not_get_mail') }}' style='margin-left: 40px'>收不到邮件？</a></p>");
+                            } 
+            
+                        } else {
+                            if ( checkerror.length == 0) {
+                                $(".email").append("<p class='check-error' style='color:red; font-size:13px;'>邮箱不存在或帐号未验证，请<a href='{{ url_for('auth.register') }}'>注册</a></p>");
+                            }     
+                        }
+                    }
+                );
+                return result;
+            }
+        })
+    </script>
+{% endblock %}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.Runoff" name="Runoff" author="Lihui Luo" keyword="Runoff" description="Compute Runoff">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="runoffFactor" dataType="PoolDouble" size="0" unit="" description="runoff Factor"/>
+    <var name="remain" dataType="PoolDouble" size="0" unit="" description="remain runoff"/>
+    <var name="surfaceRunoff" dataType="PoolDouble" size="0" unit="" description="Surface runoff"/>
+    <var name="snowMelt" dataType="PoolDouble" size="0" unit="" description="Snow melt"/>
+    <var name="runoff" dataType="PoolDouble" size="0" unit="" description="runoff"/>
+  </varMeta>
+</moduleMeta>

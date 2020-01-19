@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>国家特殊环境、特殊功能观测研究台站共享服务平台</title>
+    <style>
+        @font-face {
+            font-family: code2000;
+            src: url('{{ font_path }}');
+        }
+
+        body {
+            font-family: code2000;
+            font-size: 15px;
+        }
+
+        .title {
+            font-size: 32px;
+            margin: 5px;
+            padding: 0;
+            text-align: center;
+        }
+
+        .title-info {
+            font-size: 19px;
+        }
+
+        .td-title1 {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        .td-title2 {
+            text-align: center;
+            padding-top: 15px;
+        }
+
+        p {
+            width: 80%;
+            word-wrap: break-word;
+            -pdf-word-wrap: break-all;
+        }
+
+    </style>
+</head>
+<body>
+<h1 class="title">数据使用协议</h1>
+<p style="text-indent: 2em;">为更好促进科学研究，充分利用科技共享服务平台的科技资源，推进我国科学数据共享<br/>服务，经用户申请，并由数据管理委员会批准，为<U>
+    &nbsp;&nbsp;{{ result['realname'] or '' }}&nbsp;&nbsp;</U>提供以下数据：
+</p>
+<table border="1" width="100%" cellspacing="0">
+    <tr>
+        <td width="30" class="td-title1">数<br/>据<br/>清<br/>单<br/></td>
+        <td valign="top" style="padding-top: 10px;">
+            <ol style="padding-left: 10px;">
+                <li>{{ result['title_cn'] }}</li>
+            </ol>
+        </td>
+    </tr>
+    <tr>
+        <td width="30" class="td-title2">数<br/>据<br/>用<br/>途<br/></td>
+        <td valign="top" style="padding-top: 10px;">
+            <p style="width: 80%">{{ result['purpose']|safe }}</p>
+        </td>
+    </tr>
+</table>
+<div>
+    <h4>用户在使用该数据时须遵守以下协议：</h4>
+    <p>
+        <strong>第一条</strong>&nbsp;&nbsp;&nbsp;&nbsp;为保障数据作者的权益，用户在使用全部或部分"国家特殊环境、特殊功能观测研究台站共享服务平
+        台/寒旱区科学大数据中心"所提供的数据的基础上产出的研究成果中（包括公开发表的论文、论著、数据产品和
+        未公开发表的研究报告、数据产品、系统开发等），须在相关成果中对数据进行规范引用（参考引用方式请见
+        附件），并明确注明数据来源，数据来源声明规范如下（对数据来源署名有特殊要求的除外）：
+        中文发表的成果依据以下规范注明：数据来源于"国家特殊环境、特殊功能观测研究台站共享服务平台"
+        (http://www.crensed.ac.cn)；<br/>
+        英文发表的成果依据以下规范注明：This data set is provided by"Chinese Research Network or Special Environment and Disaster"
+    </p>
+    <p>
+        <strong>第二条</strong>&nbsp;&nbsp;&nbsp;&nbsp;所有数据和资料版权归数据和资料原有生成单位所有。数据仅供用户用于科研目的，不得用于商业
+        目的。不得将数据转让给第三方，由此引起的一切后果由数据用户承担。
+    </p>
+    <p>
+        <strong>第三条</strong>&nbsp;&nbsp;&nbsp;&nbsp;所共享的数据如属国家保密范围，乙方有义务遵守国家有关法规，如出现问题责任由乙方完全承担。
+    </p>
+    <p>
+        <strong>第四条</strong>&nbsp;&nbsp;&nbsp;&nbsp;未尽事宜，见在线使用条款和免责声明
+    </p>
+</div>
+<div>
+    <table>
+        <tr>
+            <td>数据申请人：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U>（签字）</td>
+            <td>项目负责人（导师）：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U>（签字）</td>
+        </tr>
+        <tr>
+            <td>单位：<U>&nbsp;&nbsp;&nbsp;&nbsp;{{ result['unit'] }}&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>邮箱：<U>&nbsp;&nbsp;&nbsp;&nbsp;{{ result['email'] }}&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>邮编：<U>&nbsp;&nbsp;&nbsp;&nbsp;{{ result['post_code'] }}&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+        </tr>
+        <tr>
+            <td>地址：<U>&nbsp;&nbsp;&nbsp;&nbsp;{{ result['address'] }}&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>电话：<U>&nbsp;&nbsp;&nbsp;&nbsp;{{ result['phone'] }}&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>日期：<U>
+                &nbsp;&nbsp;&nbsp;&nbsp;{{ now.strftime("%Y-%m-%d") }}&nbsp;&nbsp;&nbsp;&nbsp;</U>
+            </td>
+        </tr>
+    </table>
+
+</div>
+<br/>
+<div>
+    <table>
+        <tr>
+            <td>平台数据管理委员会负责人：<U>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</U>（签字）
+            </td>
+        </tr>
+        <tr>
+            <td>单位：<U>中国科学院西北生态环境资源研究院&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>地址：<U>甘肃省兰州市东岗西路320号6#1102&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+
+        </tr>
+
+        <tr>
+            <td>邮编：<U>&nbsp;&nbsp;&nbsp;&nbsp;730000&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>电话：<U>&nbsp;&nbsp;&nbsp;&nbsp;0931-4967287&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+        </tr>
+        <tr>
+
+            <td>网站：<U>www.crensed.ac.cn&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+            <td>邮箱：<U>&nbsp;&nbsp;&nbsp;&nbsp;cryosphere@lzb.ac.cn&nbsp;&nbsp;&nbsp;&nbsp;</U></td>
+        </tr>
+    </table>
+</div>
+<br/>
+<br/>
+{#<div>
+    <h1 class="title">附件：数据应用信息</h1>
+    <p>1.基于静止卫星和再分析资料的中国区域大气驱动数据集（140288MB）<br/>
+        【引用方式】Shi C X, Xie Z H, Qian H, et al. China land soil moisture EnKF data
+        assimilation based on satellite remote sensing data. Sci China Earth Sci,2011,doi:
+        10.1007/s11430-010-4160-3
+        【项目信息】本研究受国家高技术研究发展计划项目（863计划）（编号：2007AA12Z144）和财政部/科技
+        部公益类气象行业专项（编号：GYHY200706005）共同自助。
+    </p>
+    <p>2.全球变化背景下青藏高原关键区水份循环特征变化及其影响作用项目的汇交数据（366.62MB）
+        【引用方式】徐祥德等，JICA中日气象灾害合作研究中心项目数据集，中国气象科学研究院灾害天气国家重
+        点实验室，2008
+        【项目信息】本文档的编辑与数据的部分整理工作得到国家自然科学基金重点项目"中国西部环境与生态科学
+        数据中心（90502010）"的资助。
+        国家自然科学基金重点研究计划：中国西部环境和生态科学 我国西部环境的演变规律与发展趋势（90102017）
+    </p>
+    <p>3.中国1:400万植被图（80.98MB）
+        【引用方式】侯学煜，孙世洲，张经炜。中国人民共和国植被图，地图出版社，1979年。
+    </p>
+</div>
+<div style="padding-top: 600px">&nbsp;&nbsp;</div>#}
+<div>
+    <h1 class="title">数据保密协议书</h1>
+    <div>
+        <h3 class="title-info">甲方：国家特殊环境、特殊功能观测研究台站共享服务平台、寒旱区科学大数据中心</h3>
+        <h3 class="title-info">乙方：{{ result.realname }}</h3>
+    </div>
+    <p>甲、乙双方经协商，就乙方所申请的科学数据的保密事宜达成如下协议：</p>
+    <p><strong>第1条</strong>&nbsp;&nbsp;&nbsp;&nbsp;乙方已被告知并承诺按照《中华人民共和国保守国家秘密法》、《信息网络传播权保护条例》、《
+        中华人名共和国测绘发》、《中华人名共和国气象法》、《基础测绘成果提供使用管理暂行办法》等相关法
+        律法规及管理文件的要求，对涉密数据进行有效管理，做好安全保密工作。
+    </p>
+    <p><strong>第2条</strong>&nbsp;&nbsp;&nbsp;&nbsp;乙方不得擅自复制、转让或者出售涉密数据。为经书面许可，乙方不得以任何形式向第三方（包括
+        所属系统上级、下级或者同级其他单位）提供涉密数据。乙方若需委托第三方从事相关科学研究，应与第三
+        方签订相应的涉密数据保密协议书。第三方为外国组织和个人以及在我国注册的外商独资企业和中外合资、
+        合作企业的，使用人应当履行对外提供我国涉密数据的审批程序，须依法经相关部门批准。
+    </p>
+    <p><strong>第3条</strong>&nbsp;&nbsp;&nbsp;&nbsp;没有得到另一方的书名同意，任何一方不得将其在本协议书项下的权利和义务转让给第三方。</p>
+    <p><strong>第4条</strong>&nbsp;&nbsp;&nbsp;&nbsp;本协议甲乙双方各执一份。自签字之日起生效。</p>
+</div>
+<br/>
+<div>
+    <table>
+        <tr>
+            <td>
+                <p>甲方：国家特殊环境、特殊功能观测研究台站共享服务平台</p>
+                <p style="text-indent: 3em;">寒旱区科学大数据中心</p>
+                <br/>
+
+            </td>
+            <td></td>
+            <td>乙方：{{ result['realname'] }}</td>
+        </tr>
+        <tr>
+            <td>地址：甘肃省兰州市东岗西路320号<br/></td>
+            <td></td>
+            <td>地址：{{ result['address'] }}<br/></td>
+        </tr>
+        <tr>
+            <td>电话：0931-4967596<br/></td>
+            <td></td>
+            <td>电话：{{ result['phone'] }}<br/></td>
+        </tr>
+        <tr>
+            <td>
+                <p>邮箱：cryosphere@lzb.ac.cn</p>
+                <p style="text-indent: 3em">bigdata@lzb.ac.cn</p>
+            </td>
+            <td></td>
+            <td>邮箱：{{ result['email'] }}<br/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>签字：<br/></td>
+        </tr>
+        <tr>
+            <td>日期：{{ now.strftime("%Y-%m-%d") }}<br/></td>
+            <td></td>
+            <td>日期：{{ now.strftime("%Y-%m-%d") }}<br/></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
+
+

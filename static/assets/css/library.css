@@ -1,0 +1,64 @@
+/*.modeltitle{*/
+    /*justify-content:flex-start;*/
+    /*display:inline-block;*/
+
+/*}*/
+/*.modeltitle h2{*/
+    /*text-align:left;*/
+    /*border-left: solid 7px;*/
+    /*text-indent:0.5em;*/
+/*}*/
+/*.modelrun{*/
+    /*display: inline-block;*/
+    /*margin-top: 20px;*/
+    /*float: right;*/
+/*}*/
+/*.modelcontent{*/
+    /*margin-top: 30px;*/
+    /*list-style-image:url(/static/assets/images/linxing.png);*/
+    /*color: #333333;*/
+    /*font-size:14px;*/
+/*}*/
+/*.modelcontent li{*/
+    /*margin-top: 20px;*/
+/*}*/
+/*.modelcontent li span{*/
+    /*display:inline-block;*/
+    /*width:110px;*/
+/*}*/
+/*.modelcontent li p{*/
+    /*display:inline-block;*/
+    /*line-height:26px;*/
+    /*vertical-align:top;*/
+    /*width: 695px;*/
+    /*font-family: "微软雅黑";*/
+/*}*/
+/*#collapseOne{*/
+    /*margin-left: 110px;*/
+/*}*/
+/*zmc*/
+body {
+    /*background-color: #f1f0ec;*/
+}
+.top10 ul{
+    list-style: none none inside;
+    padding: 0;
+}
+.top10 .panel-body, .top10 .panel-heading{
+    padding: 5px !important;
+}
+.top10 li>a{
+    display: block;
+    line-height: 28px;
+    width: 250px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    border-bottom: solid 1px #EEE;
+}
+.top10 li .fa{
+    color: #CCC !important;
+}
+.top10 .panel-heading .fa{
+    color: #48c7ec !important;
+}

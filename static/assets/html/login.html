@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>国家特殊环境、特殊功能研究台站共享服务平台</title>
+    <link href="js/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet"/>
+    <link href="/static/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet"/>
+    <script src="js/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="/static/assets/components/jquery/dist/jquery.min.js"></script>
+    <script src="/static/assets/components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script src="js/bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/plugin/md5.js"></script>
+
+    <script src="js/config.js"></script>
+    <script src="js/login.js"></script>
+<style>
+#login {
+    margin: 0 auto;
+    width: 300px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border: 1px solid lightgrey;
+    border-radius: 10px;
+}
+
+#loginImg {
+    padding-top: 10vh;
+    height: 100vh;
+    width: 100vw;
+    background-image: url('/static/assets/image/bg-snow.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+
+#loginImg > h1 {
+    color: white;
+    width: 600px;
+    margin: 70px auto;
+    padding-left: 10px;
+}
+#loginLogo{
+    margin-right: 20px;
+    position: relative;
+    top: -6px;
+
+}
+#loginBtn {
+    width: 100%;
+}
+
+#loginName, #loginPwd {
+    padding-left: 25px;
+}
+
+.userIcon {
+    position: relative;
+    top: -25px;
+    left: 7px;
+}
+
+
+</style>
+</head>
+<body>
+<div id="loginImg">
+    <h1><img id="loginLogo" src="/static/assets/image/logo200x200.png" alt="" width="90">国家特殊环境共享服务平台</h1>
+
+    <div id="login">
+
+        <form class="loginForm">
+            <div class="form-group">
+                <input type="text" class="form-control" id="loginName" placeholder="请输入用户名">
+                <span class="glyphicon glyphicon-user userIcon"></span>
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" id="loginPwd" placeholder="请输入密码">
+                <span class="glyphicon glyphicon-lock userIcon"></span>
+            </div>
+        </form>
+        <button id="loginBtn" class="btn btn-sm btn-success">登录</button>
+    </div>
+</div>
+</body>
+</html>

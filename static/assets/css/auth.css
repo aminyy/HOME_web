@@ -1,0 +1,79 @@
+.profile-container {
+    margin-top: 20px;
+}
+.left-content{
+    margin-top: 30px;
+}
+.page-heading{
+    border-bottom: 1px solid #eeeeee;
+    margin-top: 50px;
+}
+.profile-top{
+    margin-top: 30px
+}
+
+.list-group-toolbar {
+    margin: 5px;
+    background-color: #f9f9f9;
+    border-top: 1px solid #e4e4e4;
+    border-bottom: 1px solid #e4e4e4;
+    padding: 5px 10px;
+}
+
+.favorite-list-group-wrapper {
+    margin: 5px;
+}
+
+.favorite-list-group-wrapper ul {
+    margin-bottom: 5px;
+}
+
+.favorite-list-group-wrapper .thumbnail {
+    margin-bottom: 0;
+}
+
+.list-group-item-text {
+    color:#999999;
+    margin: 2px;
+}
+
+.stepwizard-step p {
+    margin-top: 10px;
+    font-size:18px;
+}
+.stepwizard-row {
+    display: table-row;
+}
+.stepwizard {
+    display: table;
+    width: 70%;
+    position: relative;
+}
+.stepwizard-step button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+.stepwizard-row:before {
+    top: 29px;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 100%;
+    height: 1px;
+    background-color: #ccc;
+    z-order: 0;
+}
+.stepwizard-step {
+    display: table-cell;
+    text-align: center;
+    position: relative;
+}
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 24px;
+    line-height: 1.428571429;
+    border-radius: 30px;
+}

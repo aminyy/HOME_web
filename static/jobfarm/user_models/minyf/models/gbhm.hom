@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="gbhm">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<module class="GBHM.IO.Inputs.ClimateInput" name="ClimateInput"/>
+		<module class="GBHM.IO.Inputs.BaseMaps" name="BaseMaps"/>
+		<module class="net.casnw.home.thornthwaite.HamonET" name="HamonET">
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="daylength" name="daylength" type=" " value=" "/>
+			<var attribute="potET" name="potET" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Runoff" name="Runoff">
+			<var attribute="runoffFactor" name="runoffFactor" type=" " value=" "/>
+			<var attribute="remain" name="remain" type=" " value=" "/>
+			<var attribute="surfaceRunoff" name="surfaceRunoff" type=" " value=" "/>
+			<var attribute="snowMelt" name="snowMelt" type=" " value=" "/>
+			<var attribute="runoff" name="runoff" type=" " value=" "/>
+		</module>
+		<module class="GBHM.IO.Inputs.RiverInitialInput" name="RiverInitialInput">
+			<var attribute="intervalFlowInputPath" name="intervalFlowInputPath" type=" " value=" "/>
+			<var attribute="b" name="b" type=" " value=" "/>
+			<var attribute="roughness" name="roughness" type=" " value=" "/>
+			<var attribute="s0" name="s0" type=" " value=" "/>
+			<var attribute="subName" name="subName" type=" " value=" "/>
+			<var attribute="nflow" name="nflow" type=" " value=" "/>
+			<var attribute="qlin1_river" name="qlin1_river" type=" " value=" "/>
+			<var attribute="q1_river" name="q1_river" type=" " value=" "/>
+			<var attribute="Drw_river" name="Drw_river" type=" " value=" "/>
+		</module>
+	</context>
+</model>

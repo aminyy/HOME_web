@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.Runoff" name="runoff" author="longyinping11@lzb.ac.cn" keyword="runoff" description="产流">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="WMM" dataType="PoolDouble" size="0" unit="" description="流域内最大蓄水容量"/>
+    <var name="WM" dataType="PoolDouble" size="0" unit="" description="流域平均蓄水容量（毫米）(WM=WUM+WLM+WDM)"/>
+    <var name="Wum" dataType="PoolDouble" size="0" unit="" description="流域内上层土壤蓄水容量，植被良好的流域，约为20mm,差的流域,2~10mm"/>
+    <var name="Wlm" dataType="PoolDouble" size="0" unit="" description="流域内下层土壤蓄水容量，可取60~90mm"/>
+    <var name="B" dataType="PoolDouble" size="0" unit="" description="蓄水容量曲线的方次，小流域（几平方公里）B为0.1左右，中等面积（300平方公里以内）0.2~0.3，较大面积0.3~0.4"/>
+    <var name="FC" dataType="PoolDouble" size="0" unit="" description="稳定入渗率（毫米／小时）"/>
+    <var name="IMP" dataType="PoolDouble" size="0" unit="" description="流域不透水面积占全流域面积之比"/>
+    <var name="PE" dataType="PoolDouble" size="0" unit="" description="大于零时为净雨量，小于零时为蒸发不足量，单位（毫米"/>
+    <var name="W" dataType="PoolDouble" size="0" unit="" description="流域内土壤湿度"/>
+    <var name="WU" dataType="PoolDouble" size="0" unit="" description="流域内上层土壤湿度"/>
+    <var name="WL" dataType="PoolDouble" size="0" unit="" description="流域内下层土壤适度"/>
+    <var name="WD" dataType="PoolDouble" size="0" unit="" description="流域内深层土壤湿度"/>
+    <var name="R" dataType="PoolDouble" size="0" unit="" description="产流深度，包括地表径流深度和地下径流深度两部分（毫米）"/>
+    <var name="RG" dataType="PoolDouble" size="0" unit="" description="地下径流深度，单位（毫米）"/>
+    <var name="RS" dataType="PoolDouble" size="0" unit="" description="地表径流深度，单位（毫米）"/>
+  </varMeta>
+</moduleMeta>

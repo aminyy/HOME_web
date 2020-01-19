@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.K_cali_for_Freezing_Thawing" name="K_cali_for_Freezing_Thawing" author="longyinping11@lzb.ac.cn" keyword="hydraulic conductivity" description="calibration of soil hydraulic conductivity through daily air temperature">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Day</timeScale>
+  <varMeta>
+    <var name="tmean2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily mean air temperature at each grid of the study area"/>
+    <var name="ksat3D" dataType="PoolDouble3DArray" size="0" unit="" description="saturated hydraulic conductivity of each soil layer at each grid of the study area"/>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+  </varMeta>
+</moduleMeta>

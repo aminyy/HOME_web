@@ -1,0 +1,221 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <div class="searchdiv">
+                <form role="form" class="form-horizontal" id="jobQueryForm"
+                      action="/jobfarm/history/query/bjobs?ajax=true&action=bjobs"
+                      method="POST" name="jobQuery" style="margin:15px;">
+                    <div class="form-group">
+                        <label class="radio-inline"> <input type="radio"
+                                                            name="jobQueryRN" id="combineQueryRI" value="combine"
+                                                            checked>
+                            综合查询
+                        </label>
+                        <label class="radio-inline"> <input type="radio"
+                                                            name="jobQueryRN" id="jobidQueryRI" value="jobid"> 按作业号查询
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputJobID"
+                               class="col-sm-3 col-md-2 col-lg-1 control-label">作业号</label>
+                        <div class="col-sm-5 col-md-7 col-lg-9">
+                            <input type="text" class="form-control" id="inputJobID"
+                                   name="inputJobIDN" placeholder="请输入作业号，格式 ujid1">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputJobStatus"
+                               class="col-sm-3 col-md-2 col-lg-1 control-label"
+                               style="padding-left: 0px;">作业状态</label>
+                        <div class="col-sm-5 col-md-7 col-lg-9">
+                            <select class="form-control" 　id="inputJobStatus"
+                                    name="inputJobStatusN">
+                                <option value="prc">全部</option>
+                                <option value="r">运行</option>
+                                <option value="p">排队</option>
+                                <option value="c">结束</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputStartTime"
+                               class="col-sm-3 col-md-2 col-lg-1 control-label"
+                               style="padding-left: 0px;">开始时间</label>
+                        <div class="col-sm-3 col-md-4 col-lg-4" data-date="2014.05.10"
+                             id="starttimeDiv">
+                            <input type="text" class="form-control" placeholder="请单击选择查询的开始日期"
+                                   value="" id="inputStartTime" name="inputStartTimeN" readonly>
+                            <span class="add-on"> <i class="icon-calendar"></i>
+				</span>
+                        </div>
+                    </div>
+                    <!-- <div id="starttime_main" class="control-group">
+                                        <label class="control-label" for="starttime">开始时间</label>
+                                        <div class="date form_datetime controls" data-date="2013.05.10"
+                                            id="starttimeDiv">
+                                            <input type="text" class="span9" value="" id="starttime"
+                                                readonly> <span class="add-on"> <i
+                                                class="icon-calendar"></i>
+                                            </span>
+                                        </div>
+                                    </div> -->
+                    <!-- <div id="endtime_main" class="control-group">
+                                        <label class="control-label" for="endtime">结束时间</label>
+                                        <div class=" controls date form_datetime" data-date="2013.05.10"
+                                            id="endtimeDiv">
+                                            <input type="text" class="span9" value="" id="endtime" readonly>
+                                            <span class="add-on"><i class="icon-calendar"></i> </span>
+                                        </div>
+                                    </div> -->
+
+                    <div class="form-group">
+                        <label for="inputEndTime"
+                               class="col-sm-3 col-md-2 col-lg-1 control-label"
+                               style="padding-left: 0px;">结束时间</label>
+                        <div class="col-sm-3 col-md-4 col-lg-4" data-date="2014.05.10"
+                             id="endtimeDiv">
+                            <input type="text" class="form-control" placeholder="请单击选择查询的结束日期"
+                                   value="" id="inputEndTime" name="inputEndTimeN" readonly> <span
+                                class="add-on"><i class="icon-calendar"></i> </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+
+
+            <div class="searchdiv" id="jobsQueryDiv" style="margin-top: 15px;">
+                <table class="table table-hover">
+                    <caption class="tabel_caption">
+                        <strong>作业查询结果</strong>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>作业名称</th>
+                        <th>计算队列</th>
+                        <th>应用程序</th>
+                        <th>提交时间</th>
+                        <th>状态:更新时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="jobsQueryInfoTB">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="searchdiv" id="jobSpaceDiv" style="margin-top: 15px;">
+                <table class="table table-hover">
+                    <caption class="tabel_caption">
+                        <strong>作业<span class="text-info" id="jobidspan"></span>文件列表
+                        </strong>
+                    </caption>
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>文件名</th>
+                        <th>类型</th>
+                        <th>长度</th>
+                        <th>最后修改时间</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody id="jobSpaceInfoTB">
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" id="mdialogDiv">
+                    <div class="modal-content">
+                        <div class="modal-header" id="mheaderDiv">
+                            <button type="button" class="close" data-dismiss="modal"
+                                    aria-hidden="true">&times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <span><strong>作业号:&nbsp;</strong></span> <span id='viewJobIdSpan'
+                                                                               class='text-info'>925</span>
+                                <span><strong>&nbsp;&nbsp;文件名:&nbsp;</strong></span>
+                                <span id='viewFileNameSpan' class='text-info'>138123456789123456789.xml</span>
+                            </h4>
+                        </div>
+                        <div class="modal-body" id="mbodyDiv">
+                            <p>
+                                当前状态:<span class='text-info' id='viweStatusSpan'>正在查看第几行</span>
+                            </p>
+                            <textarea class="form-control" id="textlines" readonly></textarea>
+                        </div>
+                        <div class="modal-footer" id="mfooterDiv">
+                            <p>
+                                <button type="button" class="btn btn-primary "
+                                        onclick="javascript:viewFileHead()">首页
+                                </button>
+                                <button type="button" class="btn  btn-primary"
+                                        onclick="javascript:viewFileNextPage()">下一页
+                                </button>
+                                <button type="button" class="btn btn-primary "
+                                        onclick="javascript:viewFileUpPage()">上一页
+                                </button>
+                                <button type="button" class="btn  btn-primary"
+                                        onclick="javascript:viewFileTail()">尾页
+                                </button>
+                            </p>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+
+            </div>
+
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript" src="/static/assets/js/history.js" ></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        initHistory();
+    });
+</script>
+{% endblock %}

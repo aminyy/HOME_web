@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.Routing" name="routing" author="longyinping11@lzb.ac.cn" keyword="routing" description="河道汇流">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="dischargeFile" dataType="PoolString" size="0" unit="" description="径流量（总径流量，地表径流量，地下径流量）输出路径"/>
+    <var name="num" dataType="PoolInteger" size="0" unit="" description="气象数据记录编号"/>
+    <var name="Kstor" dataType="PoolDouble" size="0" unit="" description="汇流计算参数"/>
+    <var name="KKG" dataType="PoolDouble" size="0" unit="" description="地下径流消退系数"/>
+    <var name="RS" dataType="PoolDouble" size="0" unit="" description="地表径流深度，单位（毫米）"/>
+    <var name="RG" dataType="PoolDouble" size="0" unit="" description="地下径流深度，单位（毫米）"/>
+  </varMeta>
+</moduleMeta>

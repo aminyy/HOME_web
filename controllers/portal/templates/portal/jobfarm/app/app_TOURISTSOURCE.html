@@ -1,0 +1,159 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+                <!-- <li><a href="#io" data-toggle="tab">模型输入输出</a></li> -->
+                <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="intro">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">TOURISTSOURCE</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">
+
+                                    <p> <h5>touristsource
+                                    游客出游前往往会利用互联网搜索旅游目的地相关信息，获得与目的相关性较强的搜索信息，基于互联网搜索数据的用户IP地理位置分布，模型对对客源地时空数据可视化、时空数据异常探测、时空变化规律分析帮助旅游部门掌握游客的来源及不同地区游客的出行规律和爱好偏向。
+                                </h5></p>
+                                    <!--  <p>官网链接   :</p>
+                                     <p>源码地址   :</p> -->
+                                </li>
+                        </div>
+                    </div>
+
+                    <!--    <div class="panel panel-default" style="margin-top:5px">
+                       <div class="panel-heading">文件下载</div>
+                          <div class="panel-body">
+                          <ul class="list-group" style="margin-bottom:0px">
+                          <li class="list-group-item">
+                          <span class="badge btn btn-default" ></span></li>
+
+                       </ul>
+                       </div>
+
+                    </div> -->
+                </div>
+                <div class="tab-pane fade" id="io">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输入文件</div>
+                        <div class="panel-body">
+
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输出文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog"
+                         aria-labelledby="fileeditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                                </div>
+                                <div class="modal-body" id="fileeditModalcontent"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="submit_job">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+    });
+
+    function vic_submit() {
+        $.get("/portal/jobfarm/app/submit?name=TOURISTSOURCE&version=alpha&exec=touristsource", function (data, status) {
+            $('#submit_job').html(data)
+        });
+
+    }
+
+    function viewfile(filename) {
+
+        var settings = {
+            type: "POST",
+            url: "/portal/jobfarm/fileview",
+            data: {
+                "filename": filename,
+                "appname": "touristsource",
+            },
+            dataType: "json",
+            success: function (data, status) {
+                $("#fileeditModalLabel").html(data.fname)
+                $("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>" + data.fcontent)
+                $('#fileeditModal').modal().css({
+                    width: 'auto',
+
+                });
+                //alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+            },
+            headers: {
+                "X-CSRFToken": getCookie('csrftoken'),
+            },
+        };
+        $.ajax(settings);
+    }
+
+</script>
+{% endblock %}

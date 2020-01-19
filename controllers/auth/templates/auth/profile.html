@@ -1,0 +1,90 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.profile" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'auth/nav_tabs.html' %}
+        </div>
+    </div>
+    <div class="left-content">
+        <div class="col-md-3">
+            <h4>上传头像</h4>
+        </div>
+        <div class="col-md-9">
+            <form method="post" action="{{ url_for('auth.change_avatar') }}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="InputFile">修改头像</label>
+                    <div class="input-group">
+                        <input id="lefile" type="file" style="display:none" name="avatar">
+                        <input id="photoCover" class="form-control" type="text" name="avatar">
+                        <span class="input-group-addon" onclick="$('input[id=lefile]').click();"
+                              style="cursor: pointer; background-color: #e7e7e7"><i
+                                class="fa fa-folder-open"></i>上传头像</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">修改</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-12 page-heading"></div>
+
+    <div class="col-md-3 profile-top">
+        <h4>基本资料</h4>
+    </div>
+    <div class="col-md-9 profile-top">
+        <form method="post" action="{{ url_for('auth.profile_save') }}">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" class="form-control" name="username" value="{{ user.username }}">
+            </div>
+            <div class="form-group">
+                <label for="realname">真实姓名</label>
+                <input type="text" class="form-control" name="realname" value="{{ user.realname }}" placeholder="真实姓名">
+            </div>
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" class="form-control" name="email" value="{{ user.email }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">电话</label>
+                <input type="text" class="form-control" name="phone" placeholder="phone" value="{{ user.phone }}">
+            </div>
+            <div class="form-group">
+                <label for="phone">邮编</label>
+                <input type="text" class="form-control" name="post_code" placeholder="post_code"
+                       value="{{ user.post_code }}">
+            </div>
+            <div class="form-group">
+                <label for="unit">单位</label>
+                <input type="text" class="form-control" name="unit" placeholder="unit" value="{{ user.unit }}">
+            </div>
+            <div class="form-group">
+                <label for="address">地址</label>
+                <input type="text" class="form-control" name="address" placeholder="address" value="{{ user.address }}">
+            </div>
+            <button type="submit" class="btn btn-success">保存</button>
+
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block foot_script %}
+    <script type="text/javascript">
+        $(function () {
+            $('input[id=lefile]').change(function () {
+                $('#photoCover').val($(this).val());
+            });
+        });
+    </script>
+
+{% endblock %}

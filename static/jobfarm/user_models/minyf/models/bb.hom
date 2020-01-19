@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="bb">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="startTime" name="startTime" type=" " value=" "/>
+		<var attribute="endTime" name="endTime" type=" " value=" "/>
+		<var attribute="intervalUnit" name="intervalUnit" type=" " value=" "/>
+		<var attribute="intervalCount" name="intervalCount" type=" " value=" "/>
+		<var attribute="iteratorNum" name="iteratorNum" type=" " value=" "/>
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="intervalUnit" name="inputName" type=" " value=" feasfe"/>
+			<var attribute="intervalUnit" name="precip" type=" " value=" "/>
+			<var attribute="intervalUnit" name="temp" type=" " value=" "/>
+			<var attribute="endTime" name="time" type=" " value=" "/>
+			<var attribute="startTime" name="year" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Daylen" name="Daylen">
+			<var attribute="daylength" name="daylength" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="year" name="year" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Output" name="Output">
+			<var attribute="daylength" name="daylength" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="year" name="year" type=" " value=" "/>
+			<var attribute="potET" name="potET" type=" " value=" "/>
+			<var attribute="snowMelt" name="snowMelt" type=" " value=" "/>
+			<var attribute="runoff" name="runoff" type=" " value=" "/>
+			<var attribute="soilMoistStor" name="soilMoistStor" type=" " value=" "/>
+			<var attribute="fileName" name="fileName" type=" " value=" "/>
+			<var attribute="outputName" name="outputName" type=" " value=" "/>
+		</module>
+		<module class="GBHM.IO.Inputs.ClimateInput" name="ClimateInput">
+			<var attribute="" name="rainFile" type=" " value=" "/>
+			<var attribute="" name="meanTempFile" type=" " value=" "/>
+			<var attribute="" name="maxTempFile" type=" " value=" "/>
+			<var attribute="" name="minTempFile" type=" " value=" "/>
+			<var attribute="" name="humidityFile" type=" " value=" "/>
+			<var attribute="" name="sunshineFile" type=" " value=" "/>
+			<var attribute="" name="windFile" type=" " value=" "/>
+			<var attribute="" name="precPoints" type=" " value=" "/>
+			<var attribute="" name="tmeanPoints" type=" " value=" "/>
+			<var attribute="" name="tmaxPoints" type=" " value=" "/>
+			<var attribute="" name="tminPoints" type=" " value=" "/>
+			<var attribute="" name="EpPoints" type=" " value=" "/>
+			<var attribute="" name="currentDate" type=" " value=" "/>
+		</module>
+	</context>
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="startTime" name="startTime" type=" " value=" "/>
+		<var attribute="endTime" name="endTime" type=" " value=" "/>
+		<var attribute="intervalUnit" name="intervalUnit" type=" " value=" "/>
+		<var attribute="intervalCount" name="intervalCount" type=" " value=" "/>
+		<var attribute="iteratorNum" name="iteratorNum" type=" " value=" "/>
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="year" name="year" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="precip" name="precip" type=" " value=" "/>
+			<var attribute="inputName" name="inputName" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="year" name="year" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="precip" name="precip" type=" " value=" "/>
+			<var attribute="inputName" name="inputName" type=" " value=" "/>
+		</module>
+	</context>
+	<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+		<var attribute="year" name="year" type=" " value=" "/>
+		<var attribute="time" name="time" type=" " value=" "/>
+		<var attribute="temp" name="temp" type=" " value=" "/>
+		<var attribute="precip" name="precip" type=" " value=" "/>
+		<var attribute="inputName" name="inputName" type=" " value=" "/>
+	</module>
+</model>

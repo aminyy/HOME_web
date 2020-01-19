@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Optimization.ParameterCalibration" name="parameterCalibration" author="longyinping11@lzb.ac.cn" keyword="parameter calibration" description="calibrating parameters">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="adjustor" dataType="PoolDouble" size="0" unit="" description="the adjustor"/>
+    <var name="method" dataType="PoolInteger" size="0" unit="" description="calibration method, if 0, multiplied by (1+adjustor); if 1, added by adjustor"/>
+    <var name="value2D" dataType="PoolDouble2DArray" size="0" unit="" description="calibrated parameter at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

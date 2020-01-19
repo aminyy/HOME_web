@@ -1,0 +1,12 @@
+{% set content %}
+{% with operate=operate, result=result, message=message %}
+    {% include "auth/operate_notify.html" %}
+{% endwith %}
+{% endset %}
+
+if ($("body > .success-notify-wrapper").length) {
+$( "body > .success-notify-wrapper" ).replaceWith('{{ content|inline|safe }}');
+} else {
+$("body").append('{{ content|inline|safe }}');
+}
+$("#spanFavoriteCount").html();

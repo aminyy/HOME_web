@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.para.OutputResult" name="OutputResult">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="recNum" dataType="PoolInteger" size="0" unit="" description="number of the measure data of the study area"/>
+    <var name="parNum" dataType="PoolInteger" size="0" unit="" description="parameter number of the model"/>
+    <var name="lowerX" dataType="PoolDoubleArray" size="0" unit="" description="the lower limit of the parameter"/>
+    <var name="upperX" dataType="PoolDoubleArray" size="0" unit="" description="the upper limit of the parameter"/>
+    <var name="Xi" dataType="PoolDoubleArray" size="0" unit="" description="the current parameter value in the evolution"/>
+    <var name="XAJResultFile" dataType="PoolString" size="0" unit="" description="The result file of XinAnjiang model simultion"/>
+    <var name="XAJRunoffFile" dataType="PoolString" size="0" unit="" description="The runoff data file of XinAnjiang model simultion"/>
+    <var name="SimResultFile" dataType="PoolString" size="0" unit="" description="The simulation result file of XinAnjiang model simultion"/>
+    <var name="forcingData" dataType="PoolDouble2DArray" size="0" unit="" description="forcing data of the study area"/>
+    <var name="runoffData" dataType="PoolDoubleArray" size="0" unit="" description="measure data of the study area"/>
+    <var name="evaResult" dataType="PoolDouble" size="0" unit="" description="the evalution result data of the model"/>
+    <var name="xajObj" dataType="PoolObject" size="0" unit="" description="the object function value of the XinAnJiang model"/>
+    <var name="simResult" dataType="PoolDouble2DArray" size="0" unit="" description="the simulation result of the model"/>
+    <var name="forecastrunoffData" dataType="PoolDoubleArray" size="0" unit="" description="the forecast data of the study area"/>
+  </varMeta>
+</moduleMeta>

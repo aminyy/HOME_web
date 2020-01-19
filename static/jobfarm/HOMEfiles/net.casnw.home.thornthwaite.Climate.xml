@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.Climate" name="Climate" author="Lihui Luo" keyword="Climate data" description="Input data">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="year" dataType="PoolInteger" size="0" unit="" description="year"/>
+    <var name="time" dataType="PoolInteger" size="0" unit="" description="time"/>
+    <var name="temp" dataType="PoolDouble" size="0" unit="" description="temperature"/>
+    <var name="precip" dataType="PoolDouble" size="0" unit="" description="Precipitation"/>
+    <var name="inputName" dataType="PoolString" size="0" unit="" description="Input file name"/>
+  </varMeta>
+</moduleMeta>

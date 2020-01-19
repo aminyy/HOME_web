@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.Snow" name="snowmel" author="longyinping11@lzb.ac.cn" keyword="snowmelt" description="calculate snow depth on the ground(mm) and snow melt">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="temper" dataType="PoolDouble" size="0" unit="" description="air temperature(degree C)"/>
+    <var name="snow" dataType="PoolDouble" size="0" unit="" description="snow depth(mm H2O)"/>
+    <var name="Pnet" dataType="PoolDouble" size="0" unit="" description="net precipitation(mm H2O)"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="surface water storage(mm H2O)"/>
+    <var name="snowmelt" dataType="PoolDouble" size="0" unit="" description="snow melt(mm H2O)"/>
+    <var name="SMF" dataType="PoolDouble" size="0" unit="" description="snowmelt factor"/>
+    <var name="SMFTMP" dataType="PoolDouble" size="0" unit="" description="temperature above which snowmelt happens (degree C)"/>
+  </varMeta>
+</moduleMeta>

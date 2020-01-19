@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.SubsurfaceFlow" name="subsurfaceFlow" author="longyinping11@lzb.ac.cn" keyword="groundwater flow, lateral flow" description="calculation of exchange rate between groundwater and river: qsub(ground water flow), and subsurface flow from top saturated zone above the groundwater level(lateral flow)">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="Ds" dataType="PoolDouble" size="0" unit="" description="average depth of topsoil (m)"/>
+    <var name="Dg" dataType="PoolDouble" size="0" unit="" description="average depth of the unconfined aquifer (m)"/>
+    <var name="Dr" dataType="PoolDouble" size="0" unit="" description="depth of river (m)"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m)"/>
+    <var name="dgl" dataType="PoolDouble" size="0" unit="" description="depth to groundwater level (m)"/>
+    <var name="Drw" dataType="PoolDouble" size="0" unit="" description="depth of river water (m)"/>
+    <var name="GWst" dataType="PoolDouble" size="0" unit="" description="grondwater storage(m H2O)"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture for each UZ(Unsaturated Zone)layer,(mm H2O/ mm Soil)"/>
+    <var name="qsub" dataType="PoolDouble" size="0" unit="" description="runoff from subsurface (m3/s)"/>
+    <var name="k0" dataType="PoolDoubleArray" size="0" unit="" description="saturated hydraulic conductivity (mm H2O/hour) for each UZ(Unsaturated Zone)layer"/>
+    <var name="kg" dataType="PoolDouble" size="0" unit="" description="hydraulic conductivity of groundwater (mm/hour)"/>
+    <var name="GWcs" dataType="PoolDouble" size="0" unit="" description="groundwater storage coefficient"/>
+    <var name="length" dataType="PoolDouble" size="0" unit="" description="average hillslope length (m)"/>
+    <var name="area" dataType="PoolDouble" size="0" unit="" description="area of the local grid (m2)"/>
+    <var name="slope" dataType="PoolDouble" size="0" unit="" description="slope gradient of hillslope (percentrise)"/>
+    <var name="anik" dataType="PoolDouble" size="0" unit="" description="soil anisotropy ratio (&gt;=1.0),varied by landuse type"/>
+    <var name="wsat" dataType="PoolDoubleArray" size="0" unit="" description="saturated soil moisture, varied by soil types"/>
+    <var name="wfld" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture at field capacity, varied by soil types"/>
+    <var name="wrsd" dataType="PoolDoubleArray" size="0" unit="" description="residual soil moisture, varied by soil types"/>
+    <var name="watern" dataType="PoolDoubleArray" size="0" unit="" description="soil water parameter"/>
+    <var name="ss_f" dataType="PoolDouble" size="0" unit="" description="slope shape (concave or convex) factor,0.03 is for linear or convex slope"/>
+    <var name="groundWaterFlow" dataType="PoolDouble" size="0" unit="" description="exchange rate between groundwater and river"/>
+    <var name="lateralFlow" dataType="PoolDouble" size="0" unit="" description="subsurface flow from top saturated zone above the groundwater level(lateral flow)"/>
+  </varMeta>
+</moduleMeta>

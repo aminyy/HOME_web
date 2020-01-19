@@ -1,0 +1,164 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+                <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+                <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="intro">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">THORNTHWAITE</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">
+
+                                    <p> <h5>C.w,Thomhtwaite估算可能蒸散的方法在美国最著名且得到最广泛的应用,它已被气候学家、植物生态学家在气候分类与联系植被一气候的定量相互关系
+                                    时大量应用,已具有国际性意义。在我国Thomhtwaite方法应用最早者应首推 陶诗言在其中国气候分区中的应用，并得到国内学者的承认。但因其计算繁杂
+                                    和国内缺乏供其应用的专门计算表而未能广泛应用。近年来张新时所研究的Thomhtwaite方法的计算机程序,使其在我国普遍使用成为可能。Thornthwaite法最初基于美国中东部地区的试验数据而提出,它仅需要月平均气温,视ET0为温度的幂函数。
+                                </h5></p>
+                                </li>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">文件下载</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">thornthwaite-src.zip
+                                    <span class="badge btn btn-default"><a  target="_blank"
+                                            href="/portal/jobfarm/filedown?filename=thornthwaite-src.zip&appname=thornthwaite">下载</a></span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="io">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输入文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">input.dat
+                                    <span class="badge btn btn-primary" onclick="viewfile('input.dat')">查看</span></li>
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输出文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">output.dat
+                                    <span class="badge btn btn-primary" onclick="viewfile('output.dat')">查看</span></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog"
+                         aria-labelledby="fileeditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                                </div>
+                                <div class="modal-body" id="fileeditModalcontent"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="submit_job">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+    });
+
+    function vic_submit() {
+        $.get("/portal/jobfarm/app/submit?name=THORNTHWAITE&version=alpha&exec=thornthwaite", function (data, status) {
+            $('#submit_job').html(data)
+        });
+
+    }
+
+    function viewfile(filename) {
+
+        var settings = {
+            type: "POST",
+            url: "/portal/jobfarm/fileview",
+            data: {
+                "filename": filename,
+                "appname": "thornthwaite",
+            },
+            dataType: "json",
+            success: function (data, status) {
+                $("#fileeditModalLabel").html(data.fname)
+                $("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>" + data.fcontent)
+                $('#fileeditModal').modal().css({
+                    width: 'auto',
+
+                });
+                //alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+            },
+            headers: {
+                "X-CSRFToken": getCookie('csrftoken'),
+            },
+        };
+        $.ajax(settings);
+    }
+
+</script>
+{% endblock %}

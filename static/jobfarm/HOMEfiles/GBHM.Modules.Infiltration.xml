@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.Infiltration" name="infiltration" author="longyinping11@lzb.ac.cn" keyword="infiltration" description="infiltration from surface store to unsaturated zone">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m)"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="surface water storage(mm H2O)"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture for each UZ(Unsaturated Zone)layer,(mm H2O/ mm Soil)"/>
+    <var name="inf" dataType="PoolDouble" size="0" unit="" description="infiltration(mm H2O)"/>
+    <var name="k0" dataType="PoolDoubleArray" size="0" unit="" description="saturated hydraulic conductivity (mm H2O/hour) for each UZ(Unsaturated Zone)layer"/>
+    <var name="wsat" dataType="PoolDoubleArray" size="0" unit="" description="saturated soil moisture, varied by soil types"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<moduleMeta class="XinAnJiang.Climate" name="climateInput" author="longyinping11@lzb.ac.cn" keyword="precipitation, water surface evaporation" description="reading values of precipitation and water surface evaporation">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="weatherFile" dataType="PoolString" size="0" unit="" description=""/>
+    <var name="pP" dataType="PoolDouble" size="0" unit="" description=""/>
+    <var name="pEm" dataType="PoolDouble" size="0" unit="" description=""/>
+    <var name="num" dataType="PoolInteger" size="0" unit="" description=""/>
+  </varMeta>
+</moduleMeta>

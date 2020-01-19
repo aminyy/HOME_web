@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>浏览器版本过低</title>
+    <style>
+      body {
+          margin: 0;
+          padding: 0;
+          background-color: #c8d7d7;
+          background: linear-gradient(#fdd9b9, #90d5f6);
+          background-size:100% 100%;
+          background-attachment:fixed;
+          font-family: "Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+      }
+
+      a {
+          cursor: pointer;
+          text-decoration: none;
+      }
+
+      a:hover {
+          text-decoration: none;
+      }
+
+      .container-user-prompt,.user-prompt>h4{
+          padding: 20px;
+      }
+
+      .row {
+          clear: both;
+          max-width: 1004px;
+          margin: 0 auto;
+      }
+
+      .user-prompt{
+          text-align: center;
+      }
+
+      .user-prompt>img{
+          max-width: 40%;
+          margin: 20px;
+      }
+
+      .user-prompt>h2{
+          font-weight: 100;
+      }
+
+      .user-prompt>h4{
+          font-weight: 200;
+      }
+
+      .browser-icon{
+          padding-top: 0px;
+          text-align: center;
+          width: 33.333%
+      }
+
+      .browser-icon>a>img{
+          margin: 0 10px;
+          width: 100px;
+      }
+
+      .browser-icon>a>p{
+          padding-top: 10px;
+          color: rgba(0,0,0,.4);
+          margin: 0;
+      }
+
+      .browser-icon-360{
+          float: right;
+      }
+
+      .browser-icon-chrome{
+          float: left;
+      }
+    </style>
+</head>
+<body>
+    <div class="container-user-prompt container">
+        <div class="row">
+            <div class="user-prompt">
+                <img src="/static/assets/image/prompt.png">
+            </div>
+            <div class="phone-user-prompt user-prompt">
+                <h2>您的浏览器太古老了，该升级了~~</h2>
+                <h4>建议升级到下面的浏览器，以获得更快捷的体验。</h4>
+            </div>
+            <div class="browser-icon browser-icon-360 user-prompt">
+                <a href="/static/upload/brower/360.exe">
+                    <img src="/static/assets/image/360.png" border="0">
+                    <p>360安全浏览器</p>
+                </a>
+            </div>
+            <div class="browser-icon browser-icon-360 user-prompt">
+                <a href="/static/upload/brower/firefox.exe">
+                    <img src="/static/assets/image/firefox_.png" border="0">
+                    <p>火狐浏览器</p>
+                </a>
+            </div>
+            <div class="browser-icon browser-icon-chrome user-prompt">
+                <a href="/static/upload/brower/chrome.exe">
+                    <img src="/static/assets/image/chrome.png" border="0">
+                    <p>chrome浏览器</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

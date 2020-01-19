@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.Output" name="Output" author="Lihui Luo" keyword="Simulation output" description="Output file">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="daylength" dataType="PoolDouble" size="0" unit="" description="day length"/>
+    <var name="time" dataType="PoolInteger" size="0" unit="" description="time"/>
+    <var name="year" dataType="PoolInteger" size="0" unit="" description="year"/>
+    <var name="potET" dataType="PoolDouble" size="0" unit="" description="Potential Evapotranspiration"/>
+    <var name="snowMelt" dataType="PoolDouble" size="0" unit="" description="Snow melt"/>
+    <var name="runoff" dataType="PoolDouble" size="0" unit="" description="runoff"/>
+    <var name="soilMoistStor" dataType="PoolDouble" size="0" unit="" description="Soil water storage"/>
+    <var name="fileName" dataType="PoolString" size="0" unit="" description="output file name"/>
+    <var name="outputName" dataType="PoolString" size="0" unit="" description="Output variable name"/>
+  </varMeta>
+</moduleMeta>

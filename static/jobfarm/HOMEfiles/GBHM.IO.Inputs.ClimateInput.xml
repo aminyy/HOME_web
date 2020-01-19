@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Inputs.ClimateInput" name="climateInput" author="longyinping11@lzb.ac.cn" keyword="climate data" description="reading the climate data including the maximum, minimum and mean air temperature, precipitation, relative humidity, wind speed and sunshine duration for each day, and calculating the potential evapotranspiration based on the Penman-Monteith equation">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Day</timeScale>
+  <varMeta>
+    <var name="rainFile" dataType="PoolString" size="0" unit="" description="the daily precipitation file path"/>
+    <var name="meanTempFile" dataType="PoolString" size="0" unit="" description="the daily mean air temperature file path"/>
+    <var name="maxTempFile" dataType="PoolString" size="0" unit="" description="the daily maximum air temperature file path"/>
+    <var name="minTempFile" dataType="PoolString" size="0" unit="" description="the daily minimum air temperature file path"/>
+    <var name="humidityFile" dataType="PoolString" size="0" unit="" description="the daily relative humidity file path"/>
+    <var name="sunshineFile" dataType="PoolString" size="0" unit="" description="the daily sunshine duration file path"/>
+    <var name="windFile" dataType="PoolString" size="0" unit="" description="the daily wind speed file path"/>
+    <var name="precPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of rain gauges"/>
+    <var name="tmeanPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="tmaxPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="tminPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="EpPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.PotetJh" name="PotetJh" author="hzfwhy@lzb.ac.cn" keyword="Evapotranspiration" description="Potential ET - Jensen Haise.Determines whether current time period is one of activetranspiration and computes the potential evapotranspirationfor each HRU using the Jensen-Haise formulation.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nsol" dataType="PoolInteger" size="0" unit="" description="Number of solar radiation stations."/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="jh_coef" dataType="PoolDoubleArray" size="0" unit="" description="Monthly air temperature coefficient used in Jensen -Haise potential evapotranspiration computations, see PRMS manual for calculation method"/>
+    <var name="jh_coef_hru" dataType="PoolIntegerArray" size="0" unit="" description=" Jensen-Haise Air temperature coefficient used in Jensen-Haise potential  evapotranspiration &quot; +
+     &quot;computations for each HRU.  See PRMS  manual for calculation method"/>
+    <var name="swrad" dataType="PoolDoubleArray" size="0" unit="" description="The computed solar radiation for each HRU [solrad]"/>
+    <var name="tavgc" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="tavgf" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="newday" dataType="PoolInteger" size="0" unit="" description=" Switch signifying the start of a new day (0=no; 1=yes))"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="starttime" dataType="PoolCalendar" size="0" unit="" description="starttime"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="basin_potet" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average of potential et"/>
+    <var name="basin_potet_jh" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average of potential et"/>
+  </varMeta>
+</moduleMeta>

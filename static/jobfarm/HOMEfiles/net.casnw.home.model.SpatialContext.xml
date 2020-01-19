@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.model.SpatialContext" name="SpatialContext" author="home" keyword="spatial,grid,Context" description="control grid loop">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="rowsNum" dataType="PoolInteger" size="0" unit="" description="row numbers of grid"/>
+    <var name="colsNum" dataType="PoolInteger" size="0" unit="" description="col numbers of grid"/>
+  </varMeta>
+</moduleMeta>

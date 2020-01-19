@@ -1,0 +1,30 @@
+{
+  "name": "Leaflet.zoomslider",
+  "version": "0.7.1",
+  "homepage": "https://github.com/wancharle/Leaflet.zoomslider",
+  "authors": [
+    "Mattias Bengtsson <mattias.jc.bengtsson@gmail.com>"
+  ],
+  "license": "MIT",
+  "main": [
+    "src/L.Control.Zoomslider.js",
+    "src/L.Control.Zoomslider.css"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {},
+  "_release": "0.7.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.7.1",
+    "commit": "f1bced2258335930780ed2b939d392822ebb4d9f"
+  },
+  "_source": "https://github.com/kartena/Leaflet.zoomslider.git",
+  "_target": "^0.7.0",
+  "_originalSource": "https://github.com/kartena/Leaflet.zoomslider.git"
+}

@@ -1,0 +1,44 @@
+<JobDefinition xmlns="http://schemas.ggf.org/jsdl/2005/10/jsdl">
+	<JobDescription>
+		<JobIdentification>
+			<JobName>{{params.inputJobName}}</JobName>
+		</JobIdentification>
+		<Application>
+			<ApplicationName>{{params.appExec}}</ApplicationName>
+			<POSIXApplication>
+				<Executable>{{params.appExec}}</Executable>
+				<Argument>{{params.argument}}</Argument>
+				<Output>{{params.inputStdout}}</Output>
+				<Error>{{params.inputStderr}}</Error>
+				<WallTimeLimit>{{params.walltimeMinute}}</WallTimeLimit>
+			</POSIXApplication>
+		</Application>
+		<Resources>
+			<HostName>{{params.hpcName}}</HostName>
+			<CPUCount>{{params.inputCPUCount}}</CPUCount>
+			<queue>{{params.queueName}}</queue>
+		</Resources>
+		{% if params.input_files_list %}
+		{% for infile in params.input_files_list %}
+		<DataStaging>
+			<FileName>{{infile}}</FileName>
+			<DeleteOnTermination>true</DeleteOnTermination>
+			<Source>
+				<URI>{{infile}}</URI>
+			</Source>
+		</DataStaging>			
+		{% endfor %}
+		{% endif %}
+		{% if params.output_files_list %}
+		{% for outfile in params.output_files_list %}
+		<DataStaging>
+			<FileName>{{outfile}}</FileName>
+			<DeleteOnTermination>true</DeleteOnTermination>
+			<Target>
+				<URI>{{outfile}}</URI>
+			</Target>
+		</DataStaging>			
+		{% endfor %}
+		{% endif %}		
+	</JobDescription>
+</JobDefinition> 

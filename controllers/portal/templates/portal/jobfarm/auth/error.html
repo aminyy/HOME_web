@@ -1,0 +1,38 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}在线计算 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <div class="alert alert-warning" style="padding:20px;">
+                <form role="form" class="form-horizontal" id="authInfoForm"
+                      action="/portal/jobfarm/{{ context.authURL }}?time={{ context.timeint }}"
+                      method="POST" name="authInfo">
+                    <h4>用户{{username}}，您好！</h4>
+                    <h3 class='text-error'>&nbsp;&nbsp;&nbsp;&nbsp;{{context.authMsg}}</h3>
+                    <div style="padding:20px 0;">
+                        <button type="submit" class="btn btn-primary">{{context.btnInfo}}</button>
+                    </div>
+                </form>
+                <a href="/portal/jobfarm/auth/testaccount" class="btn btn-primary">点击试用</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+

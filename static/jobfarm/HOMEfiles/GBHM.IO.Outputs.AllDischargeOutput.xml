@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Outputs.AllDischargeOutput" name="allDischargeOutput" author="longyinping11@lzb.ac.cn" keyword="discharge output" description="output discharge at outlet of each subbasin">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Day</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="dischargeOutputPath" dataType="PoolString" size="0" unit="" description="the discharge output file path"/>
+    <var name="discharge" dataType="PoolDouble2DArray" size="0" unit="" description="discharge of each flow interval"/>
+    <var name="nsub" dataType="PoolInteger" size="0" unit="" description="number of subbasins"/>
+    <var name="nflow" dataType="PoolIntegerArray" size="0" unit="" description="number of flow intervals of each subbasin"/>
+    <var name="subName" dataType="PoolStringArray" size="0" unit="" description="name of each subbasin"/>
+  </varMeta>
+</moduleMeta>

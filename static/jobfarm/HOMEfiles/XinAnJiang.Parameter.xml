@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.Parameter" name="parameter" author="longyinping11@lzb.ac.cn" keyword="parameter" description="parameter">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="paraFile" dataType="PoolString" size="0" unit="" description="模型参数文件路径"/>
+    <var name="K" dataType="PoolDouble" size="0" unit="" description="流域蒸散发能力与实测蒸散发值的比"/>
+    <var name="IMP" dataType="PoolDouble" size="0" unit="" description="流域不透水面积占全流域面积之比"/>
+    <var name="B" dataType="PoolDouble" size="0" unit="" description="蓄水容量曲线的方次，小流域（几平方公里）B为0.1左右，中等面积（300平方公里以内）0.2~0.3，较大面积0.3~0.4"/>
+    <var name="WMM" dataType="PoolDouble" size="0" unit="" description="流域内最大蓄水容量"/>
+    <var name="WM" dataType="PoolDouble" size="0" unit="" description="流域平均蓄水容量（毫米）(WM=WUM+WLM+WDM)"/>
+    <var name="Wum" dataType="PoolDouble" size="0" unit="" description="流域内上层土壤蓄水容量，植被良好的流域，约为20mm,差的流域,2~10mm"/>
+    <var name="Wlm" dataType="PoolDouble" size="0" unit="" description="流域内下层土壤蓄水容量，可取60~90mm"/>
+    <var name="Wdm" dataType="PoolDouble" size="0" unit="" description="深层蓄水容量"/>
+    <var name="C" dataType="PoolDouble" size="0" unit="" description="流域内深层土壤蒸发系数，江南湿润地区：0.15-0.2，华北半湿润地区：0.09-0.12"/>
+    <var name="FC" dataType="PoolDouble" size="0" unit="" description="稳定入渗率（毫米／小时）"/>
+    <var name="KKG" dataType="PoolDouble" size="0" unit="" description="地下径流消退系数"/>
+    <var name="Kstor" dataType="PoolDouble" size="0" unit="" description="汇流计算参数"/>
+  </varMeta>
+</moduleMeta>

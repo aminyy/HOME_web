@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="example_Thornthwaite">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="iteratorNum" name="iteratorNum" type="PoolInteger" value="372"/>
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="inputName" name="inputName" type=" " value="input-data.dat"/>
+			<var attribute="year" name="year" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="precip" name="precip" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Daylen" name="Daylen">
+			<var attribute="year" name="year" type=" " value=" "/>
+			<var attribute="time" name="time" type=" " value=" "/>
+			<var attribute="daylength" name="daylength" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.HamonET" name="HamonET">
+			<var attribute="current" name="time" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="potET" name="potET" type=" " value=" "/>
+			<var attribute="daylength" name="daylength" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.SoilMoisture" name="SoilMoisture">
+			<var attribute="pmpe" name="pmpe" type=" " value=" "/>
+			<var attribute="precip" name="precip" type=" " value=" "/>
+			<var attribute="actET" name="actET" type=" " value=" "/>
+			<var attribute="dff" name="dff" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="potET" name="potET" type=" " value=" "/>
+			<var attribute="prestor" name="prestor" type=" " value=" "/>
+			<var attribute="soilMoistStor" name="soilMoistStor" type=" " value=" "/>
+			<var attribute="surfaceRunoff" name="surfaceRunoff" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Snow" name="Snow">
+			<var attribute="precip" name="precip" type=" " value=" "/>
+			<var attribute="temp" name="temp" type=" " value=" "/>
+			<var attribute="potET" name="potET" type=" " value=" "/>
+			<var attribute="snowMelt" name="snowMelt" type=" " value=" "/>
+			<var attribute="snowStorage" name="snowStorage" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Runoff" name="Runoff">
+			<var attribute="runoff" name="runoff" type=" " value=" "/>
+			<var attribute="snowMelt" name="snowMelt" type=" " value=" "/>
+			<var attribute="surfaceRunoff" name="surfaceRunoff" type=" " value=" "/>
+			<var attribute="runoffFactor" name="runoffFactor" type=" " value=" "/>
+			<var attribute="remain" name="remain" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Output" name="Output">
+			<var attribute="daylength" context="TemporalContext" name="daylength" value=" "/>
+			<var attribute="outputName" context="TemporalContext" name="outputName" value="output.dat"/>
+			<var attribute="potET" context="TemporalContext" name="potET" value=" "/>
+			<var attribute="runoff" context="TemporalContext" name="runoff" value=" "/>
+			<var attribute="snowMelt" context="TemporalContext" name="snowMelt" value=" "/>
+			<var attribute="soilMoistStor" context="TemporalContext" name="soilMoistStor" value=" "/>
+			<var attribute="time" context="TemporalContext" name="time" value=" "/>
+			<var attribute="year" context="TemporalContext" name="year" value=" "/>
+		</module>
+	</context>
+</model>

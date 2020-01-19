@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.DailyResults" name="dailyResults" author="longyinping11@lzb.ac.cn" keyword="daily actual evapotranspiration, runoff, snowmelt, discharge" description="daily results statistics including daily actual evapotranspiration, runoff, snowmelt, discharge">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="Eact2D" dataType="PoolDouble2DArray" size="0" unit="" description="hourly actual evaporation at each grid of the study area"/>
+    <var name="qin2D" dataType="PoolDouble2DArray" size="0" unit="" description="hourly runoff at each grid of the study area"/>
+    <var name="snowmelt2D" dataType="PoolDouble2DArray" size="0" unit="" description="hourly snowmelt at each grid of the study area"/>
+    <var name="discharge" dataType="PoolDouble2DArray" size="0" unit="" description="hourly discharge of each flow interval"/>
+    <var name="nsub" dataType="PoolInteger" size="0" unit="" description="number of subbasins"/>
+    <var name="nflow" dataType="PoolIntegerArray" size="0" unit="" description="number of flow intervals of each subbasin"/>
+    <var name="Eact_daily2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily actual evaporation at each grid of the study area"/>
+    <var name="qin_daily2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily runoff at each grid of the study area"/>
+    <var name="snowmelt_daily2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily snowmelt at each grid of the study area"/>
+    <var name="discharge_daily" dataType="PoolDouble2DArray" size="0" unit="" description="daily discharge of each flow interval"/>
+  </varMeta>
+</moduleMeta>

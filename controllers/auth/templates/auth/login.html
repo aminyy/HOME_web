@@ -1,0 +1,41 @@
+{% extends "auth/layout.html" %}
+
+{% block head2 %}
+    <link href="/static/assets/css/sigin.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <form class="form-signin" method="post">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+         <input type="email" name="email" id="inputEmail" class="form-control" placeholder="用户名" required
+               autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" name="password" id="inputPassword" class="form-control" placeholder="密码" required>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" value="remember-me"> 记住我
+            </label>
+            <label class="pull-right">
+                <a href="{{ url_for('auth.forget_passwd')}}">忘记密码?</a>
+            </label>
+        </div>
+        <div style="height: 70px;">
+            <input type="text" name="code" class="form-control" style=" width: 150px; float: left; margin-top: 10px;" required>
+            <div style="float: right; height: 60px;">
+                <a href="javascript: changeImg()" style="font-size: 25px;"><span class="glyphicon glyphicon-refresh" style="font-size: 25px; padding-top: 20px;" aria-hidden="true"></span></a>
+                <img class="verify_code" style="margin-top: 20px;" src="{{ url_for('auth.get_code') }}" onclick="this.src='/auth/code?'+ Math.random()">
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+{% endblock %}
+
+{% block foot_script %}
+    <script>
+        var changeImg = function (){
+            $(".verify_code").click();
+        };
+    </script>
+
+{% endblock %}

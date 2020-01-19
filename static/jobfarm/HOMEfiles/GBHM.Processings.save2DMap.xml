@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.save2DMap" name="save2DMap" author="longyinping11@lzb.ac.cn" keyword="save" description="save variables in a 2D array">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="value" dataType="PoolDouble" size="0" unit="" description="the value of the variable at current simulation grid"/>
+    <var name="nrows" dataType="PoolInteger" size="0" unit="" description="the nrows value in the ascii file"/>
+    <var name="ncols" dataType="PoolInteger" size="0" unit="" description="the ncols value in the ascii file"/>
+    <var name="value2D" dataType="PoolDouble2DArray" size="0" unit="" description="the value of the variable at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

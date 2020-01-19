@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Soltab" name="Soltab" author="hzfwhy@lzb.ac.cn" keyword="Radiation" description="Solar Radiation Computation.This module computes the potential solar radiation and the sunrise and sunset times for a horizontal surface and for any slope/aspect combination.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="ndays" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nradpl" dataType="PoolInteger" size="0" unit="" description="Number of radiation planes."/>
+    <var name="radpl_lat" dataType="PoolDoubleArray" size="0" unit="" description="Latitude of each radiation plane"/>
+    <var name="radpl_aspect" dataType="PoolDoubleArray" size="0" unit="" description="Aspect for each radiation plane"/>
+    <var name="radpl_slope" dataType="PoolDoubleArray" size="0" unit="" description="Slope of each radiation plane, specified as change in vertical length divided by change in horizontal length"/>
+    <var name="basin_lat" dataType="PoolDouble" size="0" unit="" description="Latitude of the basin, computed as an average of the radiation plane latitudes"/>
+    <var name="hemisphere" dataType="PoolInteger" size="0" unit="" description="Flag to indicate in which hemisphere the basin resides  (0=Northern; 1=Southern)"/>
+    <var name="radpl_cossl" dataType="PoolDoubleArray" size="0" unit="" description="Cosine of the radiation plane slope [soltab]"/>
+    <var name="sunhrs_soltab" dataType="PoolDouble2DArray" size="0" unit="" description="Hours between sunrise and sunset for each radiation plane"/>
+    <var name="radpl_soltab" dataType="PoolDouble2DArray" size="0" unit="" description="Potential shortwave radiation for each radiation plane for each timestep [soltab]"/>
+  </varMeta>
+</moduleMeta>

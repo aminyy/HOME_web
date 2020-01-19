@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.SrunoffSmidx" name="SrunoffSmidx" author="hzfwhy@lzb.ac.cn" keyword="Runoff, Surface" description="Surface runoff.Computes surface runoff and infiltration for each HRU usinga non-linear variable-source-area method.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="imperv_stor_max" dataType="PoolIntegerArray" size="0" unit="" description=" HRU maximum impervious area retention storage Maximum impervious area retention storage for each HRU"/>
+    <var name="smidx_coef" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient in contributing area computations Coefficient in non-linear contributing area algorithm.  Equation used is: contributing area = smidx_coef *  10.**(smidx_exp*smidx) where smidx is soil_moist +  .5 * ppt_net&quot;)Unit(&quot;decimal fraction)"/>
+    <var name="smidx_exp" dataType="PoolDoubleArray" size="0" unit="" description="Exponent in contributing area computations Exponent in non-linear contributing area algorithm.  Equation used is: contributing area = smidx_coef *  10.**(smidx_exp*smidx) where smidx is soil_moist +  .5 * ppt_net"/>
+    <var name="soil_moist_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum available water holding capacity of soil profile.  Soil profile is surface to bottom of rooting zone"/>
+    <var name="soil_moist_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial value of available water in soil profile"/>
+    <var name="carea_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum contributing area Maximum possible area contributing to surface runoff  expressed as a portion of the HRU area"/>
+    <var name="snowinfil_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum snow infiltration per day Maximum snow infiltration per day"/>
+    <var name="soil_moist" dataType="PoolDoubleArray" size="0" unit="" description="Current moisture content of soil profile to the depth  of the rooting zone of the major vegetation type on the  HRU"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="hru_percent_impv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="pptmix_nopack" dataType="PoolIntegerArray" size="0" unit="" description="Indicator that a rain-snow mix event has occurred with no snowpack present on an HRU. [snow]"/>
+    <var name="net_rain" dataType="PoolDoubleArray" size="0" unit="" description="hru_rain minus interception"/>
+    <var name="hru_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Impervious area of each HRU"/>
+    <var name="snowmelt" dataType="PoolDoubleArray" size="0" unit="" description="Snowmelt from snowpack on an HRU. [snow]"/>
+    <var name="pkwater_equiv" dataType="PoolIntegerArray" size="0" unit="" description=" Snowpack water equivalent on an HRU. [snow]"/>
+    <var name="net_ppt" dataType="PoolDoubleArray" size="0" unit="" description="HRU precipitation (rain and/or snow) with  interception removed"/>
+    <var name="net_snow" dataType="PoolDoubleArray" size="0" unit="" description="hru_snow minus interception"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="Pervious area of each HRU"/>
+    <var name="hru_ppt" dataType="PoolDoubleArray" size="0" unit="" description="Precipitation on HRU, rain and snow. [precip]"/>
+    <var name="snow_evap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation and sublimation from snowpack. [snow]"/>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="snowcov_area" dataType="PoolDoubleArray" size="0" unit="" description="Snow-covered area on an HRU, in decimal fraction of total HRU area. [snow]"/>
+    <var name="hru_intcpevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from interception on each HR"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="basin_sroff" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average of surface runoff"/>
+    <var name="dt_sroff" dataType="PoolDouble" size="0" unit="" description="Total basin surface runoff for a storm timestep"/>
+    <var name="basin_infil" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average for infiltration"/>
+    <var name="basin_imperv_evap" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average for evaporation from  impervious area"/>
+    <var name="basin_imperv_stor" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average for storage on  impervious area"/>
+    <var name="imperv_stor" dataType="PoolDoubleArray" size="0" unit="" description="Current storage on impervious area for each HRU"/>
+    <var name="infil" dataType="PoolDoubleArray" size="0" unit="" description="Infiltration for each HRU. [sroff]"/>
+    <var name="infil" dataType="PoolDoubleArray" size="0" unit="" description="Infiltration for each HRU. [sroff]"/>
+    <var name="infil" dataType="PoolDoubleArray" size="0" unit="" description="Infiltration for each HRU. [sroff]"/>
+    <var name="hru_impervstor" dataType="PoolDoubleArray" size="0" unit="" description="Storage on impervious area for each HRU"/>
+    <var name="hru_impervevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from impervious area for each HRU"/>
+    <var name="dprst_evap_hru" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from depression storage for each HRU"/>
+    <var name="upslope_hortonian" dataType="PoolDoubleArray" size="0" unit="" description="Hortonian surface runoff received from HRUs upslope"/>
+  </varMeta>
+</moduleMeta>

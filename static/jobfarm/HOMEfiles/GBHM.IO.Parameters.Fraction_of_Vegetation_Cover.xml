@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.Fraction_of_Vegetation_Cover" name="fraction_of_Vegetation_Cover" author="longyinping11@lzb.ac.cn" keyword="fraction of vegetation cover" description="reading 16-day fraction of vegetation cover">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="FVCPath" dataType="PoolString" size="0" unit="" description="fraction of vegetation cover file path"/>
+    <var name="FVC2D" dataType="PoolDouble2DArray" size="0" unit="" description="fraction of vegetation cover at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

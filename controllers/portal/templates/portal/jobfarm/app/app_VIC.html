@@ -1,0 +1,181 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+                <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+                <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="intro">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">VIC模型</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">
+
+                                    <p> <h5>
+                                    VIC模型是Washington大学、California大学Berkeley分校以及Prineeton大学共同研制的大尺度水文模型。它是一个基于空间分布网格化的分布式水文模型，采用了蓄满和超渗产流相结合的产流机制，模型主要考虑了大气、植被、土壤之间的物理交换过程，反映了它们之间的水热状态变化和水热传输。模型考虑了积雪、融雪及土壤冻融等水文特性，并且可以运用GCMs的不同气候背景模式对陆面过程进行模拟来进行一个地区的水资源的评估和中长期预测。
+                                </h5></p>
+                                    <p>官网链接 :<a target="_blank"
+                                                href="http://www.hydro.washington.edu/Lettenmaier/Models/VIC/index.shtml">http://www.hydro.washington.edu/Lettenmaier/Models/VIC/index.shtml</a>
+                                    </p>
+                                    <p>源码地址 :<a target="_blank" href="https://github.com/UW-Hydro/VIC">https://github.com/UW-Hydro/VIC</a>
+                                    </p>
+                                </li>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">文件下载</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">VIC_code_4.1.1.tar
+                                    <span class="badge btn btn-default"><a target="_blank"
+                                            href="/portal/jobfarm/filedown?filename=VIC_code_4.1.1.tar&appname=vic">下载</a></span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="io">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输入文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">init_model_state_v4.1.1
+                                    <span class="badge btn btn-primary"
+                                          onclick="viewfile('init_model_state_v4.1.1')">查看</span></li>
+                                <li class="list-group-item">new_rosemount_9498_45.000_-93.000
+                                    <span class="badge btn btn-primary"
+                                          onclick="viewfile('new_rosemount_9498_45.000_-93.000')">查看</span></li>
+                                <li class="list-group-item">save_state_v4.1.1_19971210
+                                    <span class="badge btn btn-primary"
+                                          onclick="viewfile('save_state_v4.1.1_19971210')">查看</span></li>
+                                <li class="list-group-item">soil_3.3.0.txt
+                                    <span class="badge btn btn-primary" onclick="viewfile('soil_3.3.0.txt')">查看</span>
+                                </li>
+                                <li class="list-group-item">veg_lib_3.3.0.txt
+                                    <span class="badge btn btn-primary"
+                                          onclick="viewfile('veg_lib_3.3.0.txt')">查看</span></li>
+                                <li class="list-group-item">veg_param_3.3.0.txt
+                                    <span class="badge btn btn-primary"
+                                          onclick="viewfile('veg_param_3.3.0.txt')">查看</span></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输出文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog"
+                         aria-labelledby="fileeditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                                </div>
+                                <div class="modal-body" id="fileeditModalcontent"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="submit_job">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script>
+    $(function () {
+        $('#myTab li:eq(0) a').tab('show');
+    });
+
+    function vic_submit() {
+        $.get("/portal/jobfarm/app/submit?name=VIC&version=alpha&exec=vic", function (data, status) {
+            $('#submit_job').html(data)
+        });
+    }
+
+    function viewfile(filename) {
+        var settings = {
+            type: "POST",
+            url: "/portal/jobfarm/fileview",
+            data: {
+                "filename": filename,
+                "appname": "vic",
+            },
+            dataType: "json",
+            success: function (data, status) {
+                $("#fileeditModalLabel").html(data.fname)
+                $("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>" + data.fcontent)
+                $('#fileeditModal').modal().css({
+                    width: 'auto',
+
+                });
+                //alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+            },
+            headers: {
+                "X-CSRFToken": getCookie('csrftoken'),
+            },
+        };
+        $.ajax(settings);
+    }
+
+</script>
+{% endblock %}

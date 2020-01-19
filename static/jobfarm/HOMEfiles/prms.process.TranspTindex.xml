@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.TranspTindex" name="TranspTindex" author="hzfwhy@lzb.ac.cn" keyword="Evapotranspiration" description="TranspTindex Determines whether current time period is one of active transpiration based on temperature index method ">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="temp_units" dataType="PoolInteger" size="0" unit="" description="Units for measured temperature (0=Fahrenheit; 1=Celsius)"/>
+    <var name="transp_beg" dataType="PoolIntegerArray" size="0" unit="" description="Month to begin summing tmaxf for each HRU; when sum is  &gt;= to transp_tmax, transpiration begins"/>
+    <var name="transp_end" dataType="PoolIntegerArray" size="0" unit="" description="Month to stop transpiration computations;  transpiration is computed thru end of previous month"/>
+    <var name="transp_tmax" dataType="PoolDoubleArray" size="0" unit="" description="Temperature index to determine the specific date of the  start of the transpiration)"/>
+    <var name="tmaxc" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tmaxf" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="newday" dataType="PoolInteger" size="0" unit="" description=" Switch signifying the start of a new day (0=no; 1=yes))"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="starttime" dataType="PoolCalendar" size="0" unit="" description="starttime"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="basin_transp_on" dataType="PoolInteger" size="0" unit="" description="Switch indicating whether transpiration is occurring anywhere in the basin (0=no; 1=yes)"/>
+    <var name="transp_on" dataType="PoolIntegerArray" size="0" unit="" description="Indicator for whether transpiration is occurring, 0=no, 1=yes. [potet]"/>
+  </varMeta>
+</moduleMeta>

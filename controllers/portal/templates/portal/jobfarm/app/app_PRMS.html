@@ -1,0 +1,168 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+            <div class="col-md-2" style="padding: 0;">
+                {% include 'portal/jobfarm/nav.html' %}
+            </div>
+            <div class="col-md-10">
+                <ul id="myTab" class="nav nav-tabs">
+   <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+   <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+   <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+   <div class="tab-pane fade in active" id="intro">
+   <div class="panel panel-default" style="margin-top:5px">
+   <div class="panel-heading">PRMS</div>
+      <div class="panel-body">
+      <ul class="list-group" style="margin-bottom:0px">
+      <li class="list-group-item">
+
+           <p> <h5>PRMS模式系统于1983年建立,主要用于评价降水、气候及地表植被等变化对河流流量、泥沙冲积量和主河道水文过程的影响。模式可以模拟一般降水、极端降水及融雪过程时的水平衡关系、洪峰及洪峰流量、土壤水等的变化。
+PRMS模式系统既可以模拟日平均径流,也可以模拟洪水过程。模式根据流域坡度、地貌、植被类型、土壤类型及降水分布等特征将流域划分为多个单元,每一个单元的水文响应是一致的,称为水文响应单元(HRU)。模式对每个单元进行日水量和能量平衡计算,所有单元响应的总合代表整个流域的响应。
+模式需要输入的参数主要包括各水文响应单元(HRU)的地貌、植被类型、土壤类型及水文特征等,并且需要输入整个流域的气候参数。运行日平均径流模式所需要的最少气候参数包括:逐日降水量、最高温度、最低温度。如果不模拟融雪过程,也可以用日蒸发能力来替代温度资料。如果需要模拟融雪过程,则还需要输入日均太阳辐射资料。模拟洪水过程时需要输入间隔为60 min或更高时间分辨率的降水资料。
+            </h5></p>
+      </li>
+      </div>
+  </div>
+    <div class="panel panel-default" style="margin-top:5px">
+   <div class="panel-heading">文件下载</div>
+      <div class="panel-body">
+      <ul class="list-group" style="margin-bottom:0px">
+      <li class="list-group-item">prms4.0.2_src.tar.gz
+      <span class="badge btn btn-default" ><a  target="_blank" href="/portal/jobfarm/filedown?filename=prms4.0.2_src.tar.gz&appname=prms">下载</a></span></li>
+
+   </ul>
+   </div>
+
+   </div>
+   </div>
+   <div class="tab-pane fade" id="io">
+ <div class="panel panel-default" style="margin-top:5px">
+   <div class="panel-heading">输入文件</div>
+      <div class="panel-body">
+    <ul class="list-group" style="margin-bottom:0px">
+      <li class="list-group-item">2Drain_adj.dat
+      <span class="badge btn btn-primary" onclick="viewfile('2Drain_adj.dat')">查看</span></li>
+      <li class="list-group-item">2Dsnow_adj.dat
+      <span class="badge btn btn-primary" onclick="viewfile('2Dsnow_adj.dat')">查看</span></li>
+      <li class="list-group-item">2Dstrain_adj.dat
+      <span class="badge btn btn-primary" onclick="viewfile('2Dstrain_adj.dat')">查看</span></li>
+      <li class="list-group-item">data_lucatest.dat
+      <span class="badge btn btn-primary" onclick="viewfile('data_lucatest.dat')">查看</span></li>
+      <li class="list-group-item">hru_flag.asc
+      <span class="badge btn btn-primary" onclick="viewfile('hru_flag.asc')">查看</span></li>
+      <li class="list-group-item">hruparameter.dat
+      <span class="badge btn btn-primary" onclick="viewfile('hruparameter.dat')">查看</span></li>
+      <li class="list-group-item">Timeparameter.dat
+      <span class="badge btn btn-primary" onclick="viewfile('Timeparameter.dat')">查看</span></li>
+   </ul>
+
+
+   </div>
+
+</div>
+ <div class="panel panel-default" style="margin-top:5px">
+   <div class="panel-heading">输出文件</div>
+      <div class="panel-body">
+      <ul class="list-group" style="margin-bottom:0px">
+      <li class="list-group-item">Output.dat
+      <span class="badge btn btn-primary" onclick="viewfile('Output.dat')">查看</span></li>
+   </ul>
+
+   </div>
+
+</div>
+   <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog" aria-labelledby="fileeditModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                </div>
+                <div class="modal-body" id="fileeditModalcontent"> </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+               </div><!-- /.modal-content -->
+         </div><!-- /.modal -->
+   </div>
+</div>
+
+   <div class="tab-pane fade" id="submit_job">
+   </div>
+</div>
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+   $(function () {
+      $('#myTab li:eq(0) a').tab('show');
+   });
+   function vic_submit(){
+	  $.get("/portal/jobfarm/app/submit?name=PRMS&version=alpha&exec=HOME",function(data,status){
+		   $('#submit_job').html(data)
+		  });
+
+   }
+   function viewfile(filename){
+
+			var settings = {
+			        type: "POST",
+			        url:"/portal/jobfarm/fileview",
+			        data:{
+			        	"filename":filename,
+			        	"appname":"prms",
+			        },
+			        dataType:"json",
+			        success: function(data,status) {
+			        	$("#fileeditModalLabel").html(data.fname)
+			        	$("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>"+data.fcontent)
+			        	$('#fileeditModal').modal().css({
+			        	    width: 'auto',
+
+			        	});
+			        	//alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+			        },
+			        headers: {
+			        	"X-CSRFToken":getCookie('csrftoken'),
+			        },
+			    };
+			    $.ajax(settings); }
+
+</script>
+{% endblock %}

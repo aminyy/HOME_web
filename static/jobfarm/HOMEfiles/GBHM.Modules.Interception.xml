@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.Interception" name="interception" author="longyinping11@lzb.ac.cn" keyword="interception" description="interception by canopy">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="Cst" dataType="PoolDouble" size="0" unit="" description="canopy storage(mm H2O)"/>
+    <var name="prec" dataType="PoolDouble" size="0" unit="" description="hourly rainfall (mm)"/>
+    <var name="Pnet" dataType="PoolDouble" size="0" unit="" description="net precipitation(mm H2O)"/>
+    <var name="dLAI" dataType="PoolDouble" size="0" unit="" description="LAI"/>
+    <var name="landuse" dataType="PoolString" size="0" unit="" description="landuse type "/>
+  </varMeta>
+</moduleMeta>

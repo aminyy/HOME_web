@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Ddsolrad" name="Ddsolrad" author="hzfwhy@lzb.ac.cn" keyword="Radiation" description="Solar radiation distribution algorithm and estimation procedure for missing radiation data.Procedures for distributing solar radiation to each HRU and for estimating missing solar radiation data using a maximum temperature / degree-day relationship. ">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nradpl" dataType="PoolInteger" size="0" unit="" description="Number of radiation planes."/>
+    <var name="nsol" dataType="PoolInteger" size="0" unit="" description="Number of solar radiation stations."/>
+    <var name="dday_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Intercept in temperature / degree-day relationship. Intercept in relationship: dd-coef =  dday_intcp + dday_slope*(tmax)+1."/>
+    <var name="dday_slope" dataType="PoolDoubleArray" size="0" unit="" description="Slope in temperature / degree-day relationship. Coefficient in relationship: dd-coef =  dday_intcp + dday_slope*(tmax)+1."/>
+    <var name="hru_radpl" dataType="PoolIntegerArray" size="0" unit="" description="Index of the radiation plane used to compute solar radiation for a given HRU"/>
+    <var name="ppt_rad_adj" dataType="PoolDoubleArray" size="0" unit="" description="If basin precipitation exceeds this value, solar radiation is mutiplied by the summer or winter precip adjustment factor, depending on the season. "/>
+    <var name="radadj_intcp" dataType="PoolDouble" size="0" unit="" description="Intercept in the temperature-range adjustment equation for solar radiation. Intercept in equation:  adj = radadj_intcp + radadj_slope*(tmax-tmax_index)"/>
+    <var name="radadj_slope" dataType="PoolDouble" size="0" unit="" description="Slope in the temperature-range adjustment equation for solar radiation. Slope in equation: adj = radadj_intcp + radadj_slope *  (tmax - tmax_index)"/>
+    <var name="radj_sppt" dataType="PoolDouble" size="0" unit="" description="Adjustment factor for computed solar radiation for summer day with greater than ppt_rad_adj inches precip"/>
+    <var name="radj_wppt" dataType="PoolDouble" size="0" unit="" description="Adjustment factor for computed solar radiation for winter day with greater than ppt_rad_adj inches precip"/>
+    <var name="hru_solsta" dataType="PoolIntegerArray" size="0" unit="" description="Index of solar radiation station associated with each HRU"/>
+    <var name="radmax" dataType="PoolDouble" size="0" unit="" description="The maximum portion of the potential solar radiation that may reach the ground due to haze, dust, smog, etc."/>
+    <var name="tmax_allrain" dataType="PoolDoubleArray" size="0" unit="" description="If maximum temperature of an HRU is greater than or equal to this value (for each month, January to December),  precipitation is assumed to be rain"/>
+    <var name="tmax_index" dataType="PoolDoubleArray" size="0" unit="" description="Index temperature, by month, used to determine precipitation adjustments to solar radiation, in deg F or C depending  on units of data"/>
+    <var name="basin_solsta" dataType="PoolInteger" size="0" unit="" description="Index of the solar radiation station used to compute basin radiation values"/>
+    <var name="rad_conv" dataType="PoolDouble" size="0" unit="" description="Conversion factor to convert measured radiation to langleys"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="radpl_cossl" dataType="PoolDoubleArray" size="0" unit="" description="Cosine of the radiation plane slope [soltab]"/>
+    <var name="radpl_soltab" dataType="PoolDouble2DArray" size="0" unit="" description="Potential shortwave radiation for each radiation plane for each timestep [soltab]"/>
+    <var name="basin_obs_ppt" dataType="PoolDouble" size="0" unit="" description="Area-weighted measured average precipitation for basin. [precip]"/>
+    <var name="solrad_tmax" dataType="PoolDouble" size="0" unit="" description="Basin daily maximum temperature adjusted to elevation of solar radiation station"/>
+    <var name="newday" dataType="PoolInteger" size="0" unit="" description="Switch signifying the start of a new day (0=no; 1=yes)"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area, expressed as the sum of HRU areas"/>
+    <var name="hemisphere" dataType="PoolInteger" size="0" unit="" description="Flag to indicate in which hemisphere the basin resides  (0=Northern; 1=Southern)"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="public Calendar date"/>
+    <var name="date_jday" dataType="PoolInteger" size="0" unit=""/>
+    <var name="swrad" dataType="PoolDoubleArray" size="0" unit="" description="Computed shortwave radiation for each HRU"/>
+    <var name="basin_potsw" dataType="PoolDouble" size="0" unit="" description="Area-weighted average of potential shortwave radiation for the basin"/>
+    <var name="orad" dataType="PoolDouble" size="0" unit="" description="Measured or computed solar radiation on a horizontal surface"/>
+    <var name="basin_horad" dataType="PoolDouble" size="0" unit="" description="Potential shortwave radiation for the basin centroid"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.MCD15A3_LAIInput" name="laiInput" author="longyinping11@lzb.ac.cn" keyword="LAI, leaf area index" description="reading 4-day LAI">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="LAIPath" dataType="PoolString" size="0" unit="" description="the 4-day LAI file path"/>
+    <var name="LAI" dataType="PoolDouble2DArray" size="0" unit="" description="LAI at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

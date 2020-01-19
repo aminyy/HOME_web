@@ -1,0 +1,42 @@
+{
+  "name": "tree-multiselect",
+  "description": "jQuery multiple select with nested options",
+  "main": [
+    "src/tree-multiselect.js",
+    "src/style.scss"
+  ],
+  "authors": [
+    "Patrick Tsai"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "tree",
+    "multiselect",
+    "select",
+    "jquery",
+    "options",
+    "checkbox"
+  ],
+  "homepage": "https://github.com/patosai/tree-multiselect",
+  "ignore": [
+    "*",
+    "!dist/",
+    "!src/",
+    "!package.json",
+    "!LICENSE"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/patosai/tree-multiselect.git"
+  },
+  "version": "2.5.2",
+  "_release": "2.5.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v2.5.2",
+    "commit": "7d1abef29e437715c5e87a84d6f463f60e800bb0"
+  },
+  "_source": "https://github.com/patosai/tree-multiselect.git",
+  "_target": "^2.2.1",
+  "_originalSource": "tree-multiselect"
+}

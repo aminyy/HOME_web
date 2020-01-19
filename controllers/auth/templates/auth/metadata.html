@@ -1,0 +1,167 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.metadata" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+    <link href="/static/assets/components/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+    <div class="body-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'auth/nav_tabs.html' %}
+            </div>
+            <div class="col-md-12">
+                <div class="list-group-toolbar">
+                    <div class="col-md-2">
+                        <a href="{{ url_for('auth.metadata_do_new') }}" class="btn btn-primary btn-xs">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            新增元数据
+                        </a>
+                    </div>
+                    <div class="pull-right col-md-offset-7">
+                        <span>共有元数据<strong>{{ total }}</strong>条</span>
+                        (<span class="text-danger">{{ current_page }}</span>/{{ total_page }})
+                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                            {% if current_page <= 1 %}
+                                <div class="btn btn-default disabled">
+                                    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                                </div>
+                            {% else %}
+                                <a class="btn btn-default"
+                                   href="{{ next_page_url(current_page - 1) }}">
+                                    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                                </a>
+                            {% endif %}
+                            {% if current_page >= total_page %}
+                                <div class="btn btn-default disabled">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                                </div>
+                            {% else %}
+                                <a class="btn btn-default" {{ 'disabled="disabled"' if current_page >= total_page }}
+                                   href="{{ next_page_url(current_page + 1) }}">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="favorite-list-group-wrapper">
+                    <ul class="list-group">
+                        {% for metadata in metadatas %}
+                            <li class="list-group-item">
+                                <div class="media">
+                                    <div class="media-left">
+                                        {% if metadata.ds_thumbnail %}
+                                            <a href="{{ url_for('manage.get_ds_thumb', meta_id=metadata.id) }}"
+                                               target="_blank">
+                                                <img alt="数据集缩略图" class="media-object"
+                                                     style="width: 120px; height: 90px;"
+                                                     src="{{ url_for('manage.get_ds_thumb', meta_id=metadata.id) }}">
+                                            </a>
+                                        {% else %}
+                                            <a href="javascript:void(0)">
+                                                <img alt="数据集缩略图" class="media-object"
+                                                     style="width: 120px; height: 90px;"
+                                                     src="{{ url_for('manage.get_ds_thumb', meta_id=metadata.id) }}?w=120&h=90&v={{ metadata.updated|dt('%f') }}">
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="media-body">
+                                        <div class="pull-right">
+                                            <div class="btn-toolbar" role="toolbar" aria-label="操作">
+                                                <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                                                    <a class="btn btn-default"
+                                                       href="{{ url_for('auth.metadata_copy',cid=metadata.id) }}">copy</a>
+                                                    <a class="btn btn-default"
+                                                       href="{{ url_for('auth.metadata_edit', cid=metadata.id) }}">edit</a>
+                                                    <a class="btn btn-default"
+                                                       onclick="deleteMeta('{{ metadata.id }}')">delete</a>
+                                                    <a href="{{ url_for('auth.metadata_data', id=metadata.id) }}"
+                                                       type="button" class="btn btn-default">data</a>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <h4 class="media-heading">
+                                            <a href="{{ url_for('auth.metadata_view',cid=metadata.id) }}">{{ metadata.title_cn }}</a>
+                                        </h4>
+                                        {{ metadata.ds_abstract | safe }}<br>
+                                        {% if metadata.publish_status==1 %}
+                                            <small><a class="btn btn-xs btn-danger">审核未通过</a>：{{ metadata.publish_msg }}
+                                            </small>
+                                        {% endif %}
+                                        <small>文件大小：<span class="text-success">{{ metadata.ds_total_size or 0 }}</span>
+                                            点击次数：<span
+                                                    class="text-success">{{ metadata.hit_count }}</span>
+                                            创建于<i>{{ metadata.created.strftime("%Y-%m-%d %H:%M:%S") if metadata.created  else '' }}</i>
+                                            更新于<i>{{ metadata.updated.strftime("%Y-%m-%d %H:%M:%S") if metadata.updated  else '' }}</i>
+                                        </small>
+                                    </div>
+                                </div>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">暂无数据.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="list-group-toolbar">
+                    <div class="pull-right col-md-offset-7">
+                    <span>共有元数据<strong>{{ total }}</strong>条</span>
+                        (<span class="text-danger">{{ current_page }}</span>/{{ total_page }})
+                        <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                            {% if current_page <= 1 %}
+                                <div class="btn btn-default disabled">
+                                    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                                </div>
+                            {% else %}
+                                <a class="btn btn-default"
+                                   href="{{ next_page_url(current_page - 1) }}">
+                                    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                                </a>
+                            {% endif %}
+                            {% if current_page >= total_page %}
+                                <div class="btn btn-default disabled">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                                </div>
+                            {% else %}
+                                <a class="btn btn-default" {{ 'disabled="disabled"' if current_page >= total_page }}
+                                   href="{{ next_page_url(current_page + 1) }}">
+                                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                                </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block foot_script %}
+    <script src="/static/assets/components/bootbox.js/bootbox.js"></script>
+
+    <script>
+        var deleteMeta = function (mid) {
+            bootbox.confirm("你确定要删除选定的元数据？", function (yes) {
+                if (yes) {
+                    $.post('/auth/metadata/delete', {id: mid}, function (data) {
+                        if (data.success) {
+                            bootbox.alert("删除成功", function () {
+                                window.location.href = "/auth/metadata?current_page=" + "{{ current_page }}";
+                            });
+                        } else {
+                            bootbox.alert("删除失败");
+                        }
+                    }, 'JSON');
+                }
+            });
+        };
+    </script>
+{% endblock %}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.Save" name="save" author="longyinping11@lzb.ac.cn">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="w3D" dataType="PoolDouble3DArray" size="0" unit="" description="moisture of each soil layer at each grid of the study area"/>
+    <var name="dgl2D" dataType="PoolDouble2DArray" size="0" unit="" description="depth from soil surface to ground water at each grid of the study area"/>
+    <var name="GWst2D" dataType="PoolDouble2DArray" size="0" unit="" description="ground water storage at each grid of the study area"/>
+    <var name="Cst2D" dataType="PoolDouble2DArray" size="0" unit="" description="canopy intercepted water at each grid of the study area"/>
+    <var name="snowdepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="snow pack water storage at each grid of the study area"/>
+    <var name="sst2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil surface water storage at each grid of the study area"/>
+    <var name="Eact2D" dataType="PoolDouble2DArray" size="0" unit="" description="actual evapotranspiration at each grid of the study area"/>
+    <var name="qin2D" dataType="PoolDouble2DArray" size="0" unit="" description="runoff at each grid of the study area"/>
+    <var name="snowmelt2D" dataType="PoolDouble2DArray" size="0" unit="" description="snowmelt at each grid of the study area"/>
+    <var name="soilWaterDepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil water depth of the profile output path"/>
+    <var name="nrows" dataType="PoolInteger" size="0" unit="" description="the nrows value in the ascii file"/>
+    <var name="ncols" dataType="PoolInteger" size="0" unit="" description="the ncols value in the ascii file"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="moisture of each soil layer at current simulation grid"/>
+    <var name="dgl" dataType="PoolDouble" size="0" unit="" description="depth from soil surface to ground water at current simulation grid"/>
+    <var name="GWst" dataType="PoolDouble" size="0" unit="" description="ground water storage at current simulation grid"/>
+    <var name="Cst" dataType="PoolDouble" size="0" unit="" description="canopy intercepted water at current simulation grid"/>
+    <var name="snowdepth" dataType="PoolDouble" size="0" unit="" description="snow pack water storage at current simulation grid"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="soil surface water storage at current simulation grid"/>
+    <var name="Eact" dataType="PoolDouble" size="0" unit="" description="actual evapotranspiration at current simulation grid"/>
+    <var name="snowmelt" dataType="PoolDouble" size="0" unit="" description="snowmelt at current simulation grid"/>
+    <var name="q_hillslope" dataType="PoolDouble" size="0" unit="" description="surface runoff at current simulation grid"/>
+    <var name="qsub" dataType="PoolDouble" size="0" unit="" description="runoff from subsurface at current simulation grid"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m) at current simulation grid"/>
+  </varMeta>
+</moduleMeta>

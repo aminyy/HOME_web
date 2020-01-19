@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.Spatial_flag" name="Spatial_flag" author="hzfwhy@lzb.ac.cn" keyword="Spatial_flag" description="Spatial_flag">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="hru_flag" dataType="PoolInteger" size="0" unit="" description="hru_flag"/>
+    <var name=" hru_flagInputPath" dataType="PoolString" size="0" unit="" description=" hru_flag file InputPath"/>
+  </varMeta>
+</moduleMeta>

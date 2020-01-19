@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.Snow" name="Snow" author="Lihui Luo" keyword="Snow" description="Compute Snow storage">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="snowStorage" dataType="PoolDouble" size="0" unit="" description="snow Storage"/>
+    <var name="potET" dataType="PoolDouble" size="0" unit="" description="Potential Evapotranspiration"/>
+    <var name="temp" dataType="PoolDouble" size="0" unit="" description="temperature"/>
+    <var name="precip" dataType="PoolDouble" size="0" unit="" description="Precipitation"/>
+    <var name="snowMelt" dataType="PoolDouble" size="0" unit="" description="Snow melt"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,9 @@
+Dear {{ user.username }}
+
+Welcome !!!
+
+To confirm your account please click on the following link:
+
+{{ url_for('manage.confirm', token=token, _external=True) }}
+
+

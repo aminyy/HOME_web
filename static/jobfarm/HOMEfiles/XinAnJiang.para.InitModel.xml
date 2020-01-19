@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.para.InitModel" name="InitModel">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="recNum" dataType="PoolInteger" size="0" unit="" description="number of the measure data of the study area"/>
+    <var name="parNum" dataType="PoolInteger" size="0" unit="" description="parameter number of the model"/>
+    <var name="lowerX" dataType="PoolDoubleArray" size="0" unit="" description="the lower limit of the parameter"/>
+    <var name="upperX" dataType="PoolDoubleArray" size="0" unit="" description="the upper limit of the parameter"/>
+    <var name="forcingData" dataType="PoolDouble2DArray" size="0" unit="" description="forcing data of the study area"/>
+    <var name="runoffData" dataType="PoolDoubleArray" size="0" unit="" description="measure data of the study area"/>
+    <var name="xajObj" dataType="PoolObject" size="0" unit="" description="the object of the XinAnJiang Model"/>
+  </varMeta>
+</moduleMeta>

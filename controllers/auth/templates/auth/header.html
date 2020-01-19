@@ -1,0 +1,130 @@
+<div class="scroll-top" id="scrollTop" title="回到顶部"><i class="fa fa-chevron-up"></i></div>
+
+<div class="login-wrapper">
+    <div class="container" style="padding: 0;">
+        <div class="login-bar login-ul pull-right">
+            <li role="presentation">
+                <a href="{{ url_for('auth.register') }}">注册</a>
+            </li>
+            <li role="presentation">
+                <a data-toggle="modal" data-target="#loginModal">登录</a>
+            </li>
+            <li>
+                <a href="http://www.csdb.cn/" target="_blank">科学数据库门户</a>
+            </li>
+        </div>
+    </div>
+</div>
+<div class="top-banner">
+    <div class="container">
+        {#        <a class="navbar-brand" href="{{ url_for('portal.index') }}"><img#}
+        {#                src="/static/assets/image/new_logo.png" class="img-responsive"></a>#}
+    </div>
+</div>
+<!--bs导航-->
+<div class="navigation">
+    <div class="container">
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target="#bs-nav-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-nav-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{{ url_for('portal.index') }}" page="portal.index">首页</a></li>
+                        <li><a href="{{ url_for('portal.news') }}" page="portal.news">综合新闻</a></li>
+                        <li><a href="{{ url_for('portal.metadata_navigator') }}" page="portal.metadata">数据资源</a></li>
+                        {#                        <li><a href="{{ url_for('portal.data_worker') }}" page="portal.data_worker">数据工作者</a></li>#}
+                        <li><a href="{{ url_for('portal.library') }}" page="portal.library">模型工具</a></li>
+                        <li><a href="{{ url_for('portal.outcome') }}" page="portal.outcome">应用成果</a></li>
+                        <li><a href="{{ url_for('portal.science') }}" page="portal.science">科学普及</a></li>
+                        <li><a href="{{ url_for('portal.about', name="platform") }}" page="portal.about">平台介绍</a></li>
+                    </ul>
+                    <form class="navbar-form navbar-right">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input id="searchBox" type="text" class="form-control search-input" placeholder="搜索"
+                                       data-action="grow"/>
+                                <span class="input-group-addon" id="search-btn"><i class="iconfont icon-search"
+                                                                                   style="color:#00669f"></i></span>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel"><i class="fa fa-fw fa-user txt-success"></i>登录系统</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-signin" method="post" action="{{ url_for('auth.login') }}">
+                    <div class="div-passport">
+                        <a href="https://passport.escience.cn/oauth2/authorize?response_type=code&redirect_uri=http://gaohan.casnw.net/portal/callback&client_id=76187&theme=full">
+                        </a>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputEmail" class="sr-only">邮箱</label>
+                        <input type="email" name="email" id="inputEmail" class="form-control"
+                               placeholder="Email address"
+                               required
+                               autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword" class="sr-only">密码</label>
+                        <input type="password" name="password" id="inputPassword" class="form-control"
+                               placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" value="remember-me"> 记住我
+                        </label>
+                        <label class="pull-right">
+                            <a href="{{ url_for('auth.forget_passwd') }}">忘记密码?</a>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <input type="text" name="code" placeholder="yanzhenma" class="form-control"
+                                   required>
+                        </div>
+                        <div class="col-md-2">
+                            <a href="javascript: changeImg()" style="font-size: 25px;"><span
+                                    class="glyphicon glyphicon-refresh"
+                                    aria-hidden="true"></span></a>
+                        </div>
+                        <div class="col-md-5">
+                            <img class="verify_code" style="margin-top:-10px"
+                                 src="{{ url_for('auth.get_code') }}"
+                                 onclick="this.src='/auth/code?'+ Math.random()">
+                        </div>
+                    </div>
+                    <div style="margin-top:20px">
+                        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var changeImg = function () {
+        $(".verify_code").click();
+    };
+</script>

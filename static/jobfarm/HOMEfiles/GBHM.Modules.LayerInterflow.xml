@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.LayerInterflow" name="layerInterflow" author="longyinping11@lzb.ac.cn" keyword="layerInterflow Rechards" description="vertical soil water movement using Rechards equation">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m)"/>
+    <var name="inf" dataType="PoolDouble" size="0" unit="" description="infiltration(mm H2O)"/>
+    <var name="rech" dataType="PoolDouble" size="0" unit="" description="recharge rate from unsaturated zone to groundwater(m H2O)"/>
+    <var name="Ds" dataType="PoolDouble" size="0" unit="" description="average depth of topsoil (m)"/>
+    <var name="dgl" dataType="PoolDouble" size="0" unit="" description="depth to groundwater level (m)"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture for each UZ(Unsaturated Zone)layer,(mm H2O/ mm Soil)"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="surface water storage(mm H2O)"/>
+    <var name="wsat" dataType="PoolDoubleArray" size="0" unit="" description="saturated soil moisture, varied by soil types"/>
+    <var name="wrsd" dataType="PoolDoubleArray" size="0" unit="" description="residual soil moisture, varied by soil types"/>
+    <var name="k0" dataType="PoolDoubleArray" size="0" unit="" description="saturated hydraulic conductivity (mm H2O/hour) for each UZ(Unsaturated Zone)layer"/>
+    <var name="alpha" dataType="PoolDoubleArray" size="0" unit="" description="soil water parameter, van Genuchten model's alpha"/>
+    <var name="watern" dataType="PoolDoubleArray" size="0" unit="" description="soil water parameter, van Genuchten model's n"/>
+  </varMeta>
+</moduleMeta>

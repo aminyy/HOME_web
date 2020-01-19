@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="gg">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="" name="startTime" type=" " value=" "/>
+		<var attribute="" name="endTime" type=" " value=" "/>
+		<var attribute="" name="intervalUnit" type=" " value=" "/>
+		<var attribute="" name="intervalCount" type=" " value=" "/>
+		<var attribute="" name="iteratorNum" type=" " value=" "/>
+	</context>
+</model>

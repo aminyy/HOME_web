@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.model.HRUContext" name="HRUContext" author="home" keyword="spatial,hru,Context" description="control hur loop">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="hruNum" dataType="PoolInteger" size="0" unit="" description="hru numbers"/>
+    <var name="currentHRUNum" dataType="PoolInteger" size="0" unit="" description="current hru index"/>
+  </varMeta>
+</moduleMeta>

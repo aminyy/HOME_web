@@ -1,0 +1,726 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}在线计算 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+            <div class="col-md-2" style="padding: 0;">
+                {% include 'portal/jobfarm/nav.html' %}
+            </div>
+            <div class="col-md-10">
+                <div class="fluid-container" style="padding-top: 10px;">
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading">
+                            <i class="glyphicon glyphicon-list text-info"></i>&nbsp;容器
+                        </div>
+                        <div class="panel-body">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="时间容器" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.model.TemporalContext')"><img
+                                            src="/static/modelBox/icon/TemporalContext.png"><span>时间容器</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="空间容器" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.model.SpatialContext')"><img
+                                            src="/static/modelBox/icon/SpatialContext.png"><span>空间容器</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="HRU容器" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.model.HRUContext')"><img
+                                            src="/static/modelBox/icon/HRUContext.png"><span>HRU容器</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="普通容器" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.model.Context')"><img
+                                            src="/static/modelBox/icon/Context.png"><span>普通容器</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;Thornthwaite模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="Climate" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.Climate')"><span><img
+                                            src="/static/modelBox/icon/Climate.png"> Climate</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Daylen" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.Daylen')"><span><img
+                                            src="/static/modelBox/icon/Daylen.png"> Daylen</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="HamonET" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.HamonET')"><span><img
+                                            src="/static/modelBox/icon/HamonET.png"> HamonET</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Runoff" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.Runoff')"><span><img
+                                            src="/static/modelBox/icon/Runoff.png"> Runoff</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Snow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.Snow')"><span><img
+                                            src="/static/modelBox/icon/Snow.png"> Snow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SoilMoisture" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.SoilMoisture')"><span><img
+                                            src="/static/modelBox/icon/SoilMoisture.png"> SoilMoisture</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Output" class="hvr-sweep-to-top"
+                                       onclick="module_intro('net.casnw.home.thornthwaite.Output')"><span><img
+                                            src="/static/modelBox/icon/Output.png"> Output</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;GBHM模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="BaseMaps" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Inputs.BaseMaps')"><span><img
+                                            src="/static/modelBox/icon/BaseMaps.png"> BaseMaps</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ClimateInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Inputs.ClimateInput')"><span><img
+                                            src="/static/modelBox/icon/ClimateInput.png"> ClimateInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="OverlandInitialInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Inputs.OverlandInitialInput')"><span><img
+                                            src="/static/modelBox/icon/OverlandInitialInput.png"> OverlandInitialInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="RiverInitialInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Inputs.RiverInitialInput')"><span><img
+                                            src="/static/modelBox/icon/RiverInitialInput.png"> RiverInitialInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="AllDischargeOutput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Outputs.AllDischargeOutput')"><span><img
+                                            src="/static/modelBox/icon/AllDischargeOutput.png"> AllDischargeOutput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="AsciiGridOutput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Outputs.AsciiGridOutput')"><span><img
+                                            src="/static/modelBox/icon/AsciiGridOutput.png"> AsciiGridOutput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="DailyOutput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Outputs.DailyOutput')"><span><img
+                                            src="/static/modelBox/icon/DailyOutput.png"> DailyOutput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="DischargeOutput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Outputs.DischargeOutput')"><span><img
+                                            src="/static/modelBox/icon/DischargeOutput.png"> DischargeOutput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="FlowAtIntervalsOutput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Outputs.FlowAtIntervalsOutput')"><span><img
+                                            src="/static/modelBox/icon/FlowAtIntervalsOutput.png"> FlowAtIntervalsOutput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="EmpiricalParameters" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.EmpiricalParameters')"><span><img
+                                            src="/static/modelBox/icon/EmpiricalParameters.png"> EmpiricalParameters</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Fraction_of_Vegetation_Cover" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.Fraction_of_Vegetation_Cover')"><span><img
+                                            src="/static/modelBox/icon/Fraction_of_Vegetation_Cover.png"> Fraction_of_Vegetation_Cover</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="LAIInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.LAIInput')"><span><img
+                                            src="/static/modelBox/icon/LAIInput.png"> LAIInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="MCD15A3_LAIInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.MCD15A3_LAIInput')"><span><img
+                                            src="/static/modelBox/icon/MCD15A3_LAIInput.png"> MCD15A3_LAIInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="RiverParameter" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.RiverParameter')"><span><img
+                                            src="/static/modelBox/icon/RiverParameter.png"> RiverParameter</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SoilParameters" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.SoilParameters')"><span><img
+                                            src="/static/modelBox/icon/SoilParameters.png"> SoilParameters</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="VegetationParameters" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.IO.Parameters.VegetationParameters')"><span><img
+                                            src="/static/modelBox/icon/VegetationParameters.png"> VegetationParameters</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ActualEvaporation" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.ActualEvaporation')"><span><img
+                                            src="/static/modelBox/icon/ActualEvaporation.png"> ActualEvaporation</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Infiltration" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.Infiltration')"><span><img
+                                            src="/static/modelBox/icon/Infiltration.png"> Infiltration</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Interception" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.Interception')"><span><img
+                                            src="/static/modelBox/icon/Interception.png"> Interception</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="LayerInterflow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.LayerInterflow')"><span><img
+                                            src="/static/modelBox/icon/LayerInterFlow.png"> LayerInterflow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="RechargeToGroundWater" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.RechargeToGroundWater')"><span><img
+                                            src="/static/modelBox/icon/RechargeToGroundWater.png"> RechargeToGroundWater</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Routing" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.Routing')"><span><img
+                                            src="/static/modelBox/icon/Routing.png"> Routing</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SheetFlow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.SheetFlow')"><span><img
+                                            src="/static/modelBox/icon/SheetFlow.png"> SheetFlow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Snow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.Snow')"><span><img
+                                            src="/static/modelBox/icon/Snow.png"> Snow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SubsurfaceFlow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Modules.SubsurfaceFlow')"><span><img
+                                            src="/static/modelBox/icon/SubsurfaceFlow.png"> SubsurfaceFlow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ParameterCalibration" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Optimization.ParameterCalibration')"><span><img
+                                            src="/static/modelBox/icon/ParameterCalibration.png"> ParameterCalibration</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="DailyResults" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.DailyResults')"><span><img
+                                            src="/static/modelBox/icon/DailyResults.png"> DailyResults</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="DailyStats" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.DailyStats')"><span><img
+                                            src="/static/modelBox/icon/DailyStats.png"> DailyStats</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="FlowSeparation" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.FlowSeparation')"><span><img
+                                            src="/static/modelBox/icon/FlowSeparation.png"> FlowSeparation</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="K_cali_for_Freezing_Thawing" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.K_cali_for_Freezing_Thawing')"><span><img
+                                            src="/static/modelBox/icon/K_cali_for_Freezing_Thawing.png"> K_cali_for_Freezing_Thawing</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="RiverToGrid" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.RiverToGrid')"><span><img
+                                            src="/static/modelBox/icon/RiverToGrid.png"> RiverToGrid</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Save" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.Save')"><span><img
+                                            src="/static/modelBox/icon/Save.png"> Save</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="save2DMap" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.save2DMap')"><span><img
+                                            src="/static/modelBox/icon/save2DMap.png"> save2DMap</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SpatialDownscaling" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.SpatialDownscaling')"><span><img
+                                            src="/static/modelBox/icon/SpatialDownscaling.png"> SpatialDownscaling</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="TemporalContextInfo" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.TemporalContextInfo')"><span><img
+                                            src="/static/modelBox/icon/TemporalContextInfo.png"> TemporalContextInfo</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="TemporalDownscaling" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.TemporalDownscaling')"><span><img
+                                            src="/static/modelBox/icon/TemporalDownscaling.png"> TemporalDownscaling</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="WeatherDataInterpolation" class="hvr-sweep-to-top"
+                                       onclick="module_intro('GBHM.Processings.WeatherDataInterpolation')"><span><img
+                                            src="/static/modelBox/icon/WeatherDataInterpolation.png"> WeatherDataInterpolation</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;prms模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="InitBasin" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.InitBasin')"><span><img
+                                            src="/static/modelBox/icon/InitBasin.png"> InitBasin</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ObsIO" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.ObsIO')"><span><img
+                                            src="/static/modelBox/icon/ObsIO.png"> ObsIO</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ParameterIO_hru" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.ParameterIO_hru')"><span><img
+                                            src="/static/modelBox/icon/ParameterIO_hru.png"> ParameterIO_hru</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ParameterIO_time" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.ParameterIO_time')"><span><img
+                                            src="/static/modelBox/icon/ParameterIO_time.png"> ParameterIO_time</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Parameter_Thru" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.Parameter_Thru')"><span><img
+                                            src="/static/modelBox/icon/Parameter_Thru.png"> Parameter_Thru</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Spatial_flag" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.Spatial_flag')"><span><img
+                                            src="/static/modelBox/icon/Spatial_flag.png"> Spatial_flag</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="WriteOut" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.io.WriteOut')"><span><img
+                                            src="/static/modelBox/icon/WriteOut.png"> WriteOut</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Basin" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Basin')"><span><img
+                                            src="/static/modelBox/icon/Basin.png"> Basin</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Ddsolrad" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Ddsolrad')"><span><img
+                                            src="/static/modelBox/icon/Ddsolrad.png"> Ddsolrad</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Gwflow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Gwflow')"><span><img
+                                            src="/static/modelBox/icon/Gwflow.png"> Gwflow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Intcp" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Intcp')"><span><img
+                                            src="/static/modelBox/icon/Intcp.png"> Intcp</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="PotetJh" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.PotetJh')"><span><img
+                                            src="/static/modelBox/icon/PotetJh.png"> PotetJh</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Precip" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Precip')"><span><img
+                                            src="/static/modelBox/icon/Precip.png"> Precip</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Smbal" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Smbal')"><span><img
+                                            src="/static/modelBox/icon/Smbal.png"> Smbal</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Snowcomp" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Snowcomp')"><span><img
+                                            src="/static/modelBox/icon/Snowcomp.png"> Snowcomp</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Soltab" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Soltab')"><span><img
+                                            src="/static/modelBox/icon/Soltab.png"> Soltab</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SrunoffSmidx" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.SrunoffSmidx')"><span><img
+                                            src="/static/modelBox/icon/SrunoffSmidx.png"> SrunoffSmidx</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Ssflow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Ssflow')"><span><img
+                                            src="/static/modelBox/icon/Ssflow.png"> Ssflow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Strmflow" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Strmflow')"><span><img
+                                            src="/static/modelBox/icon/Strmflow.png"> Strmflow</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Temp1sta" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.Temp1sta')"><span><img
+                                            src="/static/modelBox/icon/Temp1sta.png"> Temp1sta</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="TranspTindex" class="hvr-sweep-to-top"
+                                       onclick="module_intro('prms.process.TranspTindex')"><span><img
+                                            src="/static/modelBox/icon/TranspTindex.png"> TranspTindex</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;新安江模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="Climate" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Climate')"><span><img
+                                            src="/static/modelBox/icon/Climate.png"> Climate</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Evaporation" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Evaporation')"><span><img
+                                            src="/static/modelBox/icon/Evaporation.png"> Evaporation</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Output" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Output')"><span><img
+                                            src="/static/modelBox/icon/Output.png"> Output</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Parameter" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Parameter')"><span><img
+                                            src="/static/modelBox/icon/Parameter.png"> Parameter</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Routing" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Routing')"><span><img
+                                            src="/static/modelBox/icon/Routing.png"> Routing</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="Runoff" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.Runoff')"><span><img
+                                            src="/static/modelBox/icon/Runoff.png"> Runoff</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;参数优化的新安江模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="AnnealingHandle" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.AnnealingHandle')"><span><img
+                                            src="/static/modelBox/icon/AnnealingHandle.png"> AnnealingHandle</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="ClimateInput" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.ClimateInput')"><span><img
+                                            src="/static/modelBox/icon/ClimateInput.png"> ClimateInput</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="EvaluateParameter" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.EvaluateParameter')"><span><img
+                                            src="/static/modelBox/icon/EvaluateParameter.png"> EvaluateParameter</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="GenerateNewParameter" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.GenerateNewParameter')"><span><img
+                                            src="/static/modelBox/icon/GenerateNewParameter.png"> GenerateNewParameter</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="InitModel" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.InitModel')"><span><img
+                                            src="/static/modelBox/icon/InitModel.png"> InitModel</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="InitParameter" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.InitParameter')"><span><img
+                                            src="/static/modelBox/icon/InitParameter.png"> InitParameter</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="OutputResult" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.OutputResult')"><span><img
+                                            src="/static/modelBox/icon/OutputResult.png"> OutputResult</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="RunModel" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.RunModel')"><span><img
+                                            src="/static/modelBox/icon/RunModel.png"> RunModel</span></a>
+                                </li>
+
+                                <li>
+                                    <a title="SAOptimization" class="hvr-sweep-to-top"
+                                       onclick="module_intro('XinAnJiang.para.SAOptimization')"><span><img
+                                            src="/static/modelBox/icon/SAOptimization.png"> SAOptimization</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                    <div class="panel panel-default lib-panel">
+
+                        <div class="panel-heading"><i class="glyphicon glyphicon-list text-info"></i>&nbsp;整体模型
+                        </div>
+                        <div class="panel-body" style="padding-top: 10px; padding-bottom: 10px;">
+                            <ul class="ul-model clearfix">
+
+                                <li>
+                                    <a title="modflow_2005" class="hvr-sweep-to-top"
+                                       onclick="module_intro('modflow.Modflow')"><span><img
+                                            src="/static/modelBox/icon/modflow_2005.png"> modflow_2005</span></a>
+                                </li>
+
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+            </div>
+    </div>
+</div>
+
+    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog" aria-labelledby="fileeditModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                </div>
+                <div class="modal-body" id="fileeditModalcontent">
+                    <table class="table table-bordered">
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"><i
+                            class="glyphicon glyphicon-remove"></i>&nbsp;关　闭
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+        function module_intro(filename) {
+            var settings = {
+                type: "GET",
+                url: "/portal/jobfarm/module_intro",
+
+                data: {
+                    "filename": filename
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    $("#fileeditModalLabel").html(data.fname)
+                    $("#fileeditModalcontent tbody").empty()
+                    if (data.fcontent == "此文件不存在") {
+                        $("#fileeditModalcontent tbody").append("<th>" + data.fcontent + "</th>")
+                    }
+                    else {
+
+                        $("#fileeditModalcontent tbody").append("<tr><th>" + "name" + "</th><td colspan='4'>" + data.metainfos["name"] + "</td></tr>")
+                        $("#fileeditModalcontent tbody").append("<tr><th>" + "author" + "</th><td colspan='4'>" + data.metainfos["author"] + "</td></tr>")
+                        $("#fileeditModalcontent tbody").append("<tr><th>" + "keyword" + "</th><td colspan='4'>" + data.metainfos["keyword"] + "</td></tr>")
+                        $("#fileeditModalcontent tbody").append("<tr><th>" + "description" + "</th><td colspan='4'>" + data.metainfos["description"] + "</td></tr>")
+
+
+                        for (var attr in data.attrs) {
+                            $("#fileeditModalcontent tbody").append("<tr><th>" + attr + "</th><td colspan='4'>" + data.attrs[attr] + "</td></tr>")
+
+                        }
+                        $("#fileeditModalcontent tbody").append("<tr><th colspan='5'>vars</th></tr>")
+                        $("#fileeditModalcontent tbody").append("<tr><th>name</th><th>dataType</th><th>size</th><th>unit</th><th>description</th></tr>")
+
+                        for (var i = 0; i < data.vars.length; i++) {
+                            $("#fileeditModalcontent tbody").append("<tr><td>" + data.vars[i]["name"] + "</td>\
+				            		                               <td>" + data.vars[i]["dataType"] + "</td>\
+				            		                               <td>" + data.vars[i]["size"] + "</td>\
+				            		                               <td>" + data.vars[i]["unit"] + "</td>\
+				            		                               <td>" + data.vars[i]["description"] + "</td></tr>")
+
+                        }
+                    }
+                    $('#fileeditModal').modal().css({
+                        width: 'auto',
+                    });
+                },
+                // headers: {
+                //     "X-CSRFToken": getCookie('csrftoken'),
+                // },
+            };
+            $.ajax(settings);
+        }
+
+    $(function () {
+        $("a[nav='{{ cate }}']").css({color: "#f69e16"});
+    });
+</script>
+{% endblock %}

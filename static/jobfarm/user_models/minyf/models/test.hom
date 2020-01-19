@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="test">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="" name="year" type=" " value=" "/>
+			<var attribute="" name="time" type=" " value=" "/>
+			<var attribute="" name="temp" type=" " value=" "/>
+			<var attribute="" name="precip" type=" " value=" "/>
+			<var attribute="" name="inputName" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Daylen" name="Daylen">
+			<var attribute="" name="daylength" type=" " value=" "/>
+			<var attribute="" name="time" type=" " value=" "/>
+			<var attribute="" name="year" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.HamonET" name="HamonET">
+			<var attribute="" name="time" type=" " value=" "/>
+			<var attribute="" name="temp" type=" " value=" "/>
+			<var attribute="" name="daylength" type=" " value=" "/>
+			<var attribute="" name="potET" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Runoff" name="Runoff">
+			<var attribute="" name="runoffFactor" type=" " value=" "/>
+			<var attribute="" name="remain" type=" " value=" "/>
+			<var attribute="" name="surfaceRunoff" type=" " value=" "/>
+			<var attribute="" name="snowMelt" type=" " value=" "/>
+			<var attribute="" name="runoff" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Snow" name="Snow">
+			<var attribute="" name="snowStorage" type=" " value=" "/>
+			<var attribute="" name="potET" type=" " value=" "/>
+			<var attribute="" name="temp" type=" " value=" "/>
+			<var attribute="" name="precip" type=" " value=" "/>
+			<var attribute="" name="snowMelt" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.SoilMoisture" name="SoilMoisture">
+			<var attribute="" name="soilMoistStorCap" type=" " value=" "/>
+			<var attribute="" name="potET" type=" " value=" "/>
+			<var attribute="" name="temp" type=" " value=" "/>
+			<var attribute="" name="precip" type=" " value=" "/>
+			<var attribute="" name="prestor" type=" " value=" "/>
+			<var attribute="" name="soilMoistStor" type=" " value=" "/>
+			<var attribute="" name="surfaceRunoff" type=" " value=" "/>
+			<var attribute="" name="pmpe" type=" " value=" "/>
+			<var attribute="" name="actET" type=" " value=" "/>
+			<var attribute="" name="dff" type=" " value=" "/>
+		</module>
+		<module class="net.casnw.home.thornthwaite.Output" name="Output">
+			<var attribute="" name="daylength" type=" " value=" "/>
+			<var attribute="" name="time" type=" " value=" "/>
+			<var attribute="" name="year" type=" " value=" "/>
+			<var attribute="" name="potET" type=" " value=" "/>
+			<var attribute="" name="snowMelt" type=" " value=" "/>
+			<var attribute="" name="runoff" type=" " value=" "/>
+			<var attribute="" name="soilMoistStor" type=" " value=" "/>
+			<var attribute="" name="fileName" type=" " value=" "/>
+			<var attribute="" name="outputName" type=" " value=" "/>
+		</module>
+	</context>
+</model>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Gwflow" name="Gwflow" author="hzfwhy@lzb.ac.cn" keyword="Groundwater" description="Groundwater Flow.Sums inflow to groundwater reservoirs and computes outflow tostreamflow and to a groundwater sink if specified.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="ngw" dataType="PoolInteger" size="0" unit="" description="Number of Ground water reservoirs."/>
+    <var name="nssr" dataType="PoolInteger" size="0" unit="" description="Number of subsurface reservoirs."/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area."/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="HRU area,  Area of each HRU"/>
+    <var name="gwstor_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial storage in each gw reservoir Storage in each groundwater reservoir at the  beginning of a simulation"/>
+    <var name="hru_gwres" dataType="PoolIntegerArray" size="0" unit="" description="Index of groundwater reservoir assigned to HRU Index of groundwater reservoir receiving excess soil  water from each HRU"/>
+    <var name="ssr_gwres" dataType="PoolIntegerArray" size="0" unit="" description="Index of gw reservoir to receive flow from ss reservoir Index of the groundwater reservoir that will receive  flow from each subsurface or gravity reservoir"/>
+    <var name="gwflow_coef" dataType="PoolDoubleArray" size="0" unit="" description="Groundwater routing coefficient Groundwater routing coefficient - is multiplied by the  storage in the groundwater reservoir to compute  groundwater flow contribution to down-slope flow"/>
+    <var name="gwsink_coef" dataType="PoolDoubleArray" size="0" unit="" description="Groundwater sink coefficient Groundwater sink coefficient - is multiplied by the  storage in the groundwater reservoir to compute the  seepage from each reservoir to the groundwater sink"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step"/>
+    <var name="gwres_area" dataType="PoolDoubleArray" size="0" unit="" description="Groundwater reservoir area."/>
+    <var name="soil_to_gw" dataType="PoolDoubleArray" size="0" unit="" description="The amount of water transferred from the soil zone to a groundwater reservoir for each HRU. [smbal]"/>
+    <var name="ssr_to_gw" dataType="PoolDoubleArray" size="0" unit="" description="Flow from each subsurface reservoir to its associated groundwater reservoir. [ssflow]"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="HRU pervious area. [basin]"/>
+    <var name="ssres_area" dataType="PoolDoubleArray" size="0" unit="" description="Subsurface reservoir area. [ssflow]"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="active_gwrs" dataType="PoolInteger" size="0" unit="" description="Number of active GWRs"/>
+    <var name="Routing order for HRUs" dataType="PoolIntegerArray" size="0" unit="" description="hru_route_order"/>
+    <var name="gwr_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for ground-water reservoirs"/>
+    <var name="basin_gwflow" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of groundwater flow"/>
+    <var name="basin_gwstor" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of groundwater storage"/>
+    <var name="basin_gwsink" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of groundwater  reservoir storage to the groundwater sink"/>
+    <var name="basin_gwin" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of inflow to  groundwater reservoirs"/>
+    <var name="gwres_stor" dataType="PoolDoubleArray" size="0" unit="" description="Storage in each groundwater reservoir"/>
+    <var name="gw_in_soil" dataType="PoolDoubleArray" size="0" unit="" description="Sum of inflows to each groundwater reservoir from the soil-water excess of associated HRUs"/>
+    <var name="gw_in_ssr" dataType="PoolDoubleArray" size="0" unit="" description="Sum of inflows to each groundwater reservoir from  associated subsurface or gravity reservoirs"/>
+    <var name="gwres_in" dataType="PoolDoubleArray" size="0" unit="" description="Sum of inflows to each groundwater reservoir from all associated soil-zone reservoirs"/>
+    <var name="gwres_flow" dataType="PoolDoubleArray" size="0" unit="" description="Outflow from each groundwater reservoir to streams"/>
+    <var name="gwres_sink" dataType="PoolDoubleArray" size="0" unit="" description="Amount of water transferred from groundwater reservoirs to the groundwater sink.  This water is  effectively routed out of the basin and will not  be included in streamflow"/>
+  </varMeta>
+</moduleMeta>

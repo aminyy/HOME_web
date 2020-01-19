@@ -1,0 +1,171 @@
+<div class='list-group-item active' style="padding-bottom: 0px; padding-top: 10px; border-top-width: 0px; padding-bottom: 0px; padding-top: 10px; border-top-width: 0px; margin-bottom: 15px;">
+	<p>输入数据</p>
+</div>
+<div class="form-group">
+	<label for="inputFile1" class="col-sm-4 col-md-3 col-lg-2 control-label">用户文件</label>
+		<div class="col-sm-4 col-md-6 col-lg-8">
+		
+		     <div class="easyui-panel" style="padding:5px;border:1px solid #5bc0de" >
+		         <ul id="filestree" class="easyui-tree" data-options="url:'/portal/jobfarm/filelist',method:'get',animate:true,checkbox:false,onlyLeafCheck:true"></ul>
+		         
+             </div>
+			 
+<!-- 模态框（Modal） -->
+       <div class="modal fade" id="fileeditModal1" tabindex="-1" role="dialog" aria-labelledby="fileeditModalLabel1" aria-hidden="true">
+          <div class="modal-dialog">
+             <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="fileeditModalLabel1"></h4>
+                </div>
+                <div class="modal-body" id="fileeditModalcontent1"> </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                  <button type="button" class="btn btn-primary" onclick="editsave()">提交更改</button>
+                </div>
+               </div><!-- /.modal-content -->
+         </div><!-- /.modal -->
+       </div>
+						
+		</div>
+		<div id="chosedfiles"></div>
+</div>
+<div class="form-group">
+<label for="inputFile0" class="col-sm-4 col-md-3 col-lg-2 control-label">输入文件</label>
+<div class="col-sm-4 col-md-6 col-lg-10">
+<div>
+		<button onclick="file_reset()" class="btn btn-large btn-info choosefile" type="button" >选择</button>
+        <button onclick="file_confirm()" class="btn btn-large btn-info choosefile" type="button" >确认</button>
+ </div>    
+ <div class="col-sm-4 col-md-8 col-lg-9" style="margin-top:20px;"> <!-- border:1px solid #5bc0de; -->
+    <p id="showchosedfiles"></p>
+  </div>
+</div>
+
+</div>
+<!-- <div id="mm" class="easyui-menu" style="width:120px;">
+    <div onclick="add()" data-options="iconCls:'icon-add'" >增加</div>
+    <div onclick="removeit()" data-options="iconCls:'icon-remove'">删除</div>
+    <div class="menu-sep"></div>
+    <div onclick="expand()">Expand</div>
+    <div onclick="collapse()">Collapse</div>
+</div> -->
+
+<!-- <div class="easyui-panel" style="padding:5px">
+		<ul id="tt" class="easyui-tree" method:'get',animate:true">
+			<li>
+				<span>My Documents</span>
+				{% for dir in filesinfo %}
+				<ul>
+					<li data-options="state:'closed'">
+						<span>{{ dir.dirname }}</span>
+						<ul>
+						{% for file in dir.files %}
+							<li>
+								<span>{{ file }}</span>
+							</li>
+						{% endfor %}							
+				        </ul>
+			       </li>
+		       </ul>
+		       {% endfor %}
+		    </li>
+		  </ul>		       
+	</div> -->
+<script type="text/javascript">
+	$(function() {
+		  $( "#mm" ).menu();
+		});
+	    $('#filestree').tree({
+	    	dnd:true,
+			animate: true,	    	
+	    	onContextMenu: function(e,node){
+				e.preventDefault();
+				$(this).tree('select',node.target);
+				$('#mm').menu('show',{
+					left: e.pageX,
+					top: e.pageY,
+				});
+			}, 
+			onLoadSuccess:function(node,data){
+	    		$('#filestree').tree('collapseAll')
+	    	},
+	    	onClick:function(node){
+	    		if(node.attributes.type=="file"){
+	    			var path=node.attributes.path
+	    			var settings = {
+	    			        type: "POST",
+	    			        url:"/portal/jobfarm/fileedit",
+	    			        data:{
+	    			        	"filepath":path,
+	    			        },
+	    			        dataType:"json",
+	    			        success: function(data,status) {
+	    			        	$("#fileeditModalLabel1").html(data.fname)
+	    			        	$("#fileeditModalcontent1").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>"+data.fcontent)
+	    			        	$('#fileeditModal1').modal().css({
+	    			        	    width: 'auto',
+	    			        	    
+	    			        	}); 
+	    			        	//alert("Data: " + data.fcontent + "\nStatus: " + status);
+	    			        	
+	    			        },
+	    			        headers: {
+	    			        	"X-CSRFToken":getCookie('csrftoken'),
+	    			        },
+	    			    };
+	    			    $.ajax(settings); 
+	    		}
+	    	}
+	    })
+	    function editsave(){
+	    	var node = $('#filestree').tree('getSelected');
+	    	var path=node.attributes.path
+	    	var filecontent=document.getElementById("fileeditarea").value
+	    	var settings = {
+			        type: "POST",
+			        url:"/jobfarm/editsave",
+			        data:{
+			            "filecontent":filecontent,
+			        	"filepath":path,
+			        },
+			        dataType:"html",
+			        success: function(data,status) {
+			        	if(status=="success"){
+			        		alert(data)
+			        	}
+			        	
+			        },
+			        headers: {
+			        	"X-CSRFToken":getCookie('csrftoken'),
+			        },
+			    };
+			    $.ajax(settings); 
+	    }
+	    function file_confirm(){
+			var nodes = $('#filestree').tree('getChecked');
+			var showchosedfiles = document.getElementById('showchosedfiles');
+			showchosedfiles_html=' '
+	
+			for(var i=0; i<nodes.length; i++){
+				global_cao_application_data_infiles_num++;
+				var num=global_cao_application_data_infiles_num
+				var chosedfiles = document.getElementById('chosedfiles');
+				chosedfiles.innerHTML += "<input class='filename' type='hidden' value="+nodes[i].attributes.path.split("/")[(nodes[i].attributes.path.split("/")).length-1]+" name='upfileNum"+num+"_name'>"+
+				 "<input class='filepath' type='hidden' value="+nodes[i].attributes.path+" name='upfileNum"+num+"_path'>"
+				showchosedfiles_html+="<span>"+nodes[i].attributes.path.split("/")[(nodes[i].attributes.path.split("/")).length-1]+"</span>&nbsp;&nbsp;&nbsp;"
+				 
+	
+			}
+			var upfiles = document.getElementById('upFilesNumID');
+			upfiles.value=String(global_cao_application_data_infiles_num);
+			$('#filestree').tree({checkbox:false})
+			showchosedfiles.innerHTML=showchosedfiles_html
+		}
+	    function file_reset(){
+	    	$("#chosedfiles input").remove()
+	        $("#showchosedfiles span").remove()
+	    	$('#filestree').tree({checkbox:true})
+	    	
+	    }
+	</script>

@@ -1,0 +1,52 @@
+{% extends "jobfarm_base_cao.html" %}
+{% load staticfiles %}
+{% block title %}
+    模型库管理
+{% endblock %}
+{% block link2 %}
+    <style type="text/css">
+        .div-buttons .btn {
+            margin-left: 2em;
+        }
+
+        .panel-body {
+            padding: 15px !important;
+        }
+        option{
+            line-height: 28px;
+            height: 32px;
+        }
+    </style>
+
+{% endblock %}
+{% block body_left_jobfarm_cao %}
+    <ul class="list-group v-menu">
+        <li class="list-group-head"><i class="glyphicon glyphicon-play"></i>&nbsp;模型库</li>
+        <li class="list-group-item"><a href='/jobfarm/m/index'>模型库资源</a></li>
+        <li class="list-group-item current"><a href='/jobfarm/modellist'>用户模型管理</a></li>
+        <li class="list-group-head"><span><i class="glyphicon glyphicon-play"></i>&nbsp;作业管理</span></li>
+        <li class="list-group-item"><a href='/jobfarm/history'>查找作业</a></li>
+        <li class="list-group-head"><span><i class="glyphicon glyphicon-play"></i>&nbsp;应用列表</span></li>
+        <li class="list-group-item"><a href='/jobfarm/application'>全部</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=VIC'>VIC</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=Noah_LSM'>Noah_LSM</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=TOURISTSOURCE'>TOURISTSOURCE</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=THORNTHWAITE'>THORNTHWAITE</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=PRMS'>PRMS</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=MODFLOW'>MODFLOW</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=GBHM'>GBHM</a></li>
+    </ul>
+{% endblock %}
+{% block body_right_jobfarm_cao %}
+{% endblock %}
+
+{% block body_bottom_jobfarm_cao %}
+
+{% endblock %}

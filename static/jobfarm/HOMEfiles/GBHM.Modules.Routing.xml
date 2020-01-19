@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.Routing" name="routing" author="longyinping11@lzb.ac.cn" keyword="river routing, Kinematic Wave, Pfafstetter" description="River routing using Kinematic Wave Method(Nonlinear Scheme using Newton's method), according to the Pfafstetter river network coding system">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="qin" dataType="PoolDouble2DArray" size="0" unit="" description="lateral inflow of each flow interval in the whole basin(m3/s)"/>
+    <var name="nsub" dataType="PoolInteger" size="0" unit="" description="amount of subbasins"/>
+    <var name="upstreamID1" dataType="PoolIntegerArray" size="0" unit="" description="ID number of the first upper subbasin of each subbasin"/>
+    <var name="upstreamID2" dataType="PoolIntegerArray" size="0" unit="" description="ID number of the second upper subbasin of each subbasin"/>
+    <var name="dx" dataType="PoolDouble2DArray" size="0" unit="" description="length of each flow interval in the whole basin (m)"/>
+    <var name="s0" dataType="PoolDouble2DArray" size="0" unit="" description="slope of river bed of each flow interval in the whole basin (ND) "/>
+    <var name="b" dataType="PoolDouble2DArray" size="0" unit="" description="width of each flow interval  in the whole basin (m)"/>
+    <var name="roughness" dataType="PoolDouble2DArray" size="0" unit="" description="Manning's roughness of each flow interval  in the whole basin"/>
+    <var name="row" dataType="PoolInteger3DArray" size="0" unit="" description="row in the 2D map of each grid composing flow intervals"/>
+    <var name="col" dataType="PoolInteger3DArray" size="0" unit="" description="column in the 2D map of each grid composing flow intervals"/>
+    <var name="ngrid" dataType="PoolInteger2DArray" size="0" unit="" description="amount of grids composing flow intervals"/>
+    <var name="nflow" dataType="PoolIntegerArray" size="0" unit="" description="amount of flow intervals in each subbasin"/>
+    <var name="Dr" dataType="PoolDouble2DArray" size="0" unit="" description="river depth of each flow interval (m)"/>
+    <var name="q1" dataType="PoolDouble2DArray" size="0" unit="" description="discharge of last time step of each flow interval(m3/s)"/>
+    <var name="q2" dataType="PoolDouble2DArray" size="0" unit="" description="discharge of current time step of each flow interval (m3/s)"/>
+    <var name="Drw" dataType="PoolDouble2DArray" size="0" unit="" description="water depth in the river of each flow interval (m)"/>
+    <var name="qlin1" dataType="PoolDouble2DArray" size="0" unit="" description="lateral inflow of last time step of each flow interval (m3/s)"/>
+  </varMeta>
+</moduleMeta>

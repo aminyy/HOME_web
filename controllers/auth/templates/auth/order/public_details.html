@@ -1,0 +1,135 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.public" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'auth/nav_tabs.html' %}
+        </div>
+
+        <div class="col-md-12" style="margin-top: 20px;">
+            <h4>申请者信息</h4>
+            <hr>
+            <dl class="dl-horizontal">
+                <dt>申请人</dt>
+                <dd>{{ order.username }}</dd>
+                <dt>手机号码</dt>
+                <dd>{{ order.phone_no }}</dd>
+                <dt>电子邮箱</dt>
+                <dd>{{ order.email }}</dd>
+                <dt>工作单位</dt>
+                <dd>{{ order.unit }}</dd>
+                <dt>联系地址</dt>
+                <dd>{{ order.address }}</dd>
+                <dt>邮编</dt>
+                <dd>{{ order.post_code if order.post_code else '' }}</dd>
+                <dt>申请目的</dt>
+                <dd>{{ order.purpose }}</dd>
+            </dl>
+        </div>
+        {% if order.item.meta.ds_share_type != '完全公开' %}
+            <div class="col-md-12">
+                <h4>数据申请信息</h4>
+                <hr>
+                <div class="col-md-2">
+                    申请状态
+                </div>
+                <div class="col-md-10">
+                    {% if order.status == 0 %}
+                        尚未提交审核
+                    {% elif order.status == 1 %}
+                        审核中
+                    {% elif order.status == 2 %}
+                        审核通过
+                    {% elif order.status == -1 %}
+                        审核未通过
+                    {% endif %}
+                </div>
+
+                <div class="col-md-2">
+                    数据获取
+                </div>
+                <div class="col-md-10">
+                    {% if order.status == 2 %}
+                        {% if order.type == 'normal' %}
+                            <ul class="list-group">
+                                {% for d in order.item.meta.ds_data %}
+                                    <li class="list-group-item">
+                                        {{ d.data_title }} {{ d.file_size }}
+                                        <a href="{{ url_for('auth.get_file', id=d.id) }}"
+                                           target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>
+                                由于您申请的是离线数据，无法在线下载。数据服务人员会尽快将离线数据邮寄给您，如有问题请直接拨打电话0931-4967597。
+                            </p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-md-2">
+                    审批历史记录
+                </div>
+                <div class="col-md-10">
+                    <ul class="list-group">
+                        {% for reviewer in order.reviewers %}
+                            <li class="list-group-item">
+                                {% if order.type == "email" %}
+                                    于{{ reviewer.created |dtt }}向{{ reviewer.username }}
+                                    发送了审核邮件,
+                                    {% if reviewer.result == 0 %}
+                                        审核中。
+                                    {% elif reviewer.result == 1 %}
+                                        已同意。
+                                    {% else %}
+                                        已拒绝。
+                                    {% endif %}
+
+                                {% else %}
+                                    于{{ reviewer.created |dtt }}，
+                                    {{ reviewer.username }}
+                                    {% if reviewer.result == 1 %}
+                                        同意了
+                                    {% elif reviewer.result == -1 %}
+                                        拒绝了
+                                    {% endif %}
+                                    该申请。其理由为{{ reviewer.comment }}
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-md-12">
+                <h4>数据申请信息</h4>
+                <hr>
+                <div class="col-md-2">
+                    数据获取
+                </div>
+                <div class="col-md-10">
+                    <ul class="list-group">
+                        {% for d in order.item.meta.ds_data %}
+                            <li class="list-group-item">
+                                {{ d.data_title }} {{ d.file_size }}
+                                <a href="{{ url_for('auth.get_file', id=d.id) }}"
+                                   target="_blank"><span class="glyphicon glyphicon-download"></span></a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

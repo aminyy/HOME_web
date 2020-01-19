@@ -1,0 +1,185 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+                <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+                <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="intro">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">MODFLOW</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">
+
+                                    <p> <h5>MODFLOW是英文Modular Three-dimensional Finite-difference Ground-water Flow
+                                    Model（模块化三维有限差分地下水流动模型）的简称。
+                                    这套计算机程序由美国地质调查局（USGS）的Mc
+                                    Donald和Harbaugh于20世纪80年代开发出来。它是一套用于孔隙介质中地下水流动数值模拟的软件。自打问世以来，MODFLOW已在全世界范围内的科研、生产、工业、司法、环境保护、城乡发展规划、水资源利用等许多行业和部门得到了广泛的应用。它已经成为目前世界上最为普及的地下水运动数值模拟的计算机程序。
+                                    目前版本已有MODFLOW 88、MODFLOW 96、MODFLOW 2000、MODFLOW LGR、MODFLOW
+                                    2005等等版本，由于模式设计模块化，因此目前有许多模块可供使用。
+                                </h5></p>
+                                    <p>官网链接 :<a target="_blank" href="http://modflow.org/">http://modflow.org/</a>||| <a
+                                            target="_blank" href="http://water.usgs.gov/ogw/modflow/">http://water.usgs.gov/ogw/modflow/</a>
+                                    </p>
+
+                                </li>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">文件下载</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">MODFLOW-2005-USGS.zip
+                                    <span class="badge btn btn-default"><a  target="_blank"
+                                            href="/portal/jobfarm/filedown?filename=MODFLOW-2005-USGS.zip&appname=modflow">下载</a></span>
+                                </li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="io">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输入文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">bcf2ss.ba6
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.ba6')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.bc6
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.bc6')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.dis
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.dis')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.nam
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.nam')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.oc
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.oc')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.pcg
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.pcg')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.rch
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.rch')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.riv
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.riv')">查看</span></li>
+                                <li class="list-group-item">bcf2ss.wel
+                                    <span class="badge btn btn-primary" onclick="viewfile('bcf2ss.wel')">查看</span></li>
+                            </ul>
+
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输出文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">str.lst
+                                    <span class="badge btn btn-primary" onclick="viewfile('str.lst')">查看</span></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog"
+                         aria-labelledby="fileeditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                                </div>
+                                <div class="modal-body" id="fileeditModalcontent"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="submit_job">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+   $(function () {
+      $('#myTab li:eq(0) a').tab('show');
+   });
+   function vic_submit(){
+	  $.get("/portal/jobfarm/app/submit?name=MODFLOW&version=alpha&exec=HOME",function(data,status){
+		   $('#submit_job').html(data)
+		  });
+
+   }
+   function viewfile(filename){
+
+			var settings = {
+			        type: "POST",
+			        url:"/portal/jobfarm/fileview",
+			        data:{
+			        	"filename":filename,
+			        	"appname":"modflow",
+			        },
+			        dataType:"json",
+			        success: function(data,status) {
+			        	$("#fileeditModalLabel").html(data.fname)
+			        	$("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>"+data.fcontent)
+			        	$('#fileeditModal').modal().css({
+			        	    width: 'auto',
+
+			        	});
+			        	//alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+			        },
+			        headers: {
+			        	"X-CSRFToken":getCookie('csrftoken'),
+			        },
+			    };
+			    $.ajax(settings); }
+
+</script>
+{% endblock %}

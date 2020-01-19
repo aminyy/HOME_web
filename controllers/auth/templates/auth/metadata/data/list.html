@@ -1,0 +1,1106 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.metadata" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/components/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css"/>
+    <link href="/static/assets/components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/assets/components/jquery.bootgrid/dist/jquery.bootgrid.min.css"/>
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+    <style type="text/css">
+        #divColumns td, #divColumns th {
+            padding: 2px !important;
+        }
+
+        #divColumns input，#divColumns select, #divColumns .form-control {
+            /*padding: 0 2px !important;
+            height: 24px !important;*/
+        }
+
+        .zlist .active > td {
+            background-color: #b2dba1 !important;
+        }
+
+        .tab-pane {
+            padding: 20px;
+        }
+
+        #leftTreeRef, #refRightPanel {
+            height: 400px;
+        }
+
+        #leftTreeRef {
+            border: solid 1px #CCC;
+            border-radius: 4px;
+        }
+
+        #divFiles {
+            min-height: 400px;
+        }
+    </style>
+    <script id="tplControlBar" type="text/html">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary" onclick="openModal('NewFile')"><i class="fa fa-fw fa-plus"></i>添加</button>
+        </div>
+        <a id="btnThumbView" class="btn btn-success" title="创建缩略图"><i
+                class="fa fa-fw fa-photo"></i>创建缩略图</a>
+        <a class='btn btn-danger' style='margin-right:20px' href='javascript:deleteDatasInDs()'><i
+                class='fa -fa-fw fa-trash'></i>&nbsp;&nbsp;删除</a>
+    </script>
+    <script id="tplNewTable" type="text/html">
+        <div class="modal-dialog" role="document" style="width:1200px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <% if(mode=='edit'){ %>
+                    <h3>编辑表信息</h3>{{ mode }}
+                    <% }else{ %>
+                    <h3>新建数据表</h3>
+                    <% } %>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#dtInfo" aria-controls="home" role="tab"
+                                                                  data-toggle="tab">基础信息</a></li>
+                        <li role="presentation"><a href="#dtColumns" aria-controls="profile" role="tab"
+                                                   data-toggle="tab">字段信息</a></li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="dtInfo">
+                            <form id="formNewTable" class="from form-horizontal form-validate"
+                                  action="{{ url_for('manage.ds_do_new_table', meta_id=meta.id) }}"
+                                  method="post" enctype="multipart/form-data">
+                                <input type="text" name="id"/>
+                                <div class="form-group">
+                                    <label for="data_name" class="control-label col-sm-3">表代码</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="data_name"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_title" class="control-label col-sm-3">表中文名称</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="data_title"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_title_en" class="control-label col-sm-3">表英文名称</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="data_title_en"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class=" control-label col-sm-3">采集时间</label>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" name="data_start_time"
+                                               value="<%=data_start_time%>"/>
+                                    </div>
+                                    <div class="col-md-1 text-center">-</div>
+                                    <div class="col-sm-4">
+                                        <input type="date" class="form-control" name="data_end_time"
+                                               value="<%=data_end_time%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_remark" class="control-label col-sm-3">表备注信息</label>
+                                    <div class="col-sm-7">
+                                        <input type="text" class="form-control" name="data_remark"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-sm-7 col-sm-offset-3">
+                                        <textarea type="text" name="hid_dt_columns" id="hid_dt_columns"
+                                                  class="form-control" rows="4"></textarea>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="dtColumns">
+                            <div id="divColumns" class="zlist" data-name="datatable_columns"
+                                 style="height:540px;overflow: auto">
+                                <form id="formTableColumns" class="from form-validate">
+                                    <table>
+                                        <thead></thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-offset-3">
+                        <button type="button" class="btn btn-primary" onclick="saveTableInfo()"><i
+                                class="fa fa-fw fa-save"></i>提交
+                        </button>
+                        <button type="button" class="btn btn-default col-sm-offset-1" data-dismiss="modal"><i
+                                class="fa fa-fw fa-times"></i>取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </script>
+    <script id="tplNewFile" type="text/html">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <form class="from form-horizontal form-validate"
+                      action="{{ url_for('manage.ds_do_new_file', mid=meta.id) }}"
+                      method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert">
+                                    上传数据文件并输入相关信息。
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="data_file" class="control-label col-sm-3">数据文件</label>
+                                    <div class="col-sm-9">
+                                        <input type="file" class="form-control filestyle" name="data_file"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_title" class="control-label col-sm-3">文件标题</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="data_title" minlength="2"
+                                               maxlength="50"
+                                               required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="data_title" class="control-label col-sm-3">文件英文标题</label>
+                                    <div class="col-sm-9">
+                                        <input type="text" class="form-control" name="data_title_en" minlength="2"
+                                               maxlength="50"
+                                               required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-sm-offset-3">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="reset" class="btn btn-default col-sm-offset-1" data-dismiss="modal">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+    <script id="tplEditFileInfo" type="text/html">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <form class="from form-horizontal form-validate" action="/manage/dataset/do_edit_file" ;
+                      method="post" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        <div class="alert alert-info" role="alert">
+                            修改数据文件相关信息
+                        </div>
+                        <input type="hidden" name="id" value="<%=id%>">
+                        <div class="form-group">
+                            <label for="data_name" class="control-label col-sm-3">文件名</label>
+                            <div class="col-sm-9">
+                                <span><%=data_name %></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="origin_file_name" class="control-label col-sm-3">原始文件名</label>
+                            <div class="col-sm-9">
+                                <span><%=origin_file_name %></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_title" class="control-label col-sm-3">文件标题</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_title" minlength="2"
+                                       maxlength="50" value="<%=data_title %>"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_title" class="control-label col-sm-3">文件英文标题</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_title_en" minlength="2"
+                                       maxlength="50" value="<%=data_title_en %>"
+                                >
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="author" class="control-label col-sm-3">文件作者</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_author" minlength="2"
+                                       maxlength="50" value="<%=data_author%>"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label col-sm-3">采集时间</label>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="data_start_time"
+                                       value="<%=data_start_time%>"/>
+                            </div>
+                            <div class="col-md-1 text-center">-</div>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="data_end_time"
+                                       value="<%=data_end_time%>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="control-label col-sm-3">说明信息</label>
+                            <div class="col-sm-9">
+                        <textarea class="form-control" name="remark" placeholder="文件说明(2000字以内)"
+                                  rows="3"><%=remark%></textarea>
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="col-sm-offset-2">
+                                <button type="submit" class="btn btn-primary">提交</button>
+                                <button type="reset" class="btn btn-default col-sm-offset-3" data-dismiss="modal">取消
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+
+    <script id="csvConfigFileInfo" type="text/html">
+        <div class="modal-dialog" role="document" style="width:40%;height:700px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <div class="alert alert-info" role="alert">
+                    根据选择坐标轴生成配置文件
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-condensed" id="thumbtab" style="text-align: center">
+                            <thead>
+                            <tr id="thumbconfigtr" style="width:80px;">
+                            </tr>
+                            </thead>
+                            <tbody id="thumbconfigtb">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="axes" style="margin-left: 10px"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="col-sm-offset-3">
+                        <button type="button" class="btn btn-primary" onclick="saveFileInfo('<%=pid%>')">
+                            提交
+                        </button>
+                        <button type="button" class="btn btn-default col-sm-offset-1" data-dismiss="modal">
+                            取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script id="tplImportZip" type="text/html">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                </div>
+                <form class="from form-horizontal form-validate"
+                      action="{{ url_for('manage.ds_do_import_zip', mid=meta.id) }}"
+                      method="post" enctype="multipart/form-data" data-remote="true">
+                    <div class="modal-body">
+                        <div class="alert alert-info" role="alert">
+                            上传数据文件并输入相关信息。
+                        </div>
+                        <div class="form-group">
+                            <label for="data_file" class="control-label col-sm-3">数据文件</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" name="data_file" accept=".zip"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_author" class="control-label col-sm-3">文件作者</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_author" minlength="2"
+                                       maxlength="50"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="control-label col-sm-3">说明信息</label>
+                            <div class="col-sm-9">
+                            <textarea class="form-control" name="remark" placeholder="文件说明(2000字以内)"
+                                      rows="3"></textarea>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="reset" class="btn btn-default col-sm-offset-1" data-dismiss="modal">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+    <script id="tplImportTable" type="text/html">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>导入数据表</h3>
+                </div>
+                <form class="from form-horizontal form-validate"
+                      action="{{ url_for('manage.ds_do_import_csv_to_table', meta_id=meta.id) }}"
+                      method="post" enctype="multipart/form-data" data-remote="true">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="data_file" class="control-label col-sm-3">数据文件</label>
+                            <div class="col-sm-9">
+                                <input type="file" class="form-control" name="data_file" accept=".csv"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_title" class="control-label col-sm-3">数据标题</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_title" minlength="2"
+                                       maxlength="50"
+                                       required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_title_en" class="control-label col-sm-3">数据英文标题</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_title_en" minlength="2"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="data_author" class="control-label col-sm-3">数据作者</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="data_author" minlength="2"
+                                       maxlength="50">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class=" control-label col-sm-3">采集时间</label>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="data_start_time"
+                                       value="<%=data_start_time%>"/>
+                            </div>
+                            <div class="col-md-1 text-center">-</div>
+                            <div class="col-sm-4">
+                                <input type="date" class="form-control" name="data_end_time"
+                                       value="<%=data_end_time%>"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="remark" class="control-label col-sm-3">说明信息</label>
+                            <div class="col-sm-9">
+                            <textarea class="form-control" name="remark" placeholder="文件说明(2000字以内)"
+                                      rows="3"></textarea>
+                                </textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="col-sm-offset-2">
+                            <button type="submit" class="btn btn-primary">提交</button>
+                            <button type="reset" class="btn btn-default col-sm-offset-1" data-dismiss="modal">取消
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </script>
+    <script id="tplAddDataRef" type="text/html">
+        <div class="modal-dialog" role="document" style="width:960px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>添加数据引用</h3>
+                </div>
+                <div class="modal-body row">
+                    <div class="col-sm-4">
+                        <div class="bs-tree" id="leftTreeRef" style="overflow:hidden"></div>
+                    </div>
+                    <div class="col-sm-8">
+                        <div class="panel" id="refRightPanel">
+                            <table id="tblPartsInRef"
+                                   class="table part-list-table table-condensed table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <th data-column-id="id" data-visible="false"
+                                        data-identifier="true">ID
+                                    </th>
+                                    <th data-column-id="data_title">标题</th>
+                                    <th data-column-id="store_type" data-visible="false">类型</th>
+                                    <th data-column-id="data_author" data-order="desc">作者</th>
+                                    <th data-column-id="data_start_time" data-order="desc" data-visible="false">
+                                        起始时间
+                                    </th>
+                                    <th data-column-id="data_end_time" data-order="desc" data-visible="false">截至时间
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" onclick="addDataRef()">提交</button>
+                        <button type="reset" class="btn btn-default col-sm-offset-1" data-dismiss="modal">取消
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+{% endblock %}
+
+{% block body %}
+
+    <div class="body-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'auth/nav_tabs.html' %}
+            </div>
+            <div class="col-md-12" style="margin-top: 20px;">
+                <div class="stepwizard col-md-offset-2">
+                    <div class="stepwizard-row setup-panel">
+                        <div class="stepwizard-step">
+                            <a href="{{ url_for('auth.metadata_edit', cid=meta.id) }}" type="button"
+                               class="btn btn-default btn-circle disabled">1</a>
+                            <p>填写元数据</p>
+                        </div>
+                        <div class="stepwizard-step">
+                            <a href="{{ url_for('auth.metadata_data', id=meta.id) }}" type="button"
+                               class="btn btn-primary btn-circle">2</a>
+                            <p>上传数据实体</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="pane-wrapper" id="myPanes">
+                    <div>
+
+                        {#            <div class="row">#}
+                        {#                <div class="col-sm-4">#}
+                        {#                    <label>数据类型:&nbsp;&nbsp;</label>#}
+                        {#                    <div class="btn-group" id="ddView" data-view="all">#}
+                        {#                        <button type="button" class="btn btn-default"><span class="dropdown-title">全部</span></button>#}
+                        {#                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"#}
+                        {#                                aria-haspopup="true"#}
+                        {#                                aria-expanded="false">#}
+                        {#                            <span class="caret"></span>#}
+                        {#                            <span class="sr-only">Toggle Dropdown</span>#}
+                        {#                        </button>#}
+                        {#                        <ul class="dropdown-menu">#}
+                        {#                            <li data-view="all"><a href="#">全部</a></li>#}
+                        {#                            <li role="separator" class="divider"></li>#}
+                        {#                            <li data-view="file"><a href="#">文件</a></li>#}
+                        {#                            <li data-view="table"><a href="#">数据表</a></li>#}
+                        {#                        </ul>#}
+                        {#                    </div>#}
+                        {#                </div>#}
+                        {#                <div class="col-sm-4">#}
+                        {#                    <!-- Split button -->#}
+                        {#                </div>#}
+                        {#                <div class="col-sm-4">#}
+                        {#                </div>#}
+                        {#            </div>#}
+                        <div id="divFiles">
+                            <table id="dgParts" class="table table-hover table-condensed table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th data-column-id="id" data-visible="false" data-identifier="true">
+                                        ID
+                                    </th>
+                                    <th data-column-id="data_title" data-formatter="data_title" data-width="320">标题</th>
+                                    <th data-column-id="store_type" data-visible="false">类型</th>
+                                    <th data-column-id="data_author">作者</th>
+                                    <th data-column-id="file_size">文件大小</th>
+                                    <th data-column-id="data_start_time">起始时间</th>
+                                    <th data-column-id="data_end_time">截至时间</th>
+                                    <th data-column-id="commands" data-formatter="commands" data-sortable="false"
+                                        style="width:90px;" data-width="80">操作
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-1"><a class="btn btn-success" id="btnReturnLeft"><i
+                                    class="fa fa-fw fa-arrow-left"></i>返回</a></div>
+                            <div class="col-sm-11"><h4>选择文件及参数生成缩略图</h4></div>
+                        </div>
+                        <div class="alert alert-info">
+                            <span>可上下拖动调整文件在缩略图中的顺序</span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-6" id="thumbLeft">
+                                <div id="thumbCreator">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-6" id="thumbRight">
+                                <div id="divThumbPreview">
+                                    <img class="responsive-img" id="imgThumbPriview"
+                                         src="{{ url_for('manage.get_ds_thumb', meta_id=meta.id) }}"
+                                         style="border: 1px solid #e1e1e1; border-radius: 5px; width:90%">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:20px;">
+                            <a class="btn btn-primary" id="btnGenThumb" href=" javascript:genThumb()"><i
+                                    class="fa fa-fw fa-photo"></i>生成缩略图</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div id="myModal" class="modal" tabindex="-1" role="dialog">
+                </div>
+                <div id="thumbColsModal" class="modal" tabindex="-1" role="dialog">
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block foot_script %}
+    <script type="text/javascript" src="/static/assets/js/template-native.js"></script>
+    <script type="text/javascript" src="/static/assets/components/jquery.bootgrid/dist/jquery.bootgrid.min.js"></script>
+    <script src="/static/assets/components/sco.js/js/sco.panes.js"></script>
+    <link rel="stylesheet" href="/static/assets/components/jstree/dist/themes/default/style.min.css"/>
+    <script type="text/javascript" src="/static/assets/components/jstree/dist/jstree.js"></script>
+    <script type="text/javascript" src="/static/assets/components/Sortable/Sortable.min.js"></script>
+    <script type="text/javascript" src="/static/assets/components/jquery-form/jquery.form.js"></script>
+
+    <script type="text/javascript">
+        var __ref_parts_url = "/manage/query_parts";
+        // 已选中的数据id
+        var __selected_part_ids = [];
+        var $panes;
+        $(function () {
+            $panes = $.scojs_panes('#myPanes', {easing: 'slide'});
+
+            $("#btnReturnLeft").click(function () {
+                $panes.select(0);
+            });
+
+            $("#ddView .dropdown-menu>li").click(function () {
+                var li = $(this);
+                $(this).closest('.btn-group').data('view', li.data('view'))
+                        .find(".dropdown-title").html(li.text());
+            });
+            initPartGird();
+
+        });
+        var initPartGird = function () {
+            var grid = $("#dgParts").on("initialized.rs.jquery.bootgrid", function (e) {
+                $("#dgParts-header .actionBar")
+                        .prepend(template("tplControlBar"));
+                $("#btnThumbView").click(function () {
+                    $panes.select(1);
+                    initThumbUI();
+                });
+            }).bootgrid({
+                ajax: true,
+                selection: true,
+                multiSelect: true,
+                url: "{{ url_for('manage.api_ds_list_data_page',meta_id=meta.id) }}",
+                formatters: {
+                    "commands": function (column, row) {
+                        return "<div class='pull-right'><a target='_blank' href='/manage/data/download/" + row.id + "' class=\"btn btn-xs text-info command-download\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-download\"></span></a>&nbsp;<button type=\"button\" class=\"btn btn-xs text-success command-edit\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-pencil\"></span></button> " +
+                                "<button type=\"button\" class=\"btn btn-xs text-danger command-delete\" data-row-id=\"" + row.id + "\"><span class=\"fa fa-trash-o\"></span></button></div>";
+                    },
+                    "data_title": function (column, row) {
+                        return '<span class="file-default-16 ' + row.file_ext + '-16 " title="' + row.data_name + '">' + row.data_title + '</span>';
+                    }
+                },
+                requestHandler: function (request) {
+                    if (request.sort) {
+                        request.sort_by = Object.keys(request.sort)[0]; //this only gets first sort param
+                        request.sort_dir = request.sort[request.sort_by];
+                        delete request.sort
+                    }
+                    return request;
+                }
+            })
+                    .on("selected.rs.jquery.bootgrid", function (e, rows) {
+                        __selected_part_ids = [];
+                        for (var i = 0; i < rows.length; i++) {
+                            __selected_part_ids.push(rows[i].id);
+                        }
+                        console.log(__selected_part_ids);
+                    })
+                    .on("loaded.rs.jquery.bootgrid", function () {
+                        /* Executes after data is loaded and rendered */
+                        grid.find(".command-edit").on("click", function (e) {
+                            var pid = $(this).data("row-id");
+
+                            $.getJSON('{{ url_for("manage.ds_datapart") }}', {id: pid}, function (data) {
+                                if (data.success) {
+                                    editPartInfo(data.content);
+                                } else {
+                                    bootbox.alert(data.msg);
+                                }
+                            });
+                        }).end().find(".command-delete").on("click", function (e) {
+                            var pid = $(this).data("row-id");
+                            bootbox.confirm("你确定要删除选定的数据吗?", function (yes) {
+                                if (yes) {
+                                    $.post("{{ url_for('manage.delete_data_in_ds') }}", {
+                                        meta_id: '{{ meta.id }}',
+                                        part_id: pid
+                                    }, function (data) {
+                                        if (data.success) {
+                                            bootbox.alert('删除成功');
+                                            $("#dgParts").bootgrid("reload");
+                                        } else {
+                                            bootbox.alert(data.msg);
+                                        }
+                                    }, 'json');
+                                }
+                            })
+                        })
+                    });
+        };
+
+        //初始化数据引用窗口的数据grid
+        var initRefPartsGrid = function () {
+            var grid = $("#tblPartsInRef").bootgrid({
+                ajax: true,
+                selection: true,
+                multiSelect: true,
+                url: function () {
+                    return __ref_parts_url;
+                }
+            }).on("selected.rs.jquery.bootgrid", function (e, rows) {
+                console.log(rows);
+                var rowIds = [];
+                for (var i = 0; i < rows.length; i++) {
+                    rowIds.push(rows[i].id);
+                }
+                alert("Select: " + rowIds.join(","));
+            }).on("deselected.rs.jquery.bootgrid", function (e, rows) {
+                var rowIds = [];
+                for (var i = 0; i < rows.length; i++) {
+                    rowIds.push(rows[i].id);
+                }
+                alert("Deselect: " + rowIds.join(","));
+            });
+
+        };
+
+        //编辑datapart信息
+        var editPartInfo = function (content) {
+            $modal = $("#myModal").empty();
+            console.log(content)
+            switch (content.store_type) {
+                case 'file':
+                    $modal.html(template('tplEditFileInfo', content));
+                    $("form:first", $modal).ajaxForm({
+                        dataType: 'json',
+                        url: "{{ url_for('manage.ds_do_edit_file') }}",
+                        submitHandler: function (form) {
+                            $(form).ajaxSubmit();
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                $modal.modal("hide");
+                                $("#dgParts").bootgrid("reload");
+                                //$("#divFiles").empty().load('{{ url_for('manage.ds_list_file', meta_id=meta.id) }}');
+                            } else {
+                                alert(data.msg);
+                            }
+                        }
+                    });
+                    break;
+                case 'table':
+                    $modal.html(template('tplNewTable', {mode: 'edit'}));
+                    initColumnList();
+                    //加载列信息
+                    $(".zlist", $modal).zlist("loaddata", {
+                        url: "{{ url_for('manage.get_table_info') }}",
+                        qdata: {id: content.id}
+                    });
+                    //绑定表基本信息
+                    $("#formNewTable input[name]").each(function () {
+                        var elem = $(this);
+                        var fn = elem.attr('name');
+                        if (!!content[fn]) {
+                            elem.val(content[fn]);
+                        }
+                    });
+                    //
+                    $("#formNewTable").ajaxForm({
+                        dataType: 'json',
+                        url: "{{ url_for('manage.ds_do_edit_table') }}",
+                        submitHandler: function (form) {
+                            $(form).ajaxSubmit();
+                        },
+                        success: function (data) {
+                            if (data.success) {
+                                $modal.modal("hide");
+                                $("#dgParts").bootgrid("reload");
+                                //$("#divFiles").empty().load('{{ url_for('manage.ds_list_file', meta_id=meta.id) }}');
+                            } else {
+                                alert(data.msg);
+                            }
+                        }
+                    });
+                    break;
+                default:
+                    break;
+            }
+            $modal.modal('show');
+        };
+
+        var sendDelete = function (url) {
+            if (confirm("你确定要删除选定记录？")) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.success) {
+                            alert(data.msg || '删除成功');
+                            $("#divFiles").load('{{ url_for('manage.ds_list_file', meta_id=meta.id) }}');
+                        } else {
+                            alert(data.msg || '删除失败');
+                        }
+                    }
+                });
+            }
+        };
+
+        // 初始化字段信息生成器
+        var initColumnList = function () {
+            $("#formTableColumns").zlist({
+                name: 'datatable_columns',
+                rowNumber: true,
+                columns: [
+                    {name: 'col_code', title: '字段名', width: "60px", rules: {required: true}},
+                    {name: 'col_title_cn', title: '中文名称', width: "100px", rules: {required: true}},
+                    {name: 'col_title_en', title: '英文名称', width: "100px"},
+                    {name: 'col_unit', title: '单位', width: "60px"},
+                    {
+                        name: 'col_data_type',
+                        title: '数据类型',
+                        width: "100px",
+                        type: 'select',
+                        options: [
+                            {% for opt in opts['field_data_type'] %}
+                                {v: '{{opt.opt_value}}', t: '{{ opt.opt_text }}'},
+                            {% endfor %}
+                        ]
+                    },
+                    {
+                        name: 'col_control_type',
+                        width: "100px",
+                        title: '展现类型',
+                        type: 'select',
+                        options: [
+                            {% for opt in opts['data_input_control'] %}
+                                {v: '{{opt.opt_value}}', t: '{{ opt.opt_text }}'},
+                            {% endfor %}
+                        ]
+                    },
+                    {
+                        name: 'coord_axis',
+                        width: "60px",
+                        title: '坐标轴',
+                        type: 'select',
+                        options: [
+                            {v: '', t: '无'},
+                            {v: 'x', t: 'X轴'},
+                            {v: 'y', t: 'Y轴'}
+                        ]
+                    },
+                    {
+                        name: 'can_query',
+                        width: "50px",
+                        title: '查询',
+                        type: 'checkbox',
+                        checked: false
+                    },
+                    {
+                        name: 'can_sort',
+                        width: "50px",
+                        title: '排序',
+                        type: 'checkbox',
+                        checked: false
+                    }
+                ],
+                data: []
+            });
+            $("#formTableColumns").validate({
+                submitHandler: function (form) {
+                    console.log('validate cols');
+                    return false;
+                },
+                rules: {
+                    col_code: {required: true},
+                    col_title_cn: {required: true}
+                }
+            });
+        };
+
+        // 提交数据引用
+        var addDataRef = function () {
+            var ids = $("#tblPartsInRef").bootgrid("getSelectedRows").join(",");
+            console.log(ids);
+            $.post("/manage/add_data_ref_to_meta", {
+                meta_id: "{{ meta.id }}",
+                'ids': ids
+            }, function (data) {
+                if (data.success) {
+                    $("#myModal").modal('hide');
+                    $("#tblPartsInRef").bootgrid("reload");
+                } else {
+                    bootbox.alert(data.msg);
+                }
+            }, 'json')
+        };
+
+        // 根据参数弹出对应Modal
+        var openModal = function (type, url) {
+            content = '';
+            $modal = $("#myModal").empty();
+            tplId = "tpl" + type;
+            switch (type) {
+                case "NewFile":
+                    $modal.html(template(tplId));
+                case "ImportZip":
+                    {#                case "ImportTable":#}
+                    {#                    $modal.html(template(tplId));#}
+                    {#                case "NewTable":#}
+                    {#                    $modal.html(template(tplId));#}
+                    {#                    initColumnList();#}
+                case "EditFileInfo":
+                    $.ajaxSettings.async = false;
+                    $.getJSON(url,
+                            function (data) {
+                                $modal.html(template(tplId, data.content));
+                            });
+                    $.ajaxSettings.async = true;
+                    break;
+                case 'AddDataRef':
+                    $modal.html(template(tplId));
+                    $modal.find('.bs-tree').jstree({
+                        'core': {
+                            'data': {
+                                url: '{{ url_for('manage.get_category_tree_nodes') }}',
+                                data: function (node) {
+                                    return {'id': node.id};
+                                }
+                            },
+                            'ajax': {
+                                url: function (node) {
+                                    return '/manage/category/' + node.id + '/ds';
+                                }
+                            },
+                            "success": function (new_data) {
+                                return new_data;
+                            }
+                        }
+                    }).on("select_node.jstree",
+                            function (evt, data) {
+                                if (data.node.li_attr.dtype == 'cat') {
+                                    __ref_parts_url = '/manage/query_parts?cat=' + data.node.id;
+                                } else {
+                                    __ref_parts_url = '/manage/query_parts?meta_id=' + data.node.id;
+                                }
+                                $("#tblPartsInRef").bootgrid("reload");
+                            }
+                    );
+                    initRefPartsGrid();
+                default:
+                    break;
+            }
+
+            $modal.modal("show");
+
+            form1 = $modal.find("form:first");
+            form1.ajaxForm({
+                dataType: 'json',
+                submitHandler: function (form) {
+                    $(form).ajaxSubmit();
+                },
+                success: function (data) {
+                    if (data.success) {
+                        $modal.modal("hide");
+                        $("#dgParts").bootgrid("reload");
+                        //$("#divFiles").empty().load('{{ url_for('manage.ds_list_file', meta_id=meta.id) }}');
+                    } else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        };
+
+        // 保存Datatable信息
+        var saveTableInfo = function () {
+            validator2 = $("#divColumns input[name]").validate();
+            if (!$("#divColumns input[name]").valid()) {
+                alert("字段信息有错误");
+                return;
+            }
+            //收集字段信息
+            var cols_info = JSON.stringify(collectColumnsInfo()['datatable_columns']);
+            $("#hid_dt_columns").val(cols_info);
+            form1 = $("#formNewTable");
+            var cols_valid = $("#formTableColumns").valid();
+            //form1.ajaxSubmit();
+            form1.submit()
+        };
+        // 收集字段信息
+        var collectColumnsInfo = function () {
+            return $("#divColumns").zlist("collect");
+        };
+
+        //#region 缩略图
+        //初始化缩略图生成的界面
+        var initThumbUI = function () {
+            $("#thumbCreator").load("{{ url_for('manage.getFilesToGenThumb', meta_id=meta.id) }}", function (data) {
+                var el = document.getElementById('ulThumbParts');
+                var sortable = Sortable.create(el);
+
+            });
+        };
+
+        var genThumb = function () {
+            bootbox.confirm("你确定要生成缩略图吗？这将覆盖现有缩略图。", function (yes) {
+                if (yes) {
+                    ids = [];
+                    $("#ulThumbParts :checked").each(function () {
+                        ids.push($(this).closest("li").data("pid"));
+                    });
+                    $.post("{{ url_for('manage.ds_gen_thumb' ) }}", {
+                                meta_id: '{{ meta.id }}',
+                                'ids': ids.join(',')
+                            },
+                            function (data) {
+                                var imgThumbPriview = document.getElementById('imgThumbPriview')
+                                imgThumbPriview.src = data.imgInfo
+
+                            }, 'json')
+                }
+            });
+        };
+
+        //#endregion
+
+        // 删除选定的数据
+        var deleteDatasInDs = function () {
+            if (__selected_part_ids.length > 0) {
+                bootbox.confirm("你确定要删除选定的数据吗?", function (yes) {
+                    $.post("{{ url_for('manage.delete_datas_in_ds', meta_id=meta.id) }}", {'ids': __selected_part_ids.join(",")}, function (data) {
+                        if (data.success) {
+                            bootbox.alert('删除成功');
+                            $("#dgParts").bootgrid("reload");
+                        } else {
+                            bootbox.alert("删除失败:" + data.msg);
+                        }
+                    }, 'json');
+                });
+            } else {
+                bootbox.alert("当前无选中数据");
+            }
+        };
+
+        //config thumb cols.
+        var configThumbCols = function (pid) {
+            $dlg = $("#thumbColsModal").empty();
+            {#             var csvInfo=pid+'csv'#}
+            $.getJSON("{{ url_for('manage.get_thumb_cols_cfg_html') }}", {pid: pid}, function (data) {
+                for (i = 0; i < data.content.cols.length; i++) {
+                    var th = "<th class='thvalue' style='text-align:center'>" + data.content.cols[i] + "</th>"
+                    {#                    alert(data.content.cols[i])#}
+                    document.getElementById('thumbconfigtr').innerHTML += th
+                }
+                for (i = 0; i <= data.content.data.length; i++) {
+                    var tr = "<tr>"
+                    for (j = 0; j < data.content.cols.length; j++) {
+
+                        if (i == data.content.data.length) {
+                            var td = "<td style='align:center'><div style='width:80px;'><select name='sel' id='selectId' class='selectopt'  style='width:60px;height:35px;text-align:center;line-height:30px;margin:-1px'><option value=''>--</option><option  value='x'>x轴</option><option  value='y'>y轴</option></select></div></td>"
+
+                        } else {
+                            td = "<td>" + data.content.data[i][j] + "</td>"
+                        }
+                        tr += td
+
+                    }
+                    tr += "</tr>";
+                    document.getElementById('thumbconfigtb').innerHTML += tr
+                }
+            });
+            $dlg.html(template('csvConfigFileInfo', {pid: pid}));
+            $dlg.modal("show");
+        };
+
+
+        var saveFileInfo = function (pid) {
+            var selects = document.getElementsByClassName('selectopt');
+            var ths = document.getElementById('thumbconfigtr').children;
+            var thval = null;
+            var selectsval = null;
+            var data_info = {x: null, y: []};
+            for (var i = 0; i < ths.length; i++) {
+                selectsval = $(selects[i]).val();
+                thval = $(ths[i]).text();
+                if (!selectsval) {
+                    continue;
+                } else if (selectsval == 'x') {
+                    data_info.x = thval;
+                } else if (selectsval == 'y') {
+                    data_info.y.push(thval);
+                }
+            }
+            $.ajax({
+                url: "{{ url_for('manage.ds_do_csv_file') }}",
+                type: 'POST',
+                data: {
+                    pid: pid,
+                    data_info: JSON.stringify(data_info)
+                },
+
+                success: function (data) {
+                    if (data.success) {
+                        $dlg.modal("hide");
+                    }
+                }
+            });
+        }
+
+    </script>
+{% endblock %}
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Basin" name="Basin" author="hzfwhy@lzb.ac.cn" keyword="basin parameters" description="Basin setup Check for validity of basin parameters and compute reservoir areas.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="hru_percent_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="dprst_flag" dataType="PoolInteger" size="0" unit="" description="Selection flag for depression storage computation. 0=No; 1=Yes"/>
+    <var name="hru_percent_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area as a decimal percent of the total HRU area"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="hru_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area"/>
+    <var name="hru_percent_impv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="hru_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Impervious area of each HRU"/>
+    <var name="hru_percent_perv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is pervious"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="Pervious area of each HRU"/>
+    <var name="hru_flag" dataType="PoolInteger" size="0" unit="" description="hru_flag"/>
+  </varMeta>
+</moduleMeta>

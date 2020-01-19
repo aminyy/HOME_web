@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<root  name="模型库" description="">
+<category  name="容器" description="">
+     <module  name="时间容器" class="net.casnw.home.model.TemporalContext"   image="net/casnw/home/gui/palette/icon/TemporalContext.png"/>
+     <module  name="空间容器"  class="net.casnw.home.model.SpatialContext"  image="net/casnw/home/gui/palette/icon/SpatialContext.png"/>
+	 <module  name="HRU容器" class="net.casnw.home.model.HRUContext"   image="net/casnw/home/gui/palette/icon/HRUContext.png"/>
+     <module  name="普通容器" class="net.casnw.home.model.Context"  image="net/casnw/home/gui/palette/icon/Context.png"/>
+	 <!--
+     <module  name="条件容器" class="net.casnw.home.model.TemporalContext"  image="net/casnw/home/gui/palette/icon/CaseContext.png"/>  -->   
+</category >
+<category  name="Thornthwaite模型" description="">
+    <module  name="Climate" class="net.casnw.home.thornthwaite.Climate" image="net/casnw/home/gui/palette/icon/Climate.png"/>
+    <module  name="Daylen" class="net.casnw.home.thornthwaite.Daylen" image="net/casnw/home/gui/palette/icon/Daylen.png"/>
+    <module  name="HamonET" class="net.casnw.home.thornthwaite.HamonET" image="net/casnw/home/gui/palette/icon/HamonET.png"/>
+    <module  name="Runoff" class="net.casnw.home.thornthwaite.Runoff" image="net/casnw/home/gui/palette/icon/Runoff.png"/>     
+    <module  name="Snow" class="net.casnw.home.thornthwaite.Snow" image="net/casnw/home/gui/palette/icon/Snow.png"/>
+    <module  name="SoilMoisture" class="net.casnw.home.thornthwaite.SoilMoisture" image="net/casnw/home/gui/palette/icon/SoilMoisture.png"/>
+    <module  name="Output" class="net.casnw.home.thornthwaite.Output" image="net/casnw/home/gui/palette/icon/Output.png"/>        
+</category >
+<category  name="GBHM模型" description="">
+	<module  name="BaseMaps" class="GBHM.IO.Inputs.BaseMaps" image="net/casnw/home/gui/palette/icon/BaseMaps.png"/>
+	<module  name="ClimateInput" class="GBHM.IO.Inputs.ClimateInput" image="net/casnw/home/gui/palette/icon/ClimateInput.png"/>
+	<module  name="OverlandInitialInput" class="GBHM.IO.Inputs.OverlandInitialInput" image="net/casnw/home/gui/palette/icon/OverlandInitialInput.png"/>
+	<module  name="RiverInitialInput" class="GBHM.IO.Inputs.RiverInitialInput" image="net/casnw/home/gui/palette/icon/RiverInitialInput.png"/>
+	<module  name="AllDischargeOutput" class="GBHM.IO.Outputs.AllDischargeOutput" image="net/casnw/home/gui/palette/icon/AllDischargeOutput.png"/>
+	<module  name="AsciiGridOutput" class="GBHM.IO.Outputs.AsciiGridOutput" image="net/casnw/home/gui/palette/icon/AsciiGridOutput.png"/>
+	<module  name="DailyOutput" class="GBHM.IO.Outputs.DailyOutput" image="net/casnw/home/gui/palette/icon/DailyOutput.png"/>
+	<module  name="DischargeOutput" class="GBHM.IO.Outputs.DischargeOutput" image="net/casnw/home/gui/palette/icon/DischargeOutput.png"/>
+	<module  name="FlowAtIntervalsOutput" class="GBHM.IO.Outputs.FlowAtIntervalsOutput" image="net/casnw/home/gui/palette/icon/FlowAtIntervalsOutput.png"/>
+	<module  name="EmpiricalParameters" class="GBHM.IO.Parameters.EmpiricalParameters" image="net/casnw/home/gui/palette/icon/EmpiricalParameters.png"/>
+	<module  name="Fraction_of_Vegetation_Cover" class="GBHM.IO.Parameters.Fraction_of_Vegetation_Cover" image="net/casnw/home/gui/palette/icon/Fraction_of_Vegetation_Cover.png"/>
+	<module  name="LAIInput" class="GBHM.IO.Parameters.LAIInput" image="net/casnw/home/gui/palette/icon/LAIInput.png"/>
+	<module  name="MCD15A3_LAIInput" class="GBHM.IO.Parameters.MCD15A3_LAIInput" image="net/casnw/home/gui/palette/icon/MCD15A3_LAIInput.png"/>
+	<module  name="RiverParameter" class="GBHM.IO.Parameters.RiverParameter" image="net/casnw/home/gui/palette/icon/RiverParameter.png"/>
+	<module  name="SoilParameters" class="GBHM.IO.Parameters.SoilParameters" image="net/casnw/home/gui/palette/icon/SoilParameters.png"/>
+	<module  name="VegetationParameters" class="GBHM.IO.Parameters.VegetationParameters" image="net/casnw/home/gui/palette/icon/VegetationParameters.png"/>
+    <module  name="ActualEvaporation" class="GBHM.Modules.ActualEvaporation" image="net/casnw/home/gui/palette/icon/ActualEvaporation.png"/>
+    <module  name="Infiltration" class="GBHM.Modules.Infiltration" image="net/casnw/home/gui/palette/icon/Infiltration.png"/>
+    <module  name="Interception" class="GBHM.Modules.Interception" image="net/casnw/home/gui/palette/icon/Interception.png"/>
+    <module  name="LayerInterflow" class="GBHM.Modules.LayerInterflow" image="net/casnw/home/gui/palette/icon/LayerInterFlow.png"/>     
+    <module  name="RechargeToGroundWater" class="GBHM.Modules.RechargeToGroundWater" image="net/casnw/home/gui/palette/icon/RechargeToGroundWater.png"/>
+    <module  name="Routing" class="GBHM.Modules.Routing" image="net/casnw/home/gui/palette/icon/Routing.png"/>
+    <module  name="SheetFlow" class="GBHM.Modules.SheetFlow" image="net/casnw/home/gui/palette/icon/SheetFlow.png"/>  
+	<module  name="Snow" class="GBHM.Modules.Snow" image="net/casnw/home/gui/palette/icon/Snow.png"/>
+    <module  name="SubsurfaceFlow" class="GBHM.Modules.SubsurfaceFlow" image="net/casnw/home/gui/palette/icon/SubsurfaceFlow.png"/>  
+	<module  name="ParameterCalibration" class="GBHM.Optimization.ParameterCalibration" image="net/casnw/home/gui/palette/icon/ParameterCalibration.png"/>
+	<module  name="DailyResults" class="GBHM.Processings.DailyResults" image="net/casnw/home/gui/palette/icon/DailyResults.png"/>
+	<module  name="DailyStats" class="GBHM.Processings.DailyStats" image="net/casnw/home/gui/palette/icon/DailyStats.png"/>
+	<module  name="FlowSeparation" class="GBHM.Processings.FlowSeparation" image="net/casnw/home/gui/palette/icon/FlowSeparation.png"/>
+	<module  name="K_cali_for_Freezing_Thawing" class="GBHM.Processings.K_cali_for_Freezing_Thawing" image="net/casnw/home/gui/palette/icon/K_cali_for_Freezing_Thawing.png"/>
+	<module  name="RiverToGrid" class="GBHM.Processings.RiverToGrid" image="net/casnw/home/gui/palette/icon/RiverToGrid.png"/>
+	<module  name="Save" class="GBHM.Processings.Save" image="net/casnw/home/gui/palette/icon/Save.png"/>
+	<module  name="save2DMap" class="GBHM.Processings.save2DMap" image="net/casnw/home/gui/palette/icon/save2DMap.png"/>
+	<module  name="SpatialDownscaling" class="GBHM.Processings.SpatialDownscaling" image="net/casnw/home/gui/palette/icon/SpatialDownscaling.png"/>
+	<module  name="TemporalContextInfo" class="GBHM.Processings.TemporalContextInfo" image="net/casnw/home/gui/palette/icon/TemporalContextInfo.png"/>
+	<module  name="TemporalDownscaling" class="GBHM.Processings.TemporalDownscaling" image="net/casnw/home/gui/palette/icon/TemporalDownscaling.png"/>
+	<module  name="WeatherDataInterpolation" class="GBHM.Processings.WeatherDataInterpolation" image="net/casnw/home/gui/palette/icon/WeatherDataInterpolation.png"/>
+</category>
+<category  name="prms模型" description="">
+   <module  name="InitBasin" class="prms.io.InitBasin" image="net/casnw/home/gui/palette/icon/InitBasin.png"/>
+   <module  name="ObsIO" class="prms.io.ObsIO" image="net/casnw/home/gui/palette/icon/ObsIO.png"/>
+   <module  name="ParameterIO_hru" class="prms.io.ParameterIO_hru" image="net/casnw/home/gui/palette/icon/ParameterIO_hru.png"/>
+   <module  name="ParameterIO_time" class="prms.io.ParameterIO_time" image="net/casnw/home/gui/palette/icon/ParameterIO_time.png"/>
+   <module  name="Parameter_Thru" class="prms.io.Parameter_Thru" image="net/casnw/home/gui/palette/icon/Parameter_Thru.png"/>
+   <module  name="Spatial_flag" class="prms.io.Spatial_flag" image="net/casnw/home/gui/palette/icon/Spatial_flag.png"/>
+   <module  name="WriteOut" class="prms.io.WriteOut" image="net/casnw/home/gui/palette/icon/WriteOut.png"/>
+   <module  name="Basin" class="prms.process.Basin" image="net/casnw/home/gui/palette/icon/Basin.png"/>
+   <module  name="Ddsolrad" class="prms.process.Ddsolrad" image="net/casnw/home/gui/palette/icon/Ddsolrad.png"/>
+   <module  name="Gwflow" class="prms.process.Gwflow"  image="net/casnw/home/gui/palette/icon/Gwflow.png" />
+   <module  name="Intcp" class="prms.process.Intcp"  image="net/casnw/home/gui/palette/icon/Intcp.png"  />
+   <module  name="PotetJh" class="prms.process.PotetJh"  image="net/casnw/home/gui/palette/icon/PotetJh.png" />
+   <module  name="Precip" class="prms.process.Precip"  image="net/casnw/home/gui/palette/icon/Precip.png" />
+   <module  name="Smbal" class="prms.process.Smbal"  image="net/casnw/home/gui/palette/icon/Smbal.png" />
+   <module  name="Snowcomp" class="prms.process.Snowcomp"  image="net/casnw/home/gui/palette/icon/Snowcomp.png" />
+   <module  name="Soltab" class="prms.process.Soltab"  image="net/casnw/home/gui/palette/icon/Soltab.png" />
+   <module  name="SrunoffSmidx" class="prms.process.SrunoffSmidx" image="net/casnw/home/gui/palette/icon/SrunoffSmidx.png"/>
+   <module  name="Ssflow" class="prms.process.Ssflow" image="net/casnw/home/gui/palette/icon/Ssflow.png"/>
+   <module  name="Strmflow" class="prms.process.Strmflow" image="net/casnw/home/gui/palette/icon/Strmflow.png"/>
+   <module  name="Temp1sta" class="prms.process.Temp1sta" image="net/casnw/home/gui/palette/icon/Temp1sta.png"/>
+   <module  name="TranspTindex" class="prms.process.TranspTindex" image="net/casnw/home/gui/palette/icon/TranspTindex.png"/>     
+</category>
+<category  name="新安江模型" description="">
+   <module  name="Climate" class="XinAnJiang.Climate" image="net/casnw/home/gui/palette/icon/Climate.png"  />
+   <module  name="Evaporation" class="XinAnJiang.Evaporation"  image="net/casnw/home/gui/palette/icon/Evaporation.png" />
+   <module  name="Output" class="XinAnJiang.Output"  image="net/casnw/home/gui/palette/icon/Output.png" />
+   <module  name="Parameter" class="XinAnJiang.Parameter"  image="net/casnw/home/gui/palette/icon/Parameter.png" />
+   <module  name="Routing" class="XinAnJiang.Routing" image="net/casnw/home/gui/palette/icon/Routing.png"  />
+   <module  name="Runoff" class="XinAnJiang.Runoff"  image="net/casnw/home/gui/palette/icon/Runoff.png" />
+</category >
+<category  name="参数优化的新安江模型" description="">
+   <module  name="AnnealingHandle" class="XinAnJiang.para.AnnealingHandle" image="net/casnw/home/gui/palette/icon/AnnealingHandle.png"  />
+   <module  name="ClimateInput" class="XinAnJiang.para.ClimateInput" image="net/casnw/home/gui/palette/icon/ClimateInput.png" />
+   <module  name="EvaluateParameter" class="XinAnJiang.para.EvaluateParameter" image="net/casnw/home/gui/palette/icon/EvaluateParameter.png"  />
+   <module  name="GenerateNewParameter" class="XinAnJiang.para.GenerateNewParameter" image="net/casnw/home/gui/palette/icon/GenerateNewParameter.png"  />
+   <module  name="InitModel" class="XinAnJiang.para.InitModel" image="net/casnw/home/gui/palette/icon/InitModel.png"  />
+   <module  name="InitParameter" class="XinAnJiang.para.InitParameter"  image="net/casnw/home/gui/palette/icon/InitParameter.png" />
+   <module  name="OutputResult" class="XinAnJiang.para.OutputResult" image="net/casnw/home/gui/palette/icon/OutputResult.png"  />
+   <module  name="RunModel" class="XinAnJiang.para.RunModel"   image="net/casnw/home/gui/palette/icon/RunModel.png"/>
+   <module  name="SAOptimization" class="XinAnJiang.para.SAOptimization" image="net/casnw/home/gui/palette/icon/SAOptimization.png"  />
+</category >
+<category  name="整体模型" description="">
+   <module  name="modflow_2005" class="modflow.Modflow" image="net/casnw/home/gui/palette/icon/modflow_2005.png"/>
+ </category >
+
+</root>
+

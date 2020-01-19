@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.Parameter_Thru" name="Parameter_Thru" author="hzfwhy@lzb.ac.cn" keyword="parameter" description="Parameter_Thru">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="rain_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation on each HRU to account for differences in elevation, etc"/>
+    <var name="snow_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation on each HRU to account for differences in elevation, etc"/>
+    <var name="strain_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation to  each HRU to account for differences in elevation,  etc. This factor is for the rain gage used for kinematic or storm routing"/>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+  </varMeta>
+</moduleMeta>

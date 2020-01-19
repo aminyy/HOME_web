@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Modules.RechargeToGroundWater" name="rechargeToGroundWater" author="longyinping11@lzb.ac.cn" keyword="rechargeToGroundWater" description="calculation of recharge rate from unsaturated zone to groundwater using Darcy's law">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="dt" dataType="PoolDouble" size="0" unit="" description="time step (second)"/>
+    <var name="Ds" dataType="PoolDouble" size="0" unit="" description="average depth of topsoil (m)"/>
+    <var name="Dg" dataType="PoolDouble" size="0" unit="" description="average depth of the unconfined aquifer (m)"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m)"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture for each UZ(Unsaturated Zone)layer,(mm H2O/ mm Soil)"/>
+    <var name="GWst" dataType="PoolDouble" size="0" unit="" description="grondwater storage(m H2O)"/>
+    <var name="dgl" dataType="PoolDouble" size="0" unit="" description="depth to groundwater level (m)"/>
+    <var name="rech" dataType="PoolDouble" size="0" unit="" description="recharge rate from unsaturated zone to groundwater(m H2O)"/>
+    <var name="wsat" dataType="PoolDoubleArray" size="0" unit="" description="saturated soil moisture, varied by soil types"/>
+    <var name="wfld" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture at field capacity, varied by soil types"/>
+    <var name="wrsd" dataType="PoolDoubleArray" size="0" unit="" description="residual soil moisture, varied by soil types"/>
+    <var name="k0" dataType="PoolDoubleArray" size="0" unit="" description="saturated hydraulic conductivity (mm H2O/hour) for each UZ(Unsaturated Zone)layer"/>
+    <var name="watern" dataType="PoolDoubleArray" size="0" unit="" description="soil water parameter"/>
+    <var name="alpha" dataType="PoolDoubleArray" size="0" unit="" description="soil water parameter"/>
+    <var name="GWcs" dataType="PoolDouble" size="0" unit="" description="groundwater storage coefficient"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b3f2ccbf-7019-4032-8d8c-36470db8df01" name="Default" comment="删除cms_articles表的重复记录，设置id为主键。">
+      <change afterPath="$PROJECT_DIR$/services/common.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/portal/metadata.py" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/portal/metadata.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/portal/templates/portal/metadata/glacier_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/portal/templates/portal/metadata/glacier_list.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/portal/templates/portal/metadata/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/controllers/portal/templates/portal/metadata/index.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/gaohan2018$Unnamed.coverage" NAME="Unnamed Coverage Results" MODIFIED="1527817058569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/.." />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="crensed.db" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="crensed.db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="crensed.db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="crensed.db" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="main: schema" type="981a47c2:SqliteImplModel$Schema" />
+        <item name="news: table" type="3d80ac25:SqliteImplModel$Table" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="crensed.db" type="feb32156:DbDataSourceImpl" />
+        <item name="collations" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CSS File" />
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JsBowerSettings">
+    <node-interpreter value="project" />
+    <bower-package value="" />
+    <bower.json value="$PROJECT_DIR$/bower.json" />
+  </component>
+  <component name="ProjectId" id="1Sry74ItHSvSj6mgY0JWx6vUByA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../carsdc" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="gaohan2018" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="gaohan2018" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/controllers/manage" />
+      <recent name="$PROJECT_DIR$/static/jobfarm/user_models/zhmc" />
+      <recent name="$PROJECT_DIR$/controllers/auth" />
+      <recent name="$PROJECT_DIR$/controllers/portal/templates/portal/jobfarm/app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static/jobfarm/user_models/minyf/common" />
+      <recent name="$PROJECT_DIR$/static/jobfarm/user_models/minyf/models" />
+      <recent name="$PROJECT_DIR$/static/assets/css" />
+      <recent name="$PROJECT_DIR$/static/jobfarm/user_models" />
+      <recent name="$PROJECT_DIR$/static/assets/image" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="community" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="gaohan2018" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/controllers/portal" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/controllers/portal/community.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.community" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b3f2ccbf-7019-4032-8d8c-36470db8df01" name="Default" comment="" />
+      <created>1526626019512</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1526626019512</updated>
+      <workItem from="1543221887729" duration="789000" />
+      <workItem from="1543235781378" duration="2038000" />
+      <workItem from="1543301373560" duration="644000" />
+      <workItem from="1543481212665" duration="3726000" />
+      <workItem from="1543996085450" duration="315000" />
+      <workItem from="1544000475873" duration="8909000" />
+      <workItem from="1544084615050" duration="10760000" />
+      <workItem from="1544154571259" duration="14389000" />
+      <workItem from="1544750629082" duration="3384000" />
+      <workItem from="1545130443905" duration="1540000" />
+      <workItem from="1545179010017" duration="9802000" />
+      <workItem from="1545210200188" duration="4525000" />
+      <workItem from="1545266250421" duration="10205000" />
+      <workItem from="1545612044499" duration="2167000" />
+      <workItem from="1545616303372" duration="4711000" />
+      <workItem from="1545634949872" duration="889000" />
+      <workItem from="1545643250771" duration="8249000" />
+      <workItem from="1545792747288" duration="1108000" />
+      <workItem from="1545807883171" duration="383000" />
+      <workItem from="1546410521215" duration="423000" />
+      <workItem from="1546412253017" duration="1054000" />
+      <workItem from="1546415802988" duration="239000" />
+      <workItem from="1546417024325" duration="94000" />
+      <workItem from="1546417990932" duration="217000" />
+      <workItem from="1546421476339" duration="1743000" />
+      <workItem from="1546501693282" duration="79000" />
+      <workItem from="1546586010884" duration="127000" />
+      <workItem from="1547451417345" duration="74000" />
+      <workItem from="1547454057894" duration="1088000" />
+      <workItem from="1547455535207" duration="109000" />
+      <workItem from="1548994570878" duration="25000" />
+      <workItem from="1549958024890" duration="23000" />
+      <workItem from="1550654416247" duration="620000" />
+      <workItem from="1550655653024" duration="12000" />
+      <workItem from="1552979343296" duration="506000" />
+      <workItem from="1552979896844" duration="937000" />
+      <workItem from="1552988941222" duration="30000" />
+      <workItem from="1554367265185" duration="893000" />
+      <workItem from="1557463179185" duration="3097000" />
+      <workItem from="1558314823953" duration="29473000" />
+      <workItem from="1558409774099" duration="12689000" />
+      <workItem from="1558515857061" duration="11000" />
+      <workItem from="1558834800949" duration="630000" />
+      <workItem from="1559549986923" duration="1364000" />
+      <workItem from="1559609527523" duration="11413000" />
+      <workItem from="1559633768564" duration="62000" />
+      <workItem from="1559634133005" duration="679000" />
+      <workItem from="1559636251070" duration="4784000" />
+      <workItem from="1559694260880" duration="14826000" />
+      <workItem from="1560152272370" duration="4938000" />
+      <workItem from="1560420314670" duration="6098000" />
+      <workItem from="1560434388426" duration="4956000" />
+      <workItem from="1560480784755" duration="6124000" />
+      <workItem from="1560496828566" duration="4717000" />
+      <workItem from="1560561954980" duration="6980000" />
+      <workItem from="1560731283012" duration="1279000" />
+      <workItem from="1560756998713" duration="152000" />
+      <workItem from="1560763142300" duration="336000" />
+      <workItem from="1560763685381" duration="138000" />
+      <workItem from="1560776102664" duration="1756000" />
+      <workItem from="1560817672228" duration="4641000" />
+      <workItem from="1560830044721" duration="21465000" />
+      <workItem from="1560906046095" duration="134000" />
+      <workItem from="1560934635688" duration="2180000" />
+      <workItem from="1560937430440" duration="1479000" />
+      <workItem from="1560951018787" duration="8535000" />
+      <workItem from="1561000186795" duration="4569000" />
+      <workItem from="1561014276347" duration="9118000" />
+      <workItem from="1561037164151" duration="3840000" />
+      <workItem from="1561083363900" duration="379000" />
+      <workItem from="1561084162641" duration="526000" />
+      <workItem from="1561085048267" duration="4437000" />
+      <workItem from="1561099171872" duration="5039000" />
+      <workItem from="1561104531936" duration="6229000" />
+      <workItem from="1561113619650" duration="2417000" />
+      <workItem from="1561163148136" duration="5493000" />
+      <workItem from="1561174904330" duration="3249000" />
+      <workItem from="1561179281093" duration="7339000" />
+      <workItem from="1561194381271" duration="17091000" />
+      <workItem from="1561261040597" duration="15205000" />
+      <workItem from="1561448600637" duration="661000" />
+      <workItem from="1561452498132" duration="1568000" />
+      <workItem from="1562073002452" duration="8982000" />
+      <workItem from="1562137668048" duration="15537000" />
+      <workItem from="1562235661842" duration="24000" />
+      <workItem from="1562551214463" duration="433000" />
+      <workItem from="1562635658188" duration="65000" />
+      <workItem from="1563176554773" duration="426000" />
+      <workItem from="1563325158700" duration="152000" />
+      <workItem from="1563502392301" duration="445000" />
+      <workItem from="1572335845694" duration="3051000" />
+      <workItem from="1575099793562" duration="3103000" />
+      <workItem from="1576490859793" duration="1402000" />
+      <workItem from="1576543251099" duration="7707000" />
+    </task>
+    <task id="LOCAL-00240" summary="portal.py和index.html中添加异常处理,避免联合观测网站连不上导致页面出错.">
+      <created>1561187478545</created>
+      <option name="number" value="00240" />
+      <option name="presentableId" value="LOCAL-00240" />
+      <option name="project" value="LOCAL" />
+      <updated>1561187478546</updated>
+    </task>
+    <task id="LOCAL-00241" summary="portal.py和index.html中添加异常处理,避免联合观测网站连不上导致页面出错.">
+      <created>1561187659201</created>
+      <option name="number" value="00241" />
+      <option name="presentableId" value="LOCAL-00241" />
+      <option name="project" value="LOCAL" />
+      <updated>1561187659201</updated>
+    </task>
+    <task id="LOCAL-00242" summary="portal.py和index.html中添加异常处理,避免联合观测网站连不上导致页面出错.">
+      <created>1561189488455</created>
+      <option name="number" value="00242" />
+      <option name="presentableId" value="LOCAL-00242" />
+      <option name="project" value="LOCAL" />
+      <updated>1561189488455</updated>
+    </task>
+    <task id="LOCAL-00243" summary="portal.py和index.html中添加异常处理,避免联合观测网站连不上导致页面出错.">
+      <created>1561190387222</created>
+      <option name="number" value="00243" />
+      <option name="presentableId" value="LOCAL-00243" />
+      <option name="project" value="LOCAL" />
+      <updated>1561190387222</updated>
+    </task>
+    <task id="LOCAL-00244" summary="处理数据列表中下载次数显示错误的问题.">
+      <created>1561192169818</created>
+      <option name="number" value="00244" />
+      <option name="presentableId" value="LOCAL-00244" />
+      <option name="project" value="LOCAL" />
+      <updated>1561192169818</updated>
+    </task>
+    <task id="LOCAL-00245" summary="kkpage保留原有版本,并增加支持多个实例的版本.">
+      <created>1561192791127</created>
+      <option name="number" value="00245" />
+      <option name="presentableId" value="LOCAL-00245" />
+      <option name="project" value="LOCAL" />
+      <updated>1561192791127</updated>
+    </task>
+    <task id="LOCAL-00246" summary="完善了根据下载量和点击量排序的功能.">
+      <created>1561193763093</created>
+      <option name="number" value="00246" />
+      <option name="presentableId" value="LOCAL-00246" />
+      <option name="project" value="LOCAL" />
+      <updated>1561193763094</updated>
+    </task>
+    <task id="LOCAL-00247" summary="完善了根据下载量和点击量排序的功能.">
+      <created>1561194471231</created>
+      <option name="number" value="00247" />
+      <option name="presentableId" value="LOCAL-00247" />
+      <option name="project" value="LOCAL" />
+      <updated>1561194471231</updated>
+    </task>
+    <task id="LOCAL-00248" summary="修改了首页新闻图片为0时的异常错误.">
+      <created>1561196197388</created>
+      <option name="number" value="00248" />
+      <option name="presentableId" value="LOCAL-00248" />
+      <option name="project" value="LOCAL" />
+      <updated>1561196197388</updated>
+    </task>
+    <task id="LOCAL-00249" summary="通行证登录相关的修改">
+      <created>1561199731314</created>
+      <option name="number" value="00249" />
+      <option name="presentableId" value="LOCAL-00249" />
+      <option name="project" value="LOCAL" />
+      <updated>1561199731314</updated>
+    </task>
+    <task id="LOCAL-00250" summary="缩略图相关的修改">
+      <created>1561200616312</created>
+      <option name="number" value="00250" />
+      <option name="presentableId" value="LOCAL-00250" />
+      <option name="project" value="LOCAL" />
+      <updated>1561200616312</updated>
+    </task>
+    <task id="LOCAL-00251" summary="社区内容项详情页面包屑的修改.">
+      <created>1561201805860</created>
+      <option name="number" value="00251" />
+      <option name="presentableId" value="LOCAL-00251" />
+      <option name="project" value="LOCAL" />
+      <updated>1561201805860</updated>
+    </task>
+    <task id="LOCAL-00252" summary="恢复后台管理链接,获取第一张图片考虑到markdown格式.">
+      <created>1561203013343</created>
+      <option name="number" value="00252" />
+      <option name="presentableId" value="LOCAL-00252" />
+      <option name="project" value="LOCAL" />
+      <updated>1561203013343</updated>
+    </task>
+    <task id="LOCAL-00253" summary="恢复后台管理链接,获取第一张图片考虑到markdown格式.">
+      <created>1561203373891</created>
+      <option name="number" value="00253" />
+      <option name="presentableId" value="LOCAL-00253" />
+      <option name="project" value="LOCAL" />
+      <updated>1561203373891</updated>
+    </task>
+    <task id="LOCAL-00254" summary="恢复后台管理链接,获取第一张图片考虑到markdown格式.">
+      <created>1561252269782</created>
+      <option name="number" value="00254" />
+      <option name="presentableId" value="LOCAL-00254" />
+      <option name="project" value="LOCAL" />
+      <updated>1561252269783</updated>
+    </task>
+    <task id="LOCAL-00255" summary="恢复后台管理链接,获取第一张图片考虑到markdown格式.">
+      <created>1561252326235</created>
+      <option name="number" value="00255" />
+      <option name="presentableId" value="LOCAL-00255" />
+      <option name="project" value="LOCAL" />
+      <updated>1561252326235</updated>
+    </task>
+    <task id="LOCAL-00256" summary="恢复后台管理链接,获取第一张图片考虑到markdown格式.">
+      <created>1561253095047</created>
+      <option name="number" value="00256" />
+      <option name="presentableId" value="LOCAL-00256" />
+      <option name="project" value="LOCAL" />
+      <updated>1561253095047</updated>
+    </task>
+    <task id="LOCAL-00257" summary="11">
+      <created>1561253365929</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1561253365929</updated>
+    </task>
+    <task id="LOCAL-00258" summary="在线计算还是没改好">
+      <created>1561262324478</created>
+      <option name="number" value="00258" />
+      <option name="presentableId" value="LOCAL-00258" />
+      <option name="project" value="LOCAL" />
+      <updated>1561262324479</updated>
+    </task>
+    <task id="LOCAL-00259" summary="模型管理中的xml文件出来了.">
+      <created>1561274992429</created>
+      <option name="number" value="00259" />
+      <option name="presentableId" value="LOCAL-00259" />
+      <option name="project" value="LOCAL" />
+      <updated>1561274992429</updated>
+    </task>
+    <task id="LOCAL-00260" summary="联合观测页面,增加按站统计.">
+      <created>1561285761868</created>
+      <option name="number" value="00260" />
+      <option name="presentableId" value="LOCAL-00260" />
+      <option name="project" value="LOCAL" />
+      <updated>1561285761868</updated>
+    </task>
+    <task id="LOCAL-00261" summary="细节修改.">
+      <created>1561286452865</created>
+      <option name="number" value="00261" />
+      <option name="presentableId" value="LOCAL-00261" />
+      <option name="project" value="LOCAL" />
+      <updated>1561286452865</updated>
+    </task>
+    <task id="LOCAL-00262" summary="细节修改.">
+      <created>1561286892184</created>
+      <option name="number" value="00262" />
+      <option name="presentableId" value="LOCAL-00262" />
+      <option name="project" value="LOCAL" />
+      <updated>1561286892184</updated>
+    </task>
+    <task id="LOCAL-00263" summary="细节修改.">
+      <created>1561296113698</created>
+      <option name="number" value="00263" />
+      <option name="presentableId" value="LOCAL-00263" />
+      <option name="project" value="LOCAL" />
+      <updated>1561296113698</updated>
+    </task>
+    <task id="LOCAL-00264" summary="模型文件下载加上审核.">
+      <created>1561297606303</created>
+      <option name="number" value="00264" />
+      <option name="presentableId" value="LOCAL-00264" />
+      <option name="project" value="LOCAL" />
+      <updated>1561297606303</updated>
+    </task>
+    <task id="LOCAL-00265" summary="模型详情页加载太慢，将相关模型的计算改为ajax加载计算结果。">
+      <created>1561449061910</created>
+      <option name="number" value="00265" />
+      <option name="presentableId" value="LOCAL-00265" />
+      <option name="project" value="LOCAL" />
+      <updated>1561449061910</updated>
+    </task>
+    <task id="LOCAL-00266" summary="模型详情页加载太慢，将相关模型的计算改为ajax加载计算结果。">
+      <created>1561449127541</created>
+      <option name="number" value="00266" />
+      <option name="presentableId" value="LOCAL-00266" />
+      <option name="project" value="LOCAL" />
+      <updated>1561449127541</updated>
+    </task>
+    <task id="LOCAL-00267" summary="测试active_page">
+      <created>1561453063448</created>
+      <option name="number" value="00267" />
+      <option name="presentableId" value="LOCAL-00267" />
+      <option name="project" value="LOCAL" />
+      <updated>1561453063449</updated>
+    </task>
+    <task id="LOCAL-00268" summary="测试active_page">
+      <created>1561453329967</created>
+      <option name="number" value="00268" />
+      <option name="presentableId" value="LOCAL-00268" />
+      <option name="project" value="LOCAL" />
+      <updated>1561453329968</updated>
+    </task>
+    <task id="LOCAL-00269" summary="测试active_page">
+      <created>1561453502235</created>
+      <option name="number" value="00269" />
+      <option name="presentableId" value="LOCAL-00269" />
+      <option name="project" value="LOCAL" />
+      <updated>1561453502235</updated>
+    </task>
+    <task id="LOCAL-00270" summary="测试">
+      <created>1562135640471</created>
+      <option name="number" value="00270" />
+      <option name="presentableId" value="LOCAL-00270" />
+      <option name="project" value="LOCAL" />
+      <updated>1562135640474</updated>
+    </task>
+    <task id="LOCAL-00271" summary="开启debug模式">
+      <created>1562201488375</created>
+      <option name="number" value="00271" />
+      <option name="presentableId" value="LOCAL-00271" />
+      <option name="project" value="LOCAL" />
+      <updated>1562201488377</updated>
+    </task>
+    <task id="LOCAL-00272" summary="开启debug模式">
+      <created>1562208919873</created>
+      <option name="number" value="00272" />
+      <option name="presentableId" value="LOCAL-00272" />
+      <option name="project" value="LOCAL" />
+      <updated>1562208919874</updated>
+    </task>
+    <task id="LOCAL-00273" summary="全局取消ssl全局取消证书验证。">
+      <created>1562209690256</created>
+      <option name="number" value="00273" />
+      <option name="presentableId" value="LOCAL-00273" />
+      <option name="project" value="LOCAL" />
+      <updated>1562209690256</updated>
+    </task>
+    <task id="LOCAL-00274" summary="全局取消ssl全局取消证书验证。">
+      <created>1562210808017</created>
+      <option name="number" value="00274" />
+      <option name="presentableId" value="LOCAL-00274" />
+      <option name="project" value="LOCAL" />
+      <updated>1562210808017</updated>
+    </task>
+    <task id="LOCAL-00275" summary="web:194,db:199.">
+      <created>1572337566527</created>
+      <option name="number" value="00275" />
+      <option name="presentableId" value="LOCAL-00275" />
+      <option name="project" value="LOCAL" />
+      <updated>1572337566528</updated>
+    </task>
+    <task id="LOCAL-00276" summary="web:194,db:199.">
+      <created>1572337631217</created>
+      <option name="number" value="00276" />
+      <option name="presentableId" value="LOCAL-00276" />
+      <option name="project" value="LOCAL" />
+      <updated>1572337631217</updated>
+    </task>
+    <task id="LOCAL-00277" summary="web:194,db:199.">
+      <created>1572337686468</created>
+      <option name="number" value="00277" />
+      <option name="presentableId" value="LOCAL-00277" />
+      <option name="project" value="LOCAL" />
+      <updated>1572337686468</updated>
+    </task>
+    <task id="LOCAL-00278" summary="web:194,db:199.">
+      <created>1572338106673</created>
+      <option name="number" value="00278" />
+      <option name="presentableId" value="LOCAL-00278" />
+      <option name="project" value="LOCAL" />
+      <updated>1572338106673</updated>
+    </task>
+    <task id="LOCAL-00279" summary="web:194,db:199.">
+      <created>1572338291829</created>
+      <option name="number" value="00279" />
+      <option name="presentableId" value="LOCAL-00279" />
+      <option name="project" value="LOCAL" />
+      <updated>1572338291829</updated>
+    </task>
+    <task id="LOCAL-00280" summary="web:194,db:199.">
+      <created>1572338688838</created>
+      <option name="number" value="00280" />
+      <option name="presentableId" value="LOCAL-00280" />
+      <option name="project" value="LOCAL" />
+      <updated>1572338688838</updated>
+    </task>
+    <task id="LOCAL-00281" summary="修改验证码字体路径错误；">
+      <created>1575102103847</created>
+      <option name="number" value="00281" />
+      <option name="presentableId" value="LOCAL-00281" />
+      <option name="project" value="LOCAL" />
+      <updated>1575102103848</updated>
+    </task>
+    <task id="LOCAL-00282" summary="fabfile服务器路径修改;">
+      <created>1575102217812</created>
+      <option name="number" value="00282" />
+      <option name="presentableId" value="LOCAL-00282" />
+      <option name="project" value="LOCAL" />
+      <updated>1575102217813</updated>
+    </task>
+    <task id="LOCAL-00283" summary="fabfile服务器路径修改;">
+      <created>1576491185605</created>
+      <option name="number" value="00283" />
+      <option name="presentableId" value="LOCAL-00283" />
+      <option name="project" value="LOCAL" />
+      <updated>1576491185605</updated>
+    </task>
+    <task id="LOCAL-00284" summary="增加天地图tk。">
+      <created>1576491205461</created>
+      <option name="number" value="00284" />
+      <option name="presentableId" value="LOCAL-00284" />
+      <option name="project" value="LOCAL" />
+      <updated>1576491205461</updated>
+    </task>
+    <task id="LOCAL-00285" summary="修改天地图tk。">
+      <created>1576542526268</created>
+      <option name="number" value="00285" />
+      <option name="presentableId" value="LOCAL-00285" />
+      <option name="project" value="LOCAL" />
+      <updated>1576542526297</updated>
+    </task>
+    <task id="LOCAL-00286" summary="修改天地图tk。">
+      <created>1576543396075</created>
+      <option name="number" value="00286" />
+      <option name="presentableId" value="LOCAL-00286" />
+      <option name="project" value="LOCAL" />
+      <updated>1576543396075</updated>
+    </task>
+    <task id="LOCAL-00287" summary="删除cms_articles表的重复记录，设置id为主键。">
+      <created>1576549425694</created>
+      <option name="number" value="00287" />
+      <option name="presentableId" value="LOCAL-00287" />
+      <option name="project" value="LOCAL" />
+      <updated>1576549425695</updated>
+    </task>
+    <task id="LOCAL-00288" summary="删除cms_articles表的重复记录，设置id为主键。">
+      <created>1576551028451</created>
+      <option name="number" value="00288" />
+      <option name="presentableId" value="LOCAL-00288" />
+      <option name="project" value="LOCAL" />
+      <updated>1576551028451</updated>
+    </task>
+    <option name="localTasksCounter" value="289" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="4">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="处理数据列表中下载次数显示错误的问题." />
+    <MESSAGE value="kkpage保留原有版本,并增加支持多个实例的版本." />
+    <MESSAGE value="完善了根据下载量和点击量排序的功能." />
+    <MESSAGE value="修改了首页新闻图片为0时的异常错误." />
+    <MESSAGE value="通行证登录相关的修改" />
+    <MESSAGE value="缩略图相关的修改" />
+    <MESSAGE value="社区内容项详情页面包屑的修改." />
+    <MESSAGE value="恢复后台管理链接,获取第一张图片考虑到markdown格式." />
+    <MESSAGE value="11" />
+    <MESSAGE value="在线计算还是没改好" />
+    <MESSAGE value="模型管理中的xml文件出来了." />
+    <MESSAGE value="联合观测页面,增加按站统计." />
+    <MESSAGE value="细节修改." />
+    <MESSAGE value="模型文件下载加上审核." />
+    <MESSAGE value="模型详情页加载太慢，将相关模型的计算改为ajax加载计算结果。" />
+    <MESSAGE value="测试active_page" />
+    <MESSAGE value="测试" />
+    <MESSAGE value="开启debug模式" />
+    <MESSAGE value="全局取消ssl全局取消证书验证。" />
+    <MESSAGE value="web:194,db:199." />
+    <MESSAGE value="修改验证码字体路径错误；" />
+    <MESSAGE value="fabfile服务器路径修改;" />
+    <MESSAGE value="增加天地图tk。" />
+    <MESSAGE value="修改天地图tk。" />
+    <MESSAGE value="删除cms_articles表的重复记录，设置id为主键。" />
+    <option name="LAST_COMMIT_MESSAGE" value="删除cms_articles表的重复记录，设置id为主键。" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="573" y="135" width="831" height="835" key="CommitChangelistDialog2" timestamp="1576551960443">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="573" y="135" width="831" height="835" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1576551960443" />
+    <state x="475" y="187" key="SettingsEditor" timestamp="1576545546801">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="475" y="187" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1576545546801" />
+    <state x="588" y="287" width="800" height="531" key="Vcs.Push.Dialog.v2" timestamp="1576551043008">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="588" y="287" width="800" height="531" key="Vcs.Push.Dialog.v2/67.27.1853.1053@67.27.1853.1053" timestamp="1576551043008" />
+    <state x="645" y="245" width="696" height="614" key="find.popup" timestamp="1576543848894">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="645" y="245" width="696" height="614" key="find.popup/67.27.1853.1053@67.27.1853.1053" timestamp="1576543848894" />
+    <state x="645" y="333" width="686" height="439" key="git4idea.merge.GitPullDialog" timestamp="1576551035220">
+      <screen x="67" y="27" width="1853" height="1053" />
+    </state>
+    <state x="645" y="333" width="686" height="439" key="git4idea.merge.GitPullDialog/67.27.1853.1053@67.27.1853.1053" timestamp="1576551035220" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/api/order.py</url>
+          <line>1</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/models/__init__.py</url>
+          <line>2</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/gaohan2018$community.coverage" NAME="community Coverage Results" MODIFIED="1560864095657" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/controllers/portal" />
+  </component>
+</project>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.ObsIO" name="ObsIO" author="hzfwhy@lzb.ac.cn" keyword="obs io" description="obs io">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_jday" dataType="PoolInteger" size="0" unit="" description="Calendar date)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="date_year" dataType="PoolInteger" size="0" unit="" description=" Calendar date)"/>
+    <var name="rain_day" dataType="PoolInteger" size="0" unit="" description="rain of day)"/>
+    <var name="newday" dataType="PoolInteger" size="0" unit="" description=" Switch signifying the start of a new day (0=no; 1=yes))"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="rain_code" dataType="PoolIntegerArray" size="0" unit="" description="(if rain_code=4)"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Potential evapotranspiration on an HRU)"/>
+    <var name="runoff" dataType="PoolIntegerArray" size="0" unit="" description="(runoff)"/>
+    <var name="precip" dataType="PoolIntegerArray" size="0" unit="" description="(precip)"/>
+    <var name="tmin" dataType="PoolIntegerArray" size="0" unit="" description="(Minimum temperature)"/>
+    <var name="tmax" dataType="PoolDoubleArray" size="0" unit="" description="(Maximum temperature )"/>
+    <var name="nobs" dataType="PoolInteger" size="0" unit="" description="the number of observation"/>
+    <var name="nrain" dataType="PoolInteger" size="0" unit="" description="the number of rain observation"/>
+    <var name="ntemp" dataType="PoolInteger" size="0" unit="" description="the number of temperature observation"/>
+    <var name="starttime" dataType="PoolCalendar" size="0" unit="" description="starttime"/>
+  </varMeta>
+</moduleMeta>

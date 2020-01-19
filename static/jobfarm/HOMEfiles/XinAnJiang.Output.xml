@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.Output" name="output" author="longyinping11@lzb.ac.cn" keyword="output" description="输出实际蒸散发、土壤湿度和径流">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="evapFile" dataType="PoolString" size="0" unit="" description="实际蒸散发输出路径"/>
+    <var name="moistureFile" dataType="PoolString" size="0" unit="" description="土壤湿度输出路径"/>
+    <var name="runoffFile" dataType="PoolString" size="0" unit="" description="径流深输出路径"/>
+    <var name="E" dataType="PoolDouble" size="0" unit="" description="蒸散发"/>
+    <var name="EU" dataType="PoolDouble" size="0" unit="" description="上层土壤蒸散发量（毫米）"/>
+    <var name="EL" dataType="PoolDouble" size="0" unit="" description="下层土壤蒸散发量（毫米）"/>
+    <var name="ED" dataType="PoolDouble" size="0" unit="" description="深层土壤蒸散发量（毫米）"/>
+    <var name="W" dataType="PoolDouble" size="0" unit="" description="流域内土壤湿度"/>
+    <var name="WU" dataType="PoolDouble" size="0" unit="" description="流域内上层土壤湿度"/>
+    <var name="WL" dataType="PoolDouble" size="0" unit="" description="流域内下层土壤适度"/>
+    <var name="WD" dataType="PoolDouble" size="0" unit="" description="流域内深层土壤湿度"/>
+    <var name="R" dataType="PoolDouble" size="0" unit="" description="产流深度，包括地表径流深度和地下径流深度两部分（毫米）"/>
+    <var name="RS" dataType="PoolDouble" size="0" unit="" description="地表径流深度，单位（毫米）"/>
+    <var name="RG" dataType="PoolDouble" size="0" unit="" description="地下径流深度，单位（毫米）"/>
+  </varMeta>
+</moduleMeta>

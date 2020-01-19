@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.VegetationParameters" name="vegetationParameters" author="longyinping11@lzb.ac.cn" keyword="vegetation parameter" description="reading vegetation parameters including crop coefficient, fraction of vegetation coverage, maximum LAI, root depth, soil anisotropy ratio, maximum surface water detension and surface roughness">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="vegeParFile" dataType="PoolString" size="0" unit="" description="vegetation parameter file path"/>
+    <var name="landcode2D" dataType="PoolInteger2DArray" size="0" unit="" description="landuse code at at each grid of the study area"/>
+    <var name="Kcanopy2D" dataType="PoolDouble2DArray" size="0" unit="" description="fraction of vegetation coverage at each grid of the study area"/>
+    <var name="LAImax2D" dataType="PoolDouble2DArray" size="0" unit="" description=" maximum LAI at each grid of the study area"/>
+    <var name="kcrop2D" dataType="PoolDouble2DArray" size="0" unit="" description="crop coefficient at each grid of the study area"/>
+    <var name="root2D" dataType="PoolDouble2DArray" size="0" unit="" description="root depth at each grid of the study area"/>
+    <var name="anik2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil anisotropy ratio at each grid of the study area"/>
+    <var name="Sstmax2D" dataType="PoolDouble2DArray" size="0" unit="" description="maximum surface water detension at each grid of the study area"/>
+    <var name="surfn2D" dataType="PoolDouble2DArray" size="0" unit="" description="surface roughness at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

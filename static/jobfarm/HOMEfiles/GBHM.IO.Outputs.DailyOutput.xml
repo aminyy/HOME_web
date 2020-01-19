@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Outputs.DailyOutput" name="dailyOutput" author="longyinping11@lzb.ac.cn" keyword="model outputs" description="writing model outputs in acsii grid format, including precipitation, actual evapotranspiration, runoff, snowmelt, soil moisture, depth to groundwater, groundwater storage, canopy intercepted water, snow pack water storage, soil surface water storage and soil water depth in the whole profile">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Day</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="baseArray" dataType="PoolDouble2DArray" size="0" unit="" description="a 2D array that dipicts the study area extent"/>
+    <var name="precOutPath" dataType="PoolString" size="0" unit="" description="precipitation output path"/>
+    <var name="eactOutPath" dataType="PoolString" size="0" unit="" description="actual evapotranspiration output path"/>
+    <var name="runoffOutPath" dataType="PoolString" size="0" unit="" description="runoff output path"/>
+    <var name="snowmeltOutPath" dataType="PoolString" size="0" unit="" description="snowmelt output path"/>
+    <var name="MoistureOutPath" dataType="PoolString" size="0" unit="" description="soil moisture output path"/>
+    <var name="dglOutPath" dataType="PoolString" size="0" unit="" description="depth to groundwater output path"/>
+    <var name="GWstOutPath" dataType="PoolString" size="0" unit="" description="groundwater storage output path"/>
+    <var name="CstOutPath" dataType="PoolString" size="0" unit="" description="canopy intercepted water output path"/>
+    <var name="snowOutPath" dataType="PoolString" size="0" unit="" description="snow pack water storage output path"/>
+    <var name="sstOutPath" dataType="PoolString" size="0" unit="" description="soil surface water storage output path"/>
+    <var name="soilWaterDepthOutPath" dataType="PoolString" size="0" unit="" description="soil water depth of the profile output path"/>
+    <var name="prec" dataType="PoolDouble2DArray" size="0" unit="" description="daily precipitation at each grid of the study area"/>
+    <var name="Eact" dataType="PoolDouble2DArray" size="0" unit="" description="actual evapotranspiration at each grid of the study area"/>
+    <var name="qin" dataType="PoolDouble2DArray" size="0" unit="" description="runoff at each grid of the study area"/>
+    <var name="snowmelt" dataType="PoolDouble2DArray" size="0" unit="" description="snowmelt at each grid of the study area"/>
+    <var name="w" dataType="PoolDouble3DArray" size="0" unit="" description="moisture of each soil layer at each grid of the study area"/>
+    <var name="dgl" dataType="PoolDouble2DArray" size="0" unit="" description="depth from soil surface to ground water at each grid of the study area"/>
+    <var name="GWst" dataType="PoolDouble2DArray" size="0" unit="" description="ground water storage at each grid of the study area"/>
+    <var name="Cst" dataType="PoolDouble2DArray" size="0" unit="" description="canopy intercepted water at each grid of the study area"/>
+    <var name="snowdepth" dataType="PoolDouble2DArray" size="0" unit="" description="snow pack water storage at each grid of the study area"/>
+    <var name="sst" dataType="PoolDouble2DArray" size="0" unit="" description="soil surface water storage at each grid of the study area"/>
+    <var name="" dataType="PoolDouble2DArray" size="0" unit="" description="soil water depth of the profile at each grid of the study area"/>
+    <var name="nrows" dataType="PoolInteger" size="0" unit="" description="the nrows value in the ascii file"/>
+    <var name="ncols" dataType="PoolInteger" size="0" unit="" description="the ncols value in the ascii file"/>
+    <var name="xllcorner" dataType="PoolDouble" size="0" unit="" description="the xllcorner value in the ascii file"/>
+    <var name="yllcorner" dataType="PoolDouble" size="0" unit="" description="the yllcorner value in the ascii file"/>
+    <var name="cellsize" dataType="PoolDouble" size="0" unit="" description="the cellsize value in the ascii file"/>
+    <var name="nodata" dataType="PoolDouble" size="0" unit="" description="the nodata value in the ascii file"/>
+  </varMeta>
+</moduleMeta>

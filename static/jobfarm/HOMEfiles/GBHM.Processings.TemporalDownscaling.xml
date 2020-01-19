@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.TemporalDownscaling" name="temporalDownscaling" author="longyinping11@lzb.ac.cn" keyword="temporal downscaling" description="calculating hour weather data from daily values">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="prec_daily" dataType="PoolDouble2DArray" size="0" unit="" description="daily precipitation at each grid of the study area"/>
+    <var name="tmin_daily" dataType="PoolDouble2DArray" size="0" unit="" description="daily minimum air temperature at each grid of the study area"/>
+    <var name="tmax_daily" dataType="PoolDouble2DArray" size="0" unit="" description="daily maximum air temperature at each grid of the study area"/>
+    <var name="ep_daily" dataType="PoolDouble2DArray" size="0" unit="" description="daily reference(potential) evapotranspiration at each grid of the study area"/>
+    <var name="prec_hourly" dataType="PoolDouble2DArray" size="0" unit="" description="hourly precipitation at each grid of the study area"/>
+    <var name="temper_hourly" dataType="PoolDouble2DArray" size="0" unit="" description="air temperature at each grid of the study area at current simluation hour"/>
+    <var name="ep_hourly" dataType="PoolDouble2DArray" size="0" unit="" description="hourly reference(potential) evapotranspiration at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

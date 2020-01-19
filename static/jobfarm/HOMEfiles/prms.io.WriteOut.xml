@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.WriteOut" name="WriteOut" author="hzfwhy@lzb.ac.cn" keyword="WriteOut" description="WriteOut">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="tavgf" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="swrad" dataType="PoolDoubleArray" size="0" unit="" description="The computed solar radiation for each HRU [solrad]"/>
+    <var name="outputPath" dataType="PoolString" size="0" unit="" description="output file Path"/>
+    <var name="basin_stflow" dataType="PoolDouble" size="0" unit="" description="Sum of basin_sroff, basin_ssflow and basin_gwflow for  timestep"/>
+    <var name=" basin_cms" dataType="PoolDouble" size="0" unit="" description="Sum of basin_sroff, basin_ssflow and basin_gwflow for  timestep"/>
+    <var name="basin_sroff_cfs" dataType="PoolDouble" size="0" unit="" description="Basin surface runoff for timestep"/>
+    <var name="basin_ssflow_cfs" dataType="PoolDouble" size="0" unit="" description="Basin subsurface flow for timestep"/>
+    <var name="basin_gwflow_cfs" dataType="PoolDouble" size="0" unit="" description="Basin ground-water flow for timestep"/>
+    <var name="basin_cfs" dataType="PoolDouble" size="0" unit="" description="Streamflow from basin"/>
+  </varMeta>
+</moduleMeta>

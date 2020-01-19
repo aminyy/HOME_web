@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.para.EvaluateParameter" name="EvaluateParameter">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="recNum" dataType="PoolInteger" size="0" unit="" description="number of the measure data of the study area"/>
+    <var name="parNum" dataType="PoolInteger" size="0" unit="" description="parameter number of the model"/>
+    <var name="lowerX" dataType="PoolDoubleArray" size="0" unit="" description="the lower limit of the parameter"/>
+    <var name="upperX" dataType="PoolDoubleArray" size="0" unit="" description="the upper limit of the parameter"/>
+    <var name="Xi" dataType="PoolDoubleArray" size="0" unit="" description="the parameter value in the evolution"/>
+    <var name="parameters" dataType="PoolDoubleArray" size="0" unit="" description="parameter data of the model"/>
+    <var name="runoffData" dataType="PoolDoubleArray" size="0" unit="" description="measure data of the study area"/>
+    <var name="forecastrunoffData" dataType="PoolDoubleArray" size="0" unit="" description="the forecast data of the study area"/>
+    <var name="Obji" dataType="PoolDouble" size="0" unit="" description="the current object function value of the parameter"/>
+    <var name="Objj" dataType="PoolDouble" size="0" unit="" description="the  object function value of the evolution parameter"/>
+    <var name="inCycle" dataType="PoolBoolean" size="0" unit="" description="the flag indicate whether in the evolution cycle"/>
+    <var name="evaResult" dataType="PoolDouble" size="0" unit="" description="the evaluation result of parameter of the model"/>
+    <var name="xajObj" dataType="PoolObject" size="0" unit="" description="the object of XinAnJiang model"/>
+  </varMeta>
+</moduleMeta>

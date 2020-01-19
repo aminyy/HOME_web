@@ -1,0 +1,161 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %} 模型在线计算-高寒云 {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+            <div class="col-md-2" style="padding: 0;">
+                {% include 'portal/jobfarm/nav.html' %}
+            </div>
+            <div class="col-md-10">
+                   <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+        <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+        <li><a href="#submit_job" data-toggle="tab" onclick="vic_submit()">作业提交</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade in active" id="intro">
+            <div class="panel panel-default" style="margin-top:5px">
+                <div class="panel-heading">GBHM</div>
+                <div class="panel-body">
+                    <ul class="list-group" style="margin-bottom:0px">
+                        <li class="list-group-item">
+
+                            <p> <h5>
+                            基于HOME建模框架开发了分布式水文模型HOME-GBHM。该模型采用杨大文教授的GBHM模型原理，并保留了GBHM模型的九个核心模块，即降水截留、融雪、蒸散发、土壤水地下水交换、地表水入渗、土壤水分垂直运行、地下水河道水量交换、坡面流以及河道汇流等模块。HOME-GBHM重新定义了原有模型的前后处理部分，形成18个模块，包括基础数据读取、模型参数设置与读取、模型初始条件设置与读取、气象数据读取与空间插值、径流文件输出、模型状态变量文件输出等模块。HOME-GBHM加入了基于气温的冻土经验指数模块，以简单考虑土壤冻融过程对水文过程的影响。在HOME-GBHM，我们重新定义了一些文件输入输出格式，如集时空信息为一体的气象数据文件标准格式、以ASCII
+                            GRID格式输出的土壤各层含水量。HOME-GBHM基于NDVI遥感产品计算实时植被覆盖度，减少了模型经验参数并能较大提高模型模拟精度。
+                        </h5></p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--  <div class="panel panel-default" style="margin-top:5px">
+           <div class="panel-heading">文件下载</div>
+              <div class="panel-body">
+              <ul class="list-group" style="margin-bottom:0px">
+              <li class="list-group-item">
+              <span class="badge btn btn-default" ><a href="/jobfarm/filedown?filename=VIC_code_4.1.1.tar&appname=vic">下载</a></span></li>
+
+
+           </ul>
+           </div>
+
+           </div> -->
+        </div>
+        <div class="tab-pane fade" id="io">
+            <div class="panel panel-default" style="margin-top:5px">
+                <div class="panel-heading">输入文件</div>
+                <div class="panel-body">
+
+                    <ul class="list-group" style="margin-bottom:0px">
+                        <li class="list-group-item">基础数据：流域边界、高程、坡度、坡长以及土地利用类型</li>
+                        <li class="list-group-item">驱动数据：逐日降水、日平均气温、日最高气温、日最低气温、平均风速、平均相对湿度和日照时数</li>
+                        <li class="list-group-item">参数数据：1)土壤参数；2) 植被与下垫面参数；3)河道参数；4)其他参数</li>
+
+                    </ul>
+                </div>
+
+            </div>
+            <div class="panel panel-default" style="margin-top:5px">
+                <div class="panel-heading">输出</div>
+                <div class="panel-body">
+                    <ul class="list-group" style="margin-bottom:0px">
+                        <li class="list-group-item">输出：用户自定义输出模拟结果，如径流、蒸散发、土壤湿度、融雪量、积雪深度等</li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+            <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog" aria-labelledby="fileeditModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                        </div>
+                        <div class="modal-body" id="fileeditModalcontent"></div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+        <div class="tab-pane fade" id="submit_job">
+        </div>
+    </div>
+
+            </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+        $(function () {
+            $('#myTab li:eq(0) a').tab('show');
+        });
+        function vic_submit() {
+            $.get("/portal/jobfarm/app/submit?name=GBHM&version=alpha&exec=GBHM", function (data, status) {
+                $('#submit_job').html(data)
+            });
+
+        }
+        function viewfile(filename) {
+
+            var settings = {
+                type: "POST",
+                url: "/portal/jobfarm/fileview",
+                data: {
+                    "filename": filename,
+                    "appname": "gbhm",
+                },
+                dataType: "json",
+                success: function (data, status) {
+                    $("#fileeditModalLabel").html(data.fname)
+                    $("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>" + data.fcontent)
+                    $('#fileeditModal').modal().css({
+                        width: 'auto',
+
+                    });
+                    //alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+                },
+                headers: {
+                    "X-CSRFToken": getCookie('csrftoken'),
+                },
+            };
+            $.ajax(settings);
+        }
+
+</script>
+{% endblock %}

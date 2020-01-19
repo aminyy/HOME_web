@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<model name="GBHM">
+    <context class="net.casnw.home.model.TemporalContext" name="dailyContext">
+        <var attribute="dt" value="3600" type="PoolDouble"/>
+        <var attribute="startTime" value="2001-1-1" type="PoolString"/>
+        <var attribute="endTime" value="2002-12-31" type="PoolString"/>
+        <var attribute="intervalCount" value="1" type="PoolInteger"/>
+        <var attribute="intervalUnit" value="day" type="PoolString"/>
+        <context class="net.casnw.home.model.Context" name="inputContext">
+            <module class="GBHM.IO.Inputs.BaseMaps1" name="baseMap">
+                <var attribute="demFile" name="demFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/elevation.asc"/>
+                <var attribute="cellareaFile" name="cellareaFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/cell_area.asc"/>
+                <var attribute="slopeFile" name="slopeFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/slope.asc"/>
+                <var attribute="slopeLengthFile" name="slopeLengthFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/slope_length.asc"/>
+                <var attribute="slopeDegreeFile" name="slopeDegreeFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/slope_length.asc"/>
+                <var attribute="aspectFile" name="aspectFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/slope_length.asc"/>
+                <var attribute="soilTypesFile" name="soilTypesFile" type="PoolString" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/soil_unit.asc"/>	
+                <var attribute="landuseFile" name="landuseFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Basemap/landuse.asc"/>
+                <var attribute="data" context="dailyContext" name="basin2D"/>
+                <var attribute="elevRaster" context="dailyContext" name="elevRaster"/>
+                <var attribute="elev2D" context="dailyContext" name="elev2D"/>
+                <var attribute="slope2D" context="dailyContext" name="slope2D"/>                
+                <var attribute="slopeLength2D" context="dailyContext" name="slopeLength2D"/>
+                <var attribute="slopeDegree2D" name="slopeDegree2D"/>
+                <var attribute="aspect2D" name="aspect2D"/>
+                <var attribute="soilcode2D" context="dailyContext" name="soilcode2D"/>
+                <var attribute="landcode2D" context="dailyContext" name="landcode2D"/>
+                <var attribute="nrows" context="dailyContext" name="nrows"/>
+                <var attribute="ncols" context="dailyContext" name="ncols"/>
+                <var attribute="xllcorner" context="dailyContext" name="xllcorner"/>
+                <var attribute="yllcorner" context="dailyContext" name="yllcorner"/>
+                <var attribute="cellsize" context="dailyContext" name="cellsize"/>
+                <var attribute="nodata" context="dailyContext" name="nodata"/>                
+            </module>
+            <module class="GBHM.IO.Parameters.EmpiricalParameters" name="empiricalParameters">
+                <var attribute="SMF" context="dailyContext" name="SMF" value="0.1"/>
+                <var attribute="SMFTMP" context="dailyContext" name="SMFTMP" value="5.0"/>
+                <var attribute="c1_factor" context="dailyContext" name="c1_factor"/>
+                <var attribute="c2_factor1" context="dailyContext" name="c2_factor1"/>
+                <var attribute="c2_factor2" context="dailyContext" name="c2_factor2"/>	
+                <var attribute="c3_factor1" context="dailyContext" name="c3_factor1" value="-0.6"/>
+                <var attribute="c3_factor2" context="dailyContext" name="c3_factor2" value="-0.6"/>
+                <var attribute="c5" context="dailyContext" name="c5" value="0.1"/>
+                <var attribute="para_r" context="dailyContext" name="para_r"/>		     
+                <var attribute="ss_f" context="dailyContext" name="ss_f" value="0.06"/>	
+                <var attribute="soil_con_f" context="dailyContext" name="soil_con_f"/>      
+            </module>
+            <module class="GBHM.IO.Parameters.SoilParameters_heihe" name="soilParameters">
+                <var attribute="wsatFile" name="wsatFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/thsgm"/>
+                <var attribute="wrsdFile" name="wrsdFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/thr"/>
+                <var attribute="alphaFile" name="alphaFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/alpha"/>
+                <var attribute="waternFile" name="waternFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/n"/>
+                <var attribute="ksatFile" name="ksatFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/k_svg"/>
+                <var attribute="elev2D" context="dailyContext" name="elev2D"/>                     
+                <var attribute="soilDepth2D" context="dailyContext" name="soilDepth2D"/>
+                <var attribute="layerDepth3D" context="dailyContext" name="layerDepth3D"/>
+                <var attribute="acquiferDepth2D" context="dailyContext" name="acquiferDepth2D"/>
+                <var attribute="wsat3D" context="dailyContext" name="wsat3D"/>
+                <var attribute="wfld3D" context="dailyContext" name="wfld3D"/>
+                <var attribute="wrsd3D" context="dailyContext" name="wrsd3D"/>
+                <var attribute="alpha3D" context="dailyContext" name="alpha3D"/>
+                <var attribute="watern3D" context="dailyContext" name="watern3D"/>
+                <var attribute="ksat3D" context="dailyContext" name="ksat3D"/> 
+                <var attribute="kg2D" context="dailyContext" name="kg2D"/>
+                <var attribute="GWcs2D" context="dailyContext" name="GWcs2D"/>
+            </module>
+            <module class="GBHM.Optimization.ParameterCalibration" name="kgCalibration">
+                <var attribute="kg_method" name="method" value="0"/>
+                <var attribute="kg_adjustor" name="adjustor" value="-0.95"/>
+                <var attribute="kg2D" context="dailyContext" name="value2D"/>
+            </module>  
+            <module class="GBHM.IO.Parameters.VegetationParameters" name="vegetationParameters">
+                <var attribute="vegeParFile" name="vegeParFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/vege_para_FAO.dat"/>   
+                <var attribute="landcode2D" context="dailyContext" name="landcode2D"/>
+                <var attribute="Kcanopy2D" context="dailyContext" name="Kcanopy2D"/>
+                <var attribute="LAImax2D" context="dailyContext" name="LAImax2D"/>
+                <var attribute="kcrop2D" context="dailyContext" name="kcrop2D"/>
+                <var attribute="root2D" context="dailyContext" name="root2D"/>
+                <var attribute="anik2D" context="dailyContext" name="anik2D"/>
+                <var attribute="Sstmax2D" context="dailyContext" name="Sstmax2D"/>
+                <var attribute="surfn2D" context="dailyContext" name="surfn2D"/>
+            </module>          
+            <module class="GBHM.IO.Parameters.RiverParameter" name="riverParameter">
+                <var attribute="kfsFile" name="kfsFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/kfs.dat"/>
+                <var attribute="riverFilePath" name="riverFilePath" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Parameter/"/>
+                <var attribute="nsub" context="dailyContext"  name="nsub"/>
+                <var attribute="upstreamID1"  context="dailyContext" name="upstreamID1"/>
+                <var attribute="upstreamID2" context="dailyContext" name="upstreamID2"/>
+                <var attribute="dx" context="dailyContext" name="dx"/>
+                <var attribute="s0" context="dailyContext" name="s0"/>
+                <var attribute="b" context="dailyContext"  name="b"/>
+                <var attribute="roughness" context="dailyContext" name="roughness"/>
+                <var attribute="Dr_river" context="dailyContext" name="Dr_river"/>
+                <var attribute="row"  context="dailyContext" name="row"/>
+                <var attribute="col"  context="dailyContext" name="col"/>
+                <var attribute="ngrid" context="dailyContext"  name="ngrid"/>
+                <var attribute="nflow"  context="dailyContext" name="nflow"/>
+                <var attribute="subName"  context="dailyContext" name="subName"/>
+            </module>
+            <module class="GBHM.IO.Inputs.OverlandInitialInput" name="overlandInitialInput">
+                <var attribute="moisturePath" name="moisturePath" value=""/>
+                <var attribute="dglPath" name="dglPath" value=""/>
+                <var attribute="GWstPath" name="GWstPath" value=""/>
+                <var attribute="CstPath" name="CstPath" value=""/>
+                <var attribute="snowPath" name="snowPath" value=""/>
+                <var attribute="sstPath" name="sstPath" value=""/>
+                <var attribute="nrows" context="dailyContext" name="nrows"/>     
+                <var attribute="ncols" context="dailyContext" name="ncols"/>            
+                <var attribute="soilDepth2D"  context="dailyContext" name="soilDepth2D"/>
+                <var attribute="layerDepth3D"  context="dailyContext" name="layerDepth3D"/>
+                <var attribute="acquiferDepth2D"  context="dailyContext" name="acquiferDepth2D"/>
+                <var attribute="GWcs2D"  context="dailyContext" name="GWcs2D"/>
+                <var attribute="wsat3D"  context="dailyContext" name="wsat3D"/>
+                <var attribute="wrsd3D" context="dailyContext"  name="wrsd3D"/>
+                <var attribute="w3D"  context="dailyContext" name="w3D"/>
+                <var attribute="dgl2D"  context="dailyContext" name="dgl2D"/>
+                <var attribute="GWst2D"  context="dailyContext" name="GWst2D"/>
+                <var attribute="Cst2D" context="dailyContext"  name="Cst2D"/>
+                <var attribute="snowdepth2D" context="dailyContext" name="snowdepth2D"/>
+                <var attribute="sst2D" context="dailyContext" name="sst2D"/>
+            </module>
+            <module class="GBHM.IO.Inputs.RiverInitialInput" name="riverInitialInput">
+                <var attribute="intervalFlowInputPath" name="intervalFlowInputPath" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Initial/intervalFlow20101231.txt"/>
+                <var attribute="b" context="dailyContext" name="b"/>
+                <var attribute="roughness" context="dailyContext" name="roughness"/>
+                <var attribute="s0" context="dailyContext" name="s0"/>
+                <var attribute="subName" context="dailyContext" name="subName"/>
+                <var attribute="nflow" context="dailyContext" name="nflow"/>
+                <var attribute="qlin1_river" context="dailyContext" name="qlin1_river"/>
+                <var attribute="q1_river" context="dailyContext" name="q1_river"/>
+                <var attribute="Drw_river" context="dailyContext" name="Drw_river"/>
+            </module>
+            <module class="GBHM.IO.Inputs.ClimateInput" name="climateInput">
+                <var attribute="rainFile" name="rainFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/prec.txt"/>
+                <var attribute="meanTempFile" name="meanTempFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/tmean.txt"/>
+                <var attribute="maxTempFile" name="maxTempFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/tmax.txt"/>
+                <var attribute="minTempFile" name="minTempFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/tmin.txt"/>
+                <var attribute="humidityFile" name="humidityFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/humidity.txt"/>
+                <var attribute="sunshineFile" name="sunshineFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/sunshine.txt"/>
+                <var attribute="windFile" name="windFile" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/Climate/wind.txt"/>
+                <var attribute="precPoints" name="precPoints"/>   
+                <var attribute="tmeanPoints" name="tmeanPoints"/>             
+                <var attribute="tmaxPoints" name="tmaxPoints"/>
+                <var attribute="tminPoints" name="tminPoints"/>
+                <var attribute="EpPoints" name="EpPoints"/>
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+            </module>
+            <module class="GBHM.Processings.WeatherDataInterpolation" name="weatherDataInterpolation">	
+                <var attribute="precPoints" name="precPoints"/>                
+                <var attribute="EpPoints" name="EpPoints"/>
+                <var attribute="tmeanPoints" name="tmeanPoints"/>
+                <var attribute="tmaxPoints" name="tmaxPoints"/>
+                <var attribute="tminPoints" name="tminPoints"/>
+                <var attribute="slopeDegree2D" name="slopeDegree2D"/>
+                <var attribute="aspect2D" name="aspect2D"/>                
+                <var attribute="prec2D" context="dailyContext" name="prec2D"/>
+                <var attribute="Ep2D" context="dailyContext" name="Ep2D"/>
+                <var attribute="tmean2D" context="dailyContext" name="tmean2D"/>
+                <var attribute="tmax2D" context="dailyContext" name="tmax2D"/>
+                <var attribute="tmin2D" context="dailyContext" name="tmin2D"/>
+                <var attribute="elevRaster" context="dailyContext" name="elevRaster"/>
+            </module>
+            <module class="GBHM.Processings.K_cali_for_Freezing_Thawing" name="k_cali_for_Freezing_Thawing">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="tmean2D" context="dailyContext" name="tmean2D"/>
+                <var attribute="ksat3D" context="dailyContext" name="ksat3D"/> 
+            </module>  
+            <module class="GBHM.IO.Parameters.Daily_LAIInput" name="lAIInput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="LAIPath" name="LAIPath" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/LAI_daily/"/>
+                <var attribute="LAI2D" context="dailyContext" name="LAI"/>
+            </module>   
+            <module class="GBHM.IO.Parameters.Daily_Fraction_of_Vegetation_Cover" name="fraction_of_Vegetation_Cover">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="FVCPath" name="FVCPath" value="/public3/home/interior/careeri/huser071/GBHM-Heihe/GBHM_HeiHe/Input/FVC_daily/"/>                
+                <var attribute="Kcanopy2D" context="dailyContext" name="FVC2D"/>
+            </module>            
+        </context>
+        <context class="net.casnw.home.model.TemporalContext" name="hourlyContext">
+            <var attribute="iteratorNum" value="24"/>
+            <module class="GBHM.Processings.TemporalDownscaling" name="temporalDownscaling">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="prec2D" context="dailyContext" name="prec_daily"/>
+                <var attribute="Ep2D" context="dailyContext" name="ep_daily"/>               
+                <var attribute="tmax2D" context="dailyContext" name="tmax_daily"/>
+                <var attribute="tmin2D" context="dailyContext" name="tmin_daily"/>
+                <var attribute="prec_hourly2D" name="prec_hourly"/>
+                <var attribute="temper_hourly2D" name="temper_hourly"/>
+                <var attribute="ep_hourly2D" name="ep_hourly"/>
+            </module>
+            <module class="GBHM.Processings.RiverToGrid" name="riverToGrid">
+                <var attribute="Drw_river" context="dailyContext" name="Drw"/>
+                <var attribute="Dr_river" context="dailyContext" name="Dr"/>
+                <var attribute="nsub" context="dailyContext" name="nsub"/>
+                <var attribute="row" context="dailyContext" name="row"/>
+                <var attribute="col" context="dailyContext" name="col"/>
+                <var attribute="ngrid" context="dailyContext" name="ngrid"/>
+                <var attribute="nflow" context="dailyContext" name="nflow"/> 
+                <var attribute="nrows" context="dailyContext" name="nrows"/>	
+                <var attribute="ncols" context="dailyContext" name="ncols"/>
+                <var attribute="nodata" context="dailyContext" name="nodata"/>
+                <var attribute="Drw_grid2D" context="hourlyContext" name="Drw_grid2D"/>
+                <var attribute="Dr_grid2D" context="hourlyContext" name="Dr_grid2D"/>
+            </module>
+            <context class="net.casnw.home.model.SpatialContext" name="overlandContext"> 
+                <var attribute="data" context="dailyContext" name="data"/>			
+                <module class="GBHM.Processings.SpatialDownscaling" name="spatialDownscaling">
+                    <var attribute="cellsize" context="dailyContext" name="cellsize"/>
+                    <var attribute="slope2D" context="dailyContext" name="slope2D"/>
+                    <var attribute="slopeLength2D" context="dailyContext" name="slopeLength2D"/>
+                    <var attribute="soilDepth2D" context="dailyContext" name="soilDepth2D"/>
+                    <var attribute="acquiferDepth2D" context="dailyContext" name="acquiferDepth2D"/>
+                    <var attribute="layerDepth3D" context="dailyContext" name="layerDepth3D"/>
+                    <var attribute="wsat3D" context="dailyContext" name="wsat3D"/>
+                    <var attribute="wfld3D" context="dailyContext" name="wfld3D"/>
+                    <var attribute="wrsd3D" context="dailyContext" name="wrsd3D"/>
+                    <var attribute="alpha3D" context="dailyContext" name="alpha3D"/>
+                    <var attribute="watern3D" context="dailyContext" name="watern3D"/>
+                    <var attribute="ksat3D" context="dailyContext" name="ksat3D"/>
+                    <var attribute="kg2D" context="dailyContext" name="kg2D"/>
+                    <var attribute="GWcs2D" context="dailyContext" name="GWcs2D"/>
+                    <var attribute="Kcanopy2D" context="dailyContext" name="Kcanopy2D"/>
+                    <var attribute="LAImax2D" context="dailyContext" name="LAImax2D"/>
+                    <var attribute="kcrop2D" context="dailyContext" name="kcrop2D"/>
+                    <var attribute="root2D" context="dailyContext" name="root2D"/>
+                    <var attribute="anik2D" context="dailyContext" name="anik2D"/>
+                    <var attribute="Sstmax2D" context="dailyContext" name="Sstmax2D"/>
+                    <var attribute="surfn2D" context="dailyContext" name="surfn2D"/>
+                    <var attribute="landcode2D" context="dailyContext" name="landcode2D"/>
+                    <var attribute="w3D" context="dailyContext" name="w3D"/>
+                    <var attribute="dgl2D" context="dailyContext" name="dgl2D"/>
+                    <var attribute="GWst2D" context="dailyContext" name="GWst2D"/>
+                    <var attribute="Cst2D" context="dailyContext" name="Cst2D"/>
+                    <var attribute="snowdepth2D" context="dailyContext" name="snowdepth2D"/>
+                    <var attribute="sst2D" context="dailyContext" name="sst2D"/>
+                    <var attribute="prec_hourly2D" context="hourlyContext" name="prec_array"/>
+                    <var attribute="ep_hourly2D" context="hourlyContext" name="Ep_array"/>
+                    <var attribute="temper_hourly2D" context="hourlyContext" name="temper_array"/>
+                    <var attribute="LAI2D" context="dailyContext" name="LAI_array"/>
+                    <var attribute="Dr_grid2D" context="hourlyContext" name="Dr_grid"/>
+                    <var attribute="Drw_grid2D" context="hourlyContext" name="Drw_grid"/>
+                    <var attribute="area" name="area"/>
+                    <var attribute="slp" name="slp"/>
+                    <var attribute="length" name="length"/>
+                    <var attribute="Ds" name="Ds"/>
+                    <var attribute="Dg" name="Dg"/>
+                    <var attribute="D" name="D"/>
+                    <var attribute="wsat" name="wsat"/>
+                    <var attribute="wfld"  name="wfld"/>
+                    <var attribute="wrsd"  name="wrsd"/>
+                    <var attribute="alpha"  name="alpha"/>
+                    <var attribute="watern"  name="watern"/>
+                    <var attribute="k0"  name="k0"/>
+                    <var attribute="kg"  name="kg"/>
+                    <var attribute="GWcs"  name="GWcs"/>
+                    <var attribute="Kcanopy"  name="Kcanopy"/>
+                    <var attribute="LAImax"  name="LAImax"/>
+                    <var attribute="kcrop"  name="kcrop"/>
+                    <var attribute="root"  name="root"/>
+                    <var attribute="anik"  name="anik"/>
+                    <var attribute="Sstmax"  name="Sstmax"/>
+                    <var attribute="surfn"  name="surfn"/>
+                    <var attribute="landuse"  name="landuse"/>
+                    <var attribute="prec" name="prec"/>
+                    <var attribute="temper" name="temper"/>
+                    <var attribute="Ep" name="Ep"/>
+                    <var attribute="Dr" name="Dr"/>
+                    <var attribute="Drw" name="Drw"/>
+                    <var attribute="LAI" name="LAI"/>
+                    <var attribute="w" name="w"/>
+                    <var attribute="dgl" name="dgl"/>
+                    <var attribute="GWst" name="GWst"/>
+                    <var attribute="Cst" name="Cst"/>
+                    <var attribute="snowdepth" name="snowdepth"/>	
+                    <var attribute="sst" name="sst"/>
+                </module>
+                <module class="GBHM.Modules.Interception" name="interception">
+                    <var attribute="Cst" name="Cst" />
+                    <var attribute="prec" name="prec"/>
+                    <var attribute="Pnet" name="Pnet"/>
+                    <var attribute="LAI" name="dLAI"/>	
+                    <var attribute="landuse" name="landuse"/>			   
+                </module>
+                <module class="GBHM.Modules.Snow" name="SnowMelt">
+                    <var attribute="temper" name="temper" />
+                    <var attribute="snowdepth" name="snow"/>
+                    <var attribute="Pnet" name="Pnet"/>		
+                    <var attribute="sst" name="sst"/>
+                    <var attribute="snowmelt" name="snowmelt"/>
+                    <var attribute="SMF" context="dailyContext" name="SMF"/>
+                    <var attribute="SMFTMP" context="dailyContext" name="SMFTMP"/>  
+                </module>
+                <module class="GBHM.Modules.ActualEvaporation0" name="evaporation">
+                    <var attribute="Ep" name="Ep"/>
+                    <var attribute="prec" name="prec"/>
+                    <var attribute="root" name="root"/>	
+                    <var attribute="D" name="D"/>	
+                    <var attribute="w" name="w"/>	
+                    <var attribute="Cst" name="Cst"/>	
+                    <var attribute="sst" name="sst"/>	
+                    <var attribute="EfromCanopy" name="EfromCanopy"/>	
+                    <var attribute="EfromCrop" name="EfromCrop"/>	
+                    <var attribute="EfromSurface" name="EfromSurface"/>	
+                    <var attribute="Eact" name="Eact"/>	
+                    <var attribute="LAI" name="dLAI"/>	
+                    <var attribute="LAImax" name="LAImax"/>	
+                    <var attribute="para_r" context="dailyContext" name="para_r"/>	
+                    <var attribute="wfld" name="wfld" />
+                    <var attribute="wrsd" name="wrsd" />  
+                    <var attribute="kcrop" name="Kc" />  
+                    <var attribute="Kcanopy" name="Kv" />  
+                </module>
+                <module class="GBHM.Modules.RechargeToGroundWater" name="rechargeToGroundWater">
+                    <var attribute="dt" context="dailyContext" name="dt" />
+                    <var attribute="Ds" name="Ds"/>
+                    <var attribute="Dg" name="Dg"/>	
+                    <var attribute="D" name="D" />
+                    <var attribute="w" name="w" />
+                    <var attribute="GWst" name="GWst" />
+                    <var attribute="dgl" name="dgl" />
+                    <var attribute="rech" name="rech" />
+                    <var attribute="wsat" name="wsat" />
+                    <var attribute="wfld" name="wfld" />
+                    <var attribute="wrsd" name="wrsd" />
+                    <var attribute="k0" name="k0" />
+                    <var attribute="watern" name="watern" />
+                    <var attribute="alpha" name="alpha" />	
+                    <var attribute="GWcs" name="GWcs"/>			   
+                </module>
+                <module class="GBHM.Modules.Infiltration" name="infiltration">
+                    <var attribute="dt" context="dailyContext" name="dt" />
+                    <var attribute="D" name="D"/>
+                    <var attribute="sst" name="sst"/>	
+                    <var attribute="w" name="w"/>	
+                    <var attribute="inf" name="inf"/>	
+                    <var attribute="k0" name="k0"/>	
+                    <var attribute="wsat" name="wsat"/>			   
+                </module>
+                <module class="GBHM.Modules.LayerInterflow" name="layerInterflow">
+                    <var attribute="dt" context="dailyContext" name="dt" />
+                    <var attribute="D" name="D"/>
+                    <var attribute="inf" name="inf"/>	
+                    <var attribute="rech" name="rech"/>	
+                    <var attribute="Ds" name="Ds"/>	
+                    <var attribute="dgl" name="dgl"/>	
+                    <var attribute="w" name="w"/>	
+                    <var attribute="sst" name="sst"/>	
+                    <var attribute="wsat" name="wsat"/>	
+                    <var attribute="wrsd" name="wrsd"/>		
+                    <var attribute="k0" name="k0"/>
+                    <var attribute="alpha" name="alpha"/>		
+                    <var attribute="watern" name="watern"/>					   
+                </module>
+                <module class="GBHM.Modules.SubsurfaceFlow" name="subsurfaceFlow">
+                    <var attribute="dt" context="dailyContext" name="dt" />
+                    <var attribute="Ds" name="Ds"/>
+                    <var attribute="Dg" name="Dg"/>	
+                    <var attribute="Dr" name="Dr"/>		
+                    <var attribute="D" name="D"/>		
+                    <var attribute="dgl" name="dgl"/>	
+                    <var attribute="Drw" name="Drw"/>		
+                    <var attribute="GWst" name="GWst"/>		
+                    <var attribute="w" name="w"/>	
+                    <var attribute="qsub" name="qsub"/>	
+                    <var attribute="groundWaterFlow" name="groundWaterFlow"/>
+                    <var attribute="lateralFlow" name="lateralFlow"/>			
+                    <var attribute="k0" name="k0"/>		
+                    <var attribute="kg" name="kg"/>	
+                    <var attribute="GWcs" name="GWcs"/>		
+                    <var attribute="length" name="length"/>		
+                    <var attribute="area" name="area"/>		
+                    <var attribute="slp" name="slope"/>	
+                    <var attribute="anik" name="anik"/>	
+                    <var attribute="wsat" name="wsat"/>	
+                    <var attribute="wfld" name="wfld"/>	
+                    <var attribute="wrsd" name="wrsd"/>	
+                    <var attribute="watern" name="watern"/>	
+                    <var attribute="ss_f" context="dailyContext" name="ss_f"/>		   
+                </module>
+                <module class="GBHM.Modules.SheetFlow" name="sheetFlow">
+                    <var attribute="dt" context="dailyContext" name="dt" />
+                    <var attribute="Dr" name="Dr"/>
+                    <var attribute="Drw" name="Drw"/>	
+                    <var attribute="sst" name="sst"/>	
+                    <var attribute="q_hillslope" name="q_hillslope"/>		
+                    <var attribute="soil_con_f" context="dailyContext" name="soil_con_f"/>	
+                    <var attribute="Sstmax" name="Sstmax"/>		
+                    <var attribute="LAI" name="LAI"/>	
+                    <var attribute="LAImax" name="LAImax"/>		
+                    <var attribute="surfn" name="surfn"/>	
+                    <var attribute="slp" name="slp"/>		
+                    <var attribute="landuse" name="landuse"/>	
+                    <var attribute="length" name="length"/>		
+                    <var attribute="area" name="area"/>				   
+                </module>
+                <module class="GBHM.Processings.Save" name="save">                
+                    <var attribute="w3D" context="dailyContext" name="w3D"/>	
+                    <var attribute="dgl2D" context="dailyContext" name="dgl2D"/>
+                    <var attribute="GWst2D" context="dailyContext" name="GWst2D"/>
+                    <var attribute="Cst2D" context="dailyContext" name="Cst2D"/>
+                    <var attribute="snowdepth2D" context="dailyContext" name="snowdepth2D"/>
+                    <var attribute="sst2D" context="dailyContext" name="sst2D"/>
+                    <var attribute="Eact2D" context="hourlyContext" name="Eact2D"/>
+                    <var attribute="qin2D" context="hourlyContext" name="qin2D"/>
+                    <var attribute="snowmelt2D" context="hourlyContext" name="snowmelt2D"/>
+                    <var attribute="soilWaterDepth2D" context="dailyContext" name="soilWaterDepth2D"/>
+                    <var attribute="ncols" context="dailyContext" name="ncols"/>
+                    <var attribute="nrows" context="dailyContext" name="nrows"/>	
+                    <var attribute="w" name="w"/>
+                    <var attribute="dgl" name="dgl"/>
+                    <var attribute="GWst" name="GWst"/>
+                    <var attribute="Cst" name="Cst"/>
+                    <var attribute="snowdepth" name="snowdepth"/>
+                    <var attribute="sst" name="sst"/>
+                    <var attribute="Eact" name="Eact"/>
+                    <var attribute="q_hillslope" name="q_hillslope"/>
+                    <var attribute="qsub" name="qsub"/>
+                    <var attribute="D" name="D"/>
+                    <var attribute="snowmelt" name="snowmelt"/>
+                </module>
+                <module class="GBHM.Processings.save2DMap" name="saveEfromSurface">               
+                    <var attribute="EfromSurface" name="value"/>	
+                    <var attribute="ncols" context="dailyContext" name="ncols"/>
+                    <var attribute="nrows" context="dailyContext" name="nrows"/>
+                    <var attribute="EfromSurface2D" context="dailyContext" name="value2D"/>
+                </module>  
+                <module class="GBHM.Processings.save2DMap" name="saveEfromCrop">               
+                    <var attribute="EfromCrop" name="value"/>	
+                    <var attribute="ncols" context="dailyContext" name="ncols"/>
+                    <var attribute="nrows" context="dailyContext" name="nrows"/>
+                    <var attribute="EfromCrop2D" context="dailyContext" name="value2D"/>
+                </module>  
+                <module class="GBHM.Processings.FlowSeparation" name="flowSeparation">
+                    <var attribute="flowSeparationOutFile" name="flowSeparationOutFile" value="GBHM_HeiHe/Output2001-2011/flowSeparation.txt"/>
+                    <var attribute="currentDate" context="dailyContext" name="currentDate"/>                   
+                    <var attribute="groundWaterFlow" name="groundWaterFlow"/>
+                    <var attribute="lateralFlow" name="lateralFlow"/>	
+                    <var attribute="q_hillslope" name="q_hillslope"/>
+                </module>
+            </context>
+            <context class="net.casnw.home.model.Context" name="riverContext">
+                <module class="GBHM.Modules.Routing" name="routing">
+                    <var attribute="dt" context="dailyContext" name="dt"/>
+                    <var attribute="qin2D" context="hourlyContext" name="qin"/>
+                    <var attribute="nsub" context="dailyContext" name="nsub"/>
+                    <var attribute="upstreamID1" context="dailyContext" name="upstreamID1"/>
+                    <var attribute="upstreamID2" context="dailyContext" name="upstreamID2"/>
+                    <var attribute="dx" context="dailyContext" name="dx"/>
+                    <var attribute="s0" context="dailyContext" name="s0"/>
+                    <var attribute="b" context="dailyContext" name="b"/>
+                    <var attribute="roughness" context="dailyContext" name="roughness"/>
+                    <var attribute="row" context="dailyContext" name="row"/>
+                    <var attribute="col" context="dailyContext" name="col"/>
+                    <var attribute="ngrid" context="dailyContext" name="ngrid"/>
+                    <var attribute="nflow" context="dailyContext" name="nflow"/>
+                    <var attribute="Dr_river" context="dailyContext" name="Dr"/>
+                    <var attribute="q1_river" context="dailyContext" name="q1"/>
+                    <var attribute="q2_river" context="hourlyContext" name="q2"/>
+                    <var attribute="Drw_river" context="dailyContext" name="Drw"/>
+                    <var attribute="qlin1_river" context="dailyContext" name="qlin1"/>
+                </module>
+                <module class="GBHM.Processings.DailyResults" name="dailyResults">
+                    <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                    <var attribute="Eact2D" context="hourlyContext" name="Eact2D"/>
+                    <var attribute="qin2D" context="hourlyContext" name="qin2D"/>
+                    <var attribute="snowmelt2D" context="hourlyContext" name="snowmelt2D"/>
+                    <var attribute="q2_river" context="hourlyContext" name="discharge"/>
+                    <var attribute="nsub" context="dailyContext" name="nsub"/>
+                    <var attribute="nflow" context="dailyContext" name="nflow"/>
+                    <var attribute="Eact_daily2D" context="dailyContext" name="Eact_daily2D"/>
+                    <var attribute="qin_daily2D" context="dailyContext" name="qin_daily2D"/>
+                    <var attribute="snowmelt_daily2D" context="dailyContext" name="snowmelt_daily2D"/>
+                    <var attribute="discharge_daily" context="dailyContext" name="discharge_daily"/>           
+                </module>   
+                <module class="GBHM.Processings.DailyStats" name="dailyStatsEfromSurface">
+                    <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                    <var attribute="EfromSurface2D" context="dailyContext" name="value2D_h"/>
+                    <var attribute="EfromSurface2D_daily" context="dailyContext" name="value2D_d"/>
+                </module>
+                <module class="GBHM.Processings.DailyStats" name="dailyStatsEfromCrop">
+                    <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                    <var attribute="EfromCrop2D" context="dailyContext" name="value2D_h"/>
+                    <var attribute="EfromCrop2D_daily" context="dailyContext" name="value2D_d"/>
+                </module>
+            </context> 
+        </context> 
+        <context class="net.casnw.home.model.Context" name="outputContext">   
+            <module class="GBHM.IO.Outputs.DailyOutput" name="dailyOutput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="data" context="dailyContext" name="baseArray"/>
+                <var attribute="precOutPath" name="precOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/Prec"/>
+                <var attribute="eactOutPath" name="eactOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/Eact"/>
+                <var attribute="runoffOutPath" name="runoffOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/runoff"/>
+                <var attribute="snowmeltOutPath" name="snowmeltOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/snowmelt"/>
+                <var attribute="MoistureOutPath" name="MoistureOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/soilMoisture"/>
+                <var attribute="dglOutPath" name="dglOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/dgl"/>
+                <var attribute="GWstOutPath" name="GWstOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/GWst"/>
+                <var attribute="CstOutPath" name="CstOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/Cst"/>
+                <var attribute="snowOutPath" name="snowOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/snowDepth"/>
+                <var attribute="sstOutPath" name="sstOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/sst"/>
+                <var attribute="soilWaterDepthOutPath" name="soilWaterDepthOutPath" value="GBHM_HeiHe/Output2001-2011/Grids/soilWaterDepth"/>
+                <var attribute="prec2D" context="dailyContext" name="prec"/>
+                <var attribute="Eact_daily2D" context="dailyContext" name="Eact"/>
+                <var attribute="qin_daily2D" context="dailyContext" name="qin"/>
+                <var attribute="snowmelt_daily2D" context="dailyContext" name="snowmelt"/>
+                <var attribute="w3D" context="dailyContext" name="w"/>
+                <var attribute="dgl2D" context="dailyContext" name="dgl"/>
+                <var attribute="GWst2D" context="dailyContext" name="GWst"/>
+                <var attribute="Cst2D" context="dailyContext" name="Cst"/>
+                <var attribute="snowdepth2D" context="dailyContext" name="snowdepth"/>
+                <var attribute="sst2D" context="dailyContext" name="sst"/>
+                <var attribute="soilWaterDepth2D" context="dailyContext" name="soilWaterDepth"/>
+                <var attribute="ncols" context="dailyContext" name="ncols"/>
+                <var attribute="nrows" context="dailyContext" name="nrows"/>
+                <var attribute="xllcorner" context="dailyContext" name="xllcorner"/>
+                <var attribute="yllcorner" context="dailyContext" name="yllcorner"/>
+                <var attribute="cellsize" context="dailyContext" name="cellsize"/>
+                <var attribute="nodata" context="dailyContext" name="nodata"/>
+            </module>
+            <module class="GBHM.IO.Outputs.AsciiGridOutput" name="EfromSurfaceOutput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="data" context="dailyContext" name="baseMap"/>
+                <var attribute="EfromSurfaceOutPath" name="OutputPath" value="GBHM_HeiHe/Output2001-2011/Grids/EfromSurface"/>
+                <var attribute="ncols" context="dailyContext" name="ncols"/>
+                <var attribute="nrows" context="dailyContext" name="nrows"/>
+                <var attribute="xllcorner" context="dailyContext" name="xllcorner"/>
+                <var attribute="yllcorner" context="dailyContext" name="yllcorner"/>
+                <var attribute="cellsize" context="dailyContext" name="cellsize"/>
+                <var attribute="nodata" context="dailyContext" name="nodata"/>
+                <var attribute="EfromSurface2D_daily" context="dailyContext" name="value"/>
+            </module>
+            <module class="GBHM.IO.Outputs.AsciiGridOutput" name="EfromCropOutput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="data" context="dailyContext" name="baseMap"/>
+                <var attribute="EfromCropOutPath" name="OutputPath" value="GBHM_HeiHe/Output2001-2011/Grids/EfromCrop"/>
+                <var attribute="ncols" context="dailyContext" name="ncols"/>
+                <var attribute="nrows" context="dailyContext" name="nrows"/>
+                <var attribute="xllcorner" context="dailyContext" name="xllcorner"/>
+                <var attribute="yllcorner" context="dailyContext" name="yllcorner"/>
+                <var attribute="cellsize" context="dailyContext" name="cellsize"/>
+                <var attribute="nodata" context="dailyContext" name="nodata"/>
+                <var attribute="EfromCrop2D_daily" context="dailyContext" name="value"/>
+            </module>
+            <module class="GBHM.IO.Outputs.DischargeOutput" name="dischargeOutput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="dischargeOutputPath" name="dischargeOutputPath" value="GBHM_HeiHe/Output2001-2011/discharge.txt"/>
+                <var attribute="discharge_daily" context="dailyContext" name="discharge"/>               
+                <var attribute="nsub" context="dailyContext" name="nsub"/>
+                <var attribute="nflow" context="dailyContext" name="nflow"/>
+            </module>      
+            <module class="GBHM.IO.Outputs.FlowAtIntervalsOutput" name="flowAtIntervalsOutput">
+                <var attribute="currentDate" context="dailyContext" name="currentDate"/>
+                <var attribute="intervalFlowOutputPath" name="intervalFlowOutputPath" value="GBHM_HeiHe/Output2001-2011/Discharge/intervalFlow"/>
+                <var attribute="discharge_daily" context="dailyContext" name="discharge"/>               
+                <var attribute="nsub" context="dailyContext" name="nsub"/>
+                <var attribute="nflow" context="dailyContext" name="nflow"/>
+                <var attribute="subName"  context="dailyContext" name="subName"/>
+            </module>          		
+        </context>     
+    </context>   
+</model>

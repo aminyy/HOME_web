@@ -1,0 +1,149 @@
+<div class='list-group-item active' style="padding-bottom: 0px; padding-top: 10px; border-top-width: 0px; padding-bottom: 0px; padding-top: 10px; border-top-width: 0px; margin-bottom: 15px;">
+	<p>上传文件</p>
+</div>
+<div class="form-group">
+	<label for="inputFile2" class="col-sm-4 col-md-3 col-lg-2 control-label">上传文件</label>
+		<div class="col-sm-4 col-md-6 col-lg-8">
+						<button id="browse" type="button" class="btn btn-large btn-info">选择</button>
+        				<button id="start_upload" type="button" class="btn btn-large btn-info">上传</button>
+        				<table class="table" id="upfiles_table">
+   						<!-- <caption>上传文件列表</caption> -->
+   						<thead>
+      						<tr>
+         						<th>文件名称</th>
+         						<th>文件大小</th>
+        						<th>上传进度</th>
+      						</tr>
+   						</thead>
+   							<tbody id="file_lists">
+   						</tbody>
+						</table>
+		</div>
+		<div class="col-sm-4 col-md-6 col-lg-8" id="upfiles"></div>
+</div>
+
+<script type="text/javascript">
+	$("#upfiles_table").hide();
+	function deletefile(file_id){
+		 
+		 for(var i in uploader.files){
+			
+			if(uploader.files[i].id === file_id.id){
+				var toremove = i;
+		 	} 
+		}
+		
+		uploader.splice(toremove, 1); 
+		
+		
+	}
+	/* function prepareArgument(filename){	
+		alert("ceshi");
+		var index=filename.split(".").length-1
+		var extendname=filename.split(".")[index]
+		if(extendname==="dat"){
+		$("#argumentID").val(filename);}//最简单版本
+	}  */
+    //实例化一个plupload上传对象
+    var uploader = new plupload.Uploader({
+        browse_button : 'browse', //触发文件选择对话框的按钮，为那个元素id
+        url : '/portal/jobfarm/upload?time='+(new Date()).getTime(), //服务器端的上传页面地址
+        headers:{"X-CSRFToken":getCookie('csrftoken')},
+        flash_swf_url : '../js/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : '../js/Moxie.xap' ,//silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        filters: {
+        	prevent_duplicates:true
+        }
+    });    
+	
+
+    //在实例对象上调用init()方法进行初始化
+    uploader.init();
+    
+    
+    //绑定各种事件，并在事件监听函数中做你想做的事
+    uploader.bind('QueueChanged',function(uploader){
+    	if(uploader.files.length==0){
+    		$("#upfiles_table").hide();
+    	}		
+    })
+    uploader.bind('FilesAdded',function(uploader,files){
+    	
+    	
+    	$("#upfiles_table").show();
+        var lists = document.getElementById('file_lists');
+     
+        plupload.each(files, function(file) {
+        	
+                    var id="progressbar"+file.id;
+        			var content="<td class="+file.id+">"+file.name+"</td>"+"\n"+
+        						      "<td class="+file.id+">"+file.size+"</td>"+"\n"+
+        						      "<td class="+file.id+"><div id="+id+' style="height:15px;border-style:none;border-width:1px;"><div id="'+file.id+'" class="progress-label"></div><p>waiting</p></div></td>'+"\n"+
+        						      "<td class="+file.id+"><span class=\"glyphicon glyphicon-remove-circle\" style=\"color: rgb(255, 61, 48);\"onclick='deletefile("+file.id+")'> </span></td>";
+        						      //"<td class="+file.id+"><button class='btn btn-default btn-xs' type='button' onclick='deletefile("+file.id+")'><span class=\"glyphicon glyphicon-remove-circle\" style=\"color: rgb(255, 61, 48);\"> </span></button></td>";
+        			lists.innerHTML +=content;				   				   
+                    
+        });
+        
+        //每个事件监听函数都会传入一些很有用的参数，
+        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
+    });
+    uploader.bind('FilesRemoved',function(uploader,files){
+    	progressbar = $( "."+files[0].id );
+    	progressbar.remove();
+    })
+    uploader.bind('BeforeUpload',function(uploader,file){
+    	
+    	$(function() {
+    		progressbar = $( "#progressbar"+file.id );
+    		progressLabel = $( "#"+file.id+".progress-label" );
+    		$( "#progressbar"+file.id+" p" ).remove();
+    		progressLabel.innerHTML='加载...';
+    		progressbar.progressbar({
+      			value:0,
+      		    change: function() {
+        		    progressLabel.text( progressbar.progressbar( "value" ) + "%" );
+      			},
+      			complete: function() {
+        	        progressLabel.text( "99%" );
+      	    }})
+
+    });
+    uploader.bind('UploadProgress',function(uploader,file){
+    	$(function() {
+    		progressbar = $( "#progressbar"+file.id );
+    		var val = progressbar.progressbar( "value" ) || 0;
+    		progressbar.progressbar( "value", val +file.percent-1 );
+      	})
+    })
+        //每个事件监听函数都会传入一些很有用的参数，
+        //我们可以利用这些参数提供的信息来做比如更新UI，提示上传进度等操作
+    });
+    uploader.bind('FileUploaded',function(up,file,info){
+    	 var res=JSON.parse(info.response)
+         var status=res.status
+         if(status=="ok"){
+         	progressLabel = $( "#"+file.id+".progress-label" );
+         	progressLabel.text("100%");
+         	//var upfiles = document.getElementById('upfiles');
+            $("td."+file.id+" span").attr({"class":"glyphicon glyphicon-ok-circle","style":"color:rgb(64,219,131)"})
+         	//global_cao_application_data_infiles_num++;
+         	//var num=String(global_cao_application_data_infiles_num);
+         	$('#filestree').tree('reload')
+         	
+           // upfiles.innerHTML += "<input class='filename' type='hidden' value="+res.filename+" name='upfileNum"+num+"_name'>"+
+            //					 "<input class='filepath' type='hidden' value="+res.filepath+" name='upfileNum"+num+"_path'>"
+         }
+         else{
+         	progressLabel.text("failed");
+         }
+                
+    });
+    //最后给"开始上传"按钮注册事件
+    document.getElementById('start_upload').onclick = function(){
+        
+        uploader.start(); //调用实例对象的start()方法开始上传文件，当然你也可以在其他地方调用该方法
+    }
+
+ </script>
+					

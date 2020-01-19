@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.ParameterIO_hru" name="ParameterIO_hru" author="hzfwhy@lzb.ac.cn" keyword="parameter" description="parameter input">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="carea_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum contributing area Maximum possible area contributing to surface runoff  expressed as a portion of the HRU area"/>
+    <var name="cov_type" dataType="PoolDoubleArray" size="0" unit="" description="Vegetation cover type designation for HRU (0=bare soil; 1=grasses; 2=shrubs; 3=trees"/>
+    <var name="covden_sum" dataType="PoolDoubleArray" size="0" unit="" description="Summer vegetation cover density for the major vegetation type on each HRU. [intcp]"/>
+    <var name="covden_win" dataType="PoolDoubleArray" size="0" unit="" description="Winter vegetation cover density for the major vegetation type on each HRU"/>
+    <var name="dprst_pct_open" dataType="PoolDoubleArray" size="0" unit="" description="Decimal fraction of depression storage area that can flow to a stream channel. Amount of flow is a  function of storage."/>
+    <var name="frozen" dataType="PoolIntegerArray" size="0" unit="" description="Flag for frozen ground (0=no; 1=yes)."/>
+    <var name=" groundmelt" dataType="PoolDoubleArray" size="0" unit="" description="Amount of snowpack-water that melts each day to soils"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Amount of snowpack-water that melts each day to soils"/>
+    <var name="hru_deplcrv" dataType="PoolIntegerArray" size="0" unit="" description="  Index number for the snowpack areal depletion curve associated with an HRU"/>
+    <var name="hru_elev" dataType="PoolDoubleArray" size="0" unit="" description="  Mean elevation for each HRU  "/>
+    <var name="hru_deplcrv" dataType="PoolIntegerArray" size="0" unit="" description="Index of groundwater reservoir assigned to HRU Index of groundwater reservoir receiving excess soil  water from each HRU"/>
+    <var name="hru_percent_dprst" dataType="PoolDoubleArray" size="0" unit="" description="HRU depression storage area as a decimal percent of the total HRU area"/>
+    <var name="hru_percent_imperv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is impervious"/>
+    <var name="hru_psta" dataType="PoolIntegerArray" size="0" unit="" description="Index of the base precipitation station used for lapse rate calculations for each HRU"/>
+    <var name="hru_radpl" dataType="PoolIntegerArray" size="0" unit="" description="Index of the radiation plane used to compute solar radiation for a given HRU"/>
+    <var name="hru_solsta" dataType="PoolIntegerArray" size="0" unit="" description="Index of solar radiation station associated with each HRU"/>
+    <var name="hru_ssres" dataType="PoolIntegerArray" size="0" unit="" description="Index of subsurface reservoir receiving excess water from HRU soil zone"/>
+    <var name="hru_tsta" dataType="PoolIntegerArray" size="0" unit="" description="Index of the base temperature station used for lapse  rate calculations"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description=" HRU maximum impervious area retention storage Maximum impervious area retention storage for each HRU"/>
+    <var name="imperv_stor_max" dataType="PoolIntegerArray" size="0" unit="" description=" HRU maximum impervious area retention storage Maximum impervious area retention storage for each HRU"/>
+    <var name="jh_coef_hru" dataType="PoolIntegerArray" size="0" unit="" description=" Jensen-Haise Air temperature coefficient used in Jensen-Haise potential  evapotranspiration &quot; +
+     &quot;computations for each HRU.  See PRMS  manual for calculation method"/>
+    <var name="pkwater_equiv" dataType="PoolIntegerArray" size="0" unit="" description=" Snowpack water equivalent on an HRU. [snow]"/>
+    <var name="rad_trncf" dataType="PoolDoubleArray" size="0" unit="" description="inputParameter rad_trncf"/>
+    <var name="smidx_coef" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient in contributing area computations Coefficient in non-linear contributing area algorithm.  Equation used is: contributing area = smidx_coef *  10.**(smidx_exp*smidx) where smidx is soil_moist +  .5 * ppt_net&quot;)Unit(&quot;decimal fraction)"/>
+    <var name="smidx_exp" dataType="PoolDoubleArray" size="0" unit="" description="Exponent in contributing area computations Exponent in non-linear contributing area algorithm.  Equation used is: contributing area = smidx_coef *  10.**(smidx_exp*smidx) where smidx is soil_moist +  .5 * ppt_net"/>
+    <var name="snarea_thresh" dataType="PoolDoubleArray" size="0" unit="" description="If maximum temperature of an HRU is less than or equal to this value, precipitation is assumed to be snow"/>
+    <var name="snow_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Snow interception storage capacity for the major vegetation type in each HRU"/>
+    <var name="snowinfil_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum snow infiltration per day Maximum snow infiltration per day"/>
+    <var name="soil2gw_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum snow infiltration per day Maximum snow infiltration per day"/>
+    <var name="soil_moist_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial value of available water in soil profile"/>
+    <var name="soil_moist_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum available water holding capacity of soil profile.  Soil profile is surface to bottom of rooting zone"/>
+    <var name="soil_moist_srunoff" dataType="PoolDoubleArray" size="0" unit="" description="soil_moist_srunoff"/>
+    <var name="soil_rechr_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial value for soil recharge zone (upper part of  soil_moist).  Must be less than or equal to soil_moist_init"/>
+    <var name="soil_rechr_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum value for soil recharge zone (upper portion  of soil_moist where losses occur as both evaporation  and transpiration"/>
+    <var name="soil_type" dataType="PoolDoubleArray" size="0" unit="" description="HRU soil type (1=sand; 2=loam; 3=clay)"/>
+    <var name="srain_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Winter rain interception storage capacity for the major vegetation type in the HRU"/>
+    <var name="tmax_adj" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment to maximum temperature for each HRU, estimated  based on slope and aspect"/>
+    <var name="tmin_adj" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment to minimum temperature for each HRU, estimated  based on slope and aspect"/>
+    <var name="transp_beg" dataType="PoolIntegerArray" size="0" unit="" description="Month to begin summing tmaxf for each HRU; when sum is  &gt;= to transp_tmax, transpiration begins"/>
+    <var name="transp_end" dataType="PoolIntegerArray" size="0" unit="" description="Month to stop transpiration computations;  transpiration is computed thru end of previous month"/>
+    <var name="transp_tmax" dataType="PoolDoubleArray" size="0" unit="" description="Temperature index to determine the specific date of the  start of the transpiration)"/>
+    <var name="wrain_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Winter rain interception storage capacity for the major vegetation type in the HRU"/>
+    <var name="hruparameterInputPath" dataType="PoolDoubleArray" size="0" unit="" description="hruparameterInputPath"/>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+  </varMeta>
+</moduleMeta>

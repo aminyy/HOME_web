@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.model.TemporalContext" name="TemporalContext" author="home" keyword="Temporal,Context" description="control time loop">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="startTime" dataType="PoolString" size="0" unit="" description="start time"/>
+    <var name="endTime" dataType="PoolString" size="0" unit="" description="end time"/>
+    <var name="intervalUnit" dataType="PoolString" size="0" unit="" description="interval Unit,like year,month,day,hour,minute,default value is minute"/>
+    <var name="intervalCount" dataType="PoolInteger" size="0" unit="" description="interval count"/>
+    <var name="iteratorNum" dataType="PoolLong" size="0" unit="" description="iterator number"/>
+  </varMeta>
+</moduleMeta>

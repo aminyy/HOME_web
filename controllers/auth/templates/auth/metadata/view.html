@@ -1,0 +1,400 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.metadata" -%}
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+    <link href="/static/assets/components/blueimp-file-upload/css/jquery.fileupload.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/assets/components/bootstrap-tokenfield/dist/css/bootstrap-tokenfield.min.css"/>
+    <link href="/static/assets/components/bootstrap-select/dist/css/bootstrap-select.css" rel="stylesheet"/>
+    <style type="text/css">
+        .popbox {
+            width: 276px;
+            position: relative;
+        }
+
+        .popover {
+            width: 276px !important;
+        }
+
+        .popover-content {
+            width: 276px !important;
+        }
+
+        .form-group .input-group {
+            margin-bottom: 10px;
+        }
+
+        .ds_thumb-small {
+            max-width: 200px;
+        }
+
+        table {
+            table-layout: fixed !important;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+
+    <div class="body-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                {% include 'auth/nav_tabs.html' %}
+            </div>
+            <div class="col-md-12" style="margin-top: 20px;">
+                <div style="margin-bottom: 15px; text-align: right;">
+
+                    <a href="/manage/metadata/copy/{{ meta.id }}" class="btn btn-success ">Copy</a>
+                    <a href="/manage/metadata/edit/{{ meta.id }}" class="btn btn-info">Edit</a>
+                    <a href="javascript:deleteMeta('{{ meta.id }}')" class="btn btn-danger">delete</a>
+                    <a href="/manage/metadata/{{ meta.id }}/data" class="btn btn-info">data</a>
+
+                    <div class="clearfix"></div>
+                </div>
+
+
+                <div>
+                    <table class="table table-bordered">
+                        <tbody>
+
+                        <tr>
+                            <th colspan="2">中文标题</th>
+                            <td colspan="6">{{ meta.title_cn or '' }}</td>
+                            <th colspan="2">数据分类</th>
+                            <td colspan="2">{{ meta.ds_category or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">英文标题</th>
+                            <td colspan="6">{{ meta.title_en or '' }}</td>
+                            <th colspan="2">元数据编码</th>
+                            <td colspan="2">{{ meta.meta_code or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据集摘要</th>
+                            <td colspan="10">{{ meta.ds_abstract |safe or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据源描述</th>
+                            <td colspan="10">{{ meta.ds_source or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据加工方法</th>
+                            <td colspan="10">{{ meta.ds_process_way or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据质量描述</th>
+                            <td colspan="10">{{ meta.ds_quality or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">采集时间</th>
+                            <td colspan="10">{{ meta.ds_acq_start_time|dt(fmt='%Y/%m/%d') or '' }}&nbsp; -
+                                &nbsp;{{ meta.ds_acq_end_time|dt(fmt='%Y/%m/%d') or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">采集地点</th>
+                            <td colspan="10">{{ meta.ds_acq_place }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">地理范围东</th>
+                            <td colspan="2">{{ meta.ds_acq_lon_east|degree or '' }}</td>
+                            <th colspan="2">地理范围西</th>
+                            <td colspan="2">{{ meta.ds_acq_lon_west|degree or '' }}</td>
+                            <th colspan="2">海拔下界(m)</th>
+                            <td colspan="2">{{ meta.ds_acq_alt_low or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">地理范围南</th>
+                            <td colspan="2">{{ meta.ds_acq_lat_south|degree or '' }}</td>
+                            <th colspan="2">地理范围北</th>
+                            <td colspan="2">{{ meta.ds_acq_lat_north|degree or '' }}</td>
+                            <th colspan="2">海拔上界(m)</th>
+                            <td colspan="2">{{ meta.ds_acq_alt_high or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据格式</th>
+                            <td colspan="10">{{ meta.ds_format or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据空间分辨率(/米)</th>
+                            <td colspan="6">{{ meta.ds_space_res or '' }}</td>
+                            <th colspan="2">数据时间分辨率</th>
+                            <td colspan="2">{{ meta.ds_time_res or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">地理坐标系</th>
+                            <td colspan="6">{{ meta.ds_coordinate or '' }}</td>
+                            <th colspan="2">投影方式</th>
+                            <td colspan="2">{{ meta.ds_projection or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">缩略图
+                                <div style="padding:2em">
+                                    <a class="btn btn-primary btn-sm" data-toggle="modal" data-target="#dlgAddThumb">上传缩略图</a>
+                                </div>
+                            </th>
+                            <td colspan="10">
+                                <a target="_blank"
+                                   href="{{ url_for('manage.get_ds_thumb', meta_id=meta.id) }}?w=120&h=90&v={{ meta.updated|dt('%f') }}">
+                                    <img alt="数据集缩略图" class="ds_thumb-small"
+                                         src="{{ url_for('manage.get_ds_thumb', meta_id=meta.id) }}?v={{ meta.updated|dt('%f') }}">
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">主题标签</th>
+                            <td colspan="10">{{ meta.ds_topic_tags | join(",", attribute="text") }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">学科标签</th>
+                            <td colspan="10">{{ meta.ds_subject_tags | join(",", attribute="text") }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">分类标签</th>
+                            <td colspan="10">{{ meta.ds_class_tags | join(",", attribute="text") }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">时间标签</th>
+                            <td colspan="10">{{ meta.ds_time_tags | join(",", attribute="text") }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">地点标签</th>
+                            <td colspan="10">{{ meta.ds_locus_tags | join(",", attribute="text") }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">项目支持信息</th>
+                            <td colspan="10">
+                                {% if meta.ds_projects %}
+                                    <table class="table ">
+                                        <thead>
+                                        <tr>
+                                            <th>项目编号</th>
+                                            <th>项目名称</th>
+                                            <th>项目类型</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for project in meta.ds_projects %}
+                                            <tr data-pid="{{ project.id }}">
+                                                <td>{{ project.code or '' }}</td>
+                                                <td>{{ project.title  or '' }}</td>
+                                                <td>{{ project.category  or '' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据贡献者</th>
+                            <td colspan="10">
+                                {% if meta.ds_contributors %}
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>单位</th>
+                                            <th>邮箱</th>
+                                            <th>电话</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for contributor in meta.ds_contributors %}
+                                            <tr data-pid="{{ contributor.id }}">
+                                                <td>{{ contributor.true_name or '' }}</td>
+                                                <td>{{ contributor.unit or '' }}</td>
+                                                <td>{{ contributor.mailbox or '' }}</td>
+                                                <td>{{ contributor.phone_code or '' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">元数据作者</th>
+                            <td colspan="10">
+                                {% if meta.ds_meta_authors %}
+                                    <table class="table ">
+                                        <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>单位</th>
+                                            <th>邮箱</th>
+                                            <th>电话</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for author in meta.ds_meta_authors %}
+                                            <tr data-pid="{{ author.id }}">
+                                                <td>{{ author.true_name or '' }}</td>
+                                                <td>{{ author.unit or '' }}</td>
+                                                <td>{{ author.mailbox or '' }}</td>
+                                                <td>{{ author.phone_code or '' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据管理者</th>
+                            <td colspan="10">
+                                {% if meta.ds_managers %}
+                                    <table class="table ">
+                                        <thead>
+                                        <tr>
+                                            <th>姓名</th>
+                                            <th>单位</th>
+                                            <th>邮箱</th>
+                                            <th>电话</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for manager in meta.ds_managers %}
+                                            <tr data-pid="{{ manager.id }}">
+                                                <td>{{ manager.true_name or '' }}</td>
+                                                <td>{{ manager.unit or '' }}</td>
+                                                <td>{{ manager.mailbox or '' }}</td>
+                                                <td>{{ manager.phone_code or '' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据应用成果</th>
+                            <td colspan="10">
+                                {% if meta.ds_outcomes %}
+                                    <table class="table">
+                                        <thead>
+                                        <tr>
+                                            <th>类别</th>
+                                            <th>作者</th>
+                                            <th>标题</th>
+                                            <th>年份</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for outcome in meta.ds_outcomes %}
+                                            <tr data-pid="{{ outcome.id }}">
+                                                <td>{{ outcome.category or '' }}</td>
+                                                <td>{{ outcome.author or '' }}</td>
+                                                <td>{{ outcome.title  or '' }}</td>
+                                                <td>{{ outcome.in_year or '' }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据共享方式</th>
+                            <td colspan="2">{{ meta.ds_share_type or '' }}</td>
+                            <th colspan="2">数据量(M字节)</th>
+                            <td colspan="2">{{ meta.ds_total_size or '' }}</td>
+                            <th colspan="2">数据质量等级</th>
+                            <td colspan="2">{{ meta.ds_quality_level or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据引用方式</th>
+                            <td colspan="10">{{ meta.ds_ref_way |safe or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据使用说明</th>
+                            <td colspan="10">{{ meta.ds_ref_instruction or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据来源站点</th>
+                            <td colspan="4">{{ meta.ds_from_station or '' }}</td>
+                            <th colspan="2">数据服务联系人</th>
+                            <td colspan="4">{{ meta.ds_serv_man or '' }}</td>
+                        </tr>
+                        <tr>
+                            <th colspan="2">数据服务电话</th>
+                            <td colspan="4">{{ meta.ds_serv_phone or '' }}</td>
+                            <th colspan="2">数据服务邮箱</th>
+                            <td colspan="4">{{ meta.ds_serv_mail or '' }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="dlgAddThumb" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <form id="formAddThumb" class="from form-horizontal form-validate"
+                  action="/manage/metadata/{{ meta.id }}/add_thumb"
+                  method="POST"
+                  enctype="multipart/form-data" onsubmit="onSubmitAddThumbForm()">
+                <fieldset>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">上传缩略图</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="form-group" style="padding:15px">
+                                <input type="file" id="exampleInputFile" class="form-control filestyle"
+                                       name="file_thumbnail" data-buttonBefore="true"
+                                       data-buttonText="选择图片"
+                                       accept="image/jpeg,image/png,image/gif">
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                            <button type="submit" class="btn btn-primary"><i class="fa fa-fw fa-save"></i>&nbsp;保存
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </fieldset>
+            </form>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block foot_script %}
+    <script type="text/javascript"
+            src="/static/assets/components/bootstrap-tokenfield/dist/bootstrap-tokenfield.min.js"></script>
+    <script type="text/javascript">
+        var onSubmitAddThumbForm = function () {
+            var elem = $("#formAddThumb [name=file_thumbnail]");
+            console.log("vv:", !!elem.val());
+            return !!elem.val();
+        };
+
+        var deleteMeta = function (mid) {
+            bootbox.confirm("你确定要删除选定的元数据？", function (yes) {
+                if (yes) {
+                    $.post('{{ url_for('manage.ds_delete') }}', {id: mid}, function (data) {
+                        if (data.success) {
+                            bootbox.alert("删除成功", function () {
+                                loadPage(1);
+                            });
+                        } else {
+                            bootbox.alert("删除失败");
+                        }
+                    }, 'JSON');
+                }
+            });
+        };
+
+        $(function () {
+            $(".btn-thumb-popover").popover({
+                html: true,
+                content: "<img class='ds_thumb-small' src={{ url_for('manage.get_ds_thumb', meta_id=meta.id) }} alt='数据集缩略图' />"
+            });
+            $(".tokenfield").tokenfield();
+        });
+
+    </script>
+{% endblock %}

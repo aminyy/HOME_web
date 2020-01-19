@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.EmpiricalParameters" name="empiricalParameters" author="longyinping11@lzb.ac.cn" keyword="empirical parameter" description="setting values for empirical parameters">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="SMF" dataType="PoolDouble" size="0" unit="" description="snowmelt factor"/>
+    <var name="SMFTMP" dataType="PoolDouble" size="0" unit="" description="temperature above which snowmelt happens (degree C)"/>
+    <var name="c1_factor" dataType="PoolDouble" size="0" unit="" description="factor used to calculate c1, and c1 is used in reference evaporation calculation"/>
+    <var name="c2_factor1" dataType="PoolDouble" size="0" unit="" description="factor used to calculate c2, and c2 is used in reference evaporation calculation"/>
+    <var name="c2_factor2" dataType="PoolDouble" size="0" unit="" description="factor used to calculate c2, and c2 is used in reference evaporation calculation"/>
+    <var name="c3_factor1" dataType="PoolDouble" size="0" unit="" description="factor used to calculate c3, and c3 is used in reference evaporation calculation"/>
+    <var name="c3_factor2" dataType="PoolDouble" size="0" unit="" description="factor used to calculate c3, and c3 is used in reference evaporation calculation"/>
+    <var name="c5" dataType="PoolDouble" size="0" unit="" description="factor used in reference evaporation calculation"/>
+    <var name="para_r" dataType="PoolDouble" size="0" unit="" description="root density ratio of deepest soil layer"/>
+    <var name="ss_f" dataType="PoolDouble" size="0" unit="" description="slope shape (concave or convex) factor,0.03 is for linear or convex slope"/>
+    <var name="soil_con_f" dataType="PoolDouble" size="0" unit="" description="soil water conservation factor"/>
+  </varMeta>
+</moduleMeta>

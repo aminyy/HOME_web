@@ -1,0 +1,460 @@
+<ul class="list-group v-menu">
+    <li class="list-group-head"><i class="glyphicon glyphicon-play"></i>&nbsp;模型库</li>
+    <li class="list-group-item {{ 'current' if active_page=='jobfarm_index' else '' }}"><a
+            href="{{ url_for('portal.jobfarm') }}">模型库资源</a></li>
+    <li class="list-group-item {{ 'current' if active_page=='jobfarm_mymodels' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_mymodels') }}">用户模型管理</a></li>
+    <li class="list-group-head"><span><i class="glyphicon glyphicon-play"></i>&nbsp;作业管理</span></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_history' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_history') }}">查找作业</a></li>
+    <li class="list-group-head  {{ 'current' if active_page=='jobfarm_apps' else '' }}"><span><i
+            class="glyphicon glyphicon-play"></i>&nbsp;应用列表</span></li>
+    <li class="list-group-item {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_apps') }}">全部</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href=" {{ url_for('portal.jobfarm_app', appname='VIC') }} ">VIC</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='Noah_LSM') }}">Noah_LSM</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='TOURISTSOURCE') }}">TOURISTSOURCE</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='THORNTHWAITE') }}">THORNTHWAITE</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='PRMS') }}">PRMS</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='MODFLOW') }}">MODFLOW</a></li>
+    <li class="list-group-item  {{ 'current' if active_page=='jobfarm_app' else '' }}"><a
+            href="{{ url_for('portal.jobfarm_app', appname='GBHM') }}">GBHM</a></li>
+</ul>
+{% block foot_script %}
+<script type="text/javascript" src="/static/assets/js/jobfarm/application.js"></script>
+<script type="text/javascript" src="/static/assets/js/jobfarm/application/VIC/submit.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#selModel").change(function () {
+            console.log($(this).val());
+            getmodel($(this).val());
+        }).trigger("change");
+    });
+    modify_flag = 1
+    create_flag = 1
+    count = 0
+    datatype = "<option id='nothing'>" + " " + "</option>\
+    <option id='PoolInteger'>PoolInteger</option>\
+    <option id='PoolFloat'>PoolFloat</option>\
+    <option id='PoolDouble'>PoolDouble</option>\
+    <option id='PoolBoolean'>PoolBoolean</option>\
+    <option id='PoolLong'>PoolLong</option>\
+    <option id='PoolString'>PoolString</option>\
+    <option id='PoolIntegerArray'>PoolIntegerArray</option>\
+    <option id='PoolFloatArray'>PoolFloatArray</option>\
+    <option id='PoolDoubleArray'>PoolDoubleArray</option>\
+    <option id='PoolBooleanArray'>PoolBooleanArray</option>\
+    <option id='PoolLongArray'>PoolLongArray</option>\
+    <option id='PoolStringArray'>PoolStringArray</option>\
+    <option id='PoolInteger2DArray'>PoolInteger2DArray</option>\
+    <option id='PoolFloat2DArray'>PoolFloat2DArray</option>\
+    <option id='PoolDouble2DArray'>PoolDouble2DArray</option>\
+    <option id='PoolBoolear2DArray'>PoolBoolear2DArray</option>\
+    <option id='PoolLong2DArray'>PoolLong2DArray</option>\
+    <option id='PoolString2DArray'>PoolString2DArray</option>\
+    <option id='PoolInteger3DArray'>PoolInteger3DArray</option>\
+    <option id='PoolDouble3DArray'>PoolDouble3DArray</option>\
+    <option id='PoolDouble4DArray'>PoolDouble4DArray</option>\
+    <option id='PoolDate'>PoolDate</option>\
+    <option id='PoolCalendar'>PoolCalendar</option>\
+    <option id='PoolObject'>PoolObject</option>\
+    <option id='PoolObjectArray'>PoolObjectArray</option>"
+    node_parents_var = {}
+
+    /*  $(function() {
+     $( "#menu" ).menu();
+     }); */
+
+    function sequence() {
+        /* 	if(!modify_flag){
+         alert("请保存当前修改！")
+         return
+         } */
+        $("#tt").tree("options").dnd = true
+        $("#tt").tree("reload")
+    }
+
+    function save_sequence() {
+        /* 	if(!modify_flag){
+         alert("请保存当前修改！")
+         return
+         } */
+        var datajson = $('#tt').tree("getRoot")
+        var modelname = datajson.text
+        var jsonstr = JSON.stringify(datajson);
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/modelbox/modelopera",
+            data: {"modeltree": jsonstr, "opera": "savesequence", "modelname": modelname},// 你的formid
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                $("#tt").tree("options").dnd = false
+                $("#tt").tree("reload");
+            },
+            headers: {"X-CSRFToken": getCookie('csrftoken')},
+        })
+    }
+
+    function createmodel() {
+        /* if(!modify_flag){
+         alert("请保存当前修改！")
+         return
+         } */
+        $(function () {
+            $('#myTab li:eq(0) a').tab('show');
+        });
+        $("#cmodel").show()
+        $("#modelshow").hide()
+        $("#compute").hide()
+        $("#sequence_start").hide()
+        $("#sequence_save").hide()
+        $("#infoshow").html("")
+        $("form").submit(function () {
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/modelbox/modelopera",
+                data: $('#newmodel').serialize(),// 你的formid
+                async: false,
+                error: function (request) {
+                    alert("Connection error");
+                },
+                success: function (data) {
+                    alert(data)
+                },
+            })
+        })
+    }
+
+    function getmodel(modelname) {
+        /* 	if(!modify_flag){
+         alert("请保存当前修改！")
+         return
+         }
+         */
+        $("#infoshow").html("")
+        $("#cmodel").hide()
+        $("#modelshow").show()
+        $("#compute").show()
+        $("#sequence_start").show()
+        $("#sequence_save").show()
+        $('#tt').tree({
+            dnd: false,
+            url: '/modelbox/modeldata?name=' + modelname,
+            method: 'get',
+            animate: true,
+            onContextMenu: function (e, node) {
+                e.preventDefault();
+                $(this).tree('select', node.target);
+                if (node.attributes.nodetype == "module") {
+                    $("#add").hide()
+                }
+                else {
+                    $("#add").show()
+                }
+
+                $('#mm').menu('show', {
+                    left: e.pageX,
+                    top: e.pageY,
+                });
+            },
+            onClick: function (node) {
+                $("#infoshow").html("")
+                var node1 = $('#tt').tree('getParent', node.target)
+                if (!node1) {
+                    return
+                }
+                var node_parents = {}
+                node_parents_var = {}
+                var parentnum = 1
+                while (node1) {
+                    if (node1.attributes.nodetype == "context") {
+                        node_parents[String(parentnum)] = node1.text
+                        node_parents_var[String(parentnum) + "_" + node1.text] = []
+                        for (var j = 0; j < node1.attributes["var"].length; j++) {
+                            node_parents_var[String(parentnum) + "_" + node1.text][j] = node1.attributes["var"][j]["attribute"]
+                        }
+                    }
+                    node1 = $('#tt').tree('getParent', node1.target)
+                    parentnum++
+                }
+
+                $("#infoshow").append("<div class='panel-heading'><h5 class='list-group-item-heading'>参数信息</h5></div>\
+                    <div class='panel-body' id='parainfo'><form class='form-horizontal' role='form' id='module_param' method='POST' ></form><div id='control'></div></div>")
+                $("#module_param").append("<table class='table table-bordered'><tbody></tbody></table>")
+                $("#module_param").append("<input type='hidden' name='module' value='" + node.text + "'>")
+                $("#module_param").append("<input type='hidden' value='modify' name='opera'>")
+                $("#module_param").append("<input type='hidden' name='nodetype' value='" + node.attributes.nodetype + "'>")
+
+                if (node.attributes.nodetype == "context") {
+                    $("#module_param tbody").append("<tr><td>name</td><td>attribute</td><td>value</td><td>type</td><td></td></tr>")
+                    var i = 0
+                    if (node.attributes["var"] && node.attributes["var"].length != 0) {
+                        //已有变量
+
+                        for (; i < node.attributes["var"].length; i++) {
+                            $("#module_param tbody").append("<tr id='var_" + String(i) + "'>\
+								<td><input type='text' class='form-control' id='para" + i + "_name' name='atr_" + node.attributes["var"][i]["name"] + "_name' value='" + node.attributes["var"][i]["name"] + "'></td>\
+								<td><input type='text' class='form-control' id='para" + i + "_attribute' name='atr_" + node.attributes["var"][i]["name"] + "_attribute' value='" + node.attributes["var"][i]["attribute"] + "'></td>\
+								<td><input type='text' class='form-control' id='para" + i + "_value' name='atr_" + node.attributes["var"][i]["name"] + "_value' value='" + node.attributes["var"][i]["value"] + "'></td>\
+								<td><select id = 'selectgroup" + String(i) + "' class='form-control' onchange='selectinput(" + String(i) + ")'>" + datatype + "</select></td>\
+								<td><button onclick='del_attr(" + String(i) + ")' class='btn btn-danger btn-md pull-right'><i class='glyphicon glyphicon-trash'></i></button></td>\
+								</tr>")
+                            if (node.attributes["var"][i]["type"] != " ") {
+                                $("select#selectgroup" + String(i) + " option#" + node.attributes["var"][i]["type"]).attr("selected", true)
+                            }
+
+                            $("#module_param").append("<input type='hidden' id='para_atr" + i + "' name='atr_" + node.attributes["var"][i]["name"] + "_type' value='" + node.attributes["var"][i]["type"] + "'>")
+                        }
+
+                    }
+                    count = i
+                    $("#control").append("<button onclick='add_attr()' class='btn btn-primary  pull-right' style='margin-left:2em'><i class='glyphicon glyphicon-plus'>&nbsp;</i>添加</button>")
+                    $("#control").append("<button onclick='submodify(\"" + modelname + "\")' class='btn btn-primary pull-right'><i class='glyphicon glyphicon-floppy-disk'>&nbsp;</i>保存</button>")
+                }
+                else {
+                    $("#module_param tbody").append("<tr><td>name</td><td>context</td><td>attribute</td><td>value</td></tr>")
+                    var htmlstr = ""//"<option>"+" "+"</option>"
+                    for (var parent in node_parents) {
+                        htmlstr += "<option id='" + node_parents[parent] + "'>" + parent + "_" + node_parents[parent] + "</option>"
+                    }
+                    /* selectstr=" "
+                     for(var i=0;i<node_parents_var["1_"+node_parents["1"]].length;i++)
+                     selectstr+="<option id>"+node_parents_var["1_"+node_parents["1"]][i]+"</option>" */
+                    for (var i = 0; i < node.attributes["var"].length; i++) {
+                        $("#module_param tbody").append("<tr>\
+							<td>" + node.attributes["var"][i]["name"] + "</td>\
+							<td><select id = 'selectgroup" + String(i) + "' class='form-control' onchange='selectinput(" + String(i) + ")'>" + htmlstr + "</select></td>\
+							<td><select id = 'selectgroup_attribute" + String(i) + "' class='form-control' onchange ='selectinput_atr(" + String(i) + ")'></select></td>\
+							<td><input type='text' class='form-control' id='para" + i + "' name='atr_" + node.attributes["var"][i]["name"] + "_value' value='" + node.attributes["var"][i]["value"] + "'></td>\
+							</tr>")
+                        if (node.attributes["var"][i]["context"]) {
+                            $("#" + node.attributes["var"][i]["context"]).attr("selected", true)
+                            var selectvalue = $("#" + node.attributes["var"][i]["context"]).text()
+                            var selectstr = ""
+                            for (var m = 0; m < node_parents_var[selectvalue].length; m++)
+                                selectstr += "<option id='" + node_parents_var[selectvalue][m] + "'>" + node_parents_var[selectvalue][m] + "</option>"
+                            $("#selectgroup_attribute" + String(i)).html(selectstr)
+                            if (node.attributes["var"][i]["attribute"])
+                                $("#" + node.attributes["var"][i]["attribute"]).attr("selected", true)
+                            $("#module_param").append("<input type='hidden' id='para_atr" + i + "' name='atr_" + node.attributes["var"][i]["name"] + "_context' value='" + node.attributes["var"][i]["context"] + "'>")
+                            $("#module_param").append("<input type='hidden' id='para_atr" + i + "_atr' name='atr_" + node.attributes["var"][i]["name"] + "_attribute' value='" + node.attributes["var"][i]["attribute"] + "'>")
+                        }
+                        else {
+                            var selectstr = "<option>" + " " + "</option>"
+                            for (var j = 0; j < node_parents_var["1_" + node_parents["1"]].length; j++)
+                                selectstr += "<option id='" + i + "_" + node_parents_var["1_" + node_parents["1"]][j] + "'>" + node_parents_var["1_" + node_parents["1"]][j] + "</option>"
+                            $("#selectgroup_attribute" + String(i)).html(selectstr)
+                            if (node.attributes["var"][i]["attribute"])
+                                $("#" + i + "_" + node.attributes["var"][i]["attribute"]).attr("selected", true)
+                            $("#module_param").append("<input type='hidden' id='para_atr" + i + "' name='atr_" + node.attributes["var"][i]["name"] + "_context' value='" + node_parents["1"] + "'>")
+                            $("#module_param").append("<input type='hidden' id='para_atr" + i + "_atr' name='atr_" + node.attributes["var"][i]["name"] + "_attribute' value='" + node.attributes["var"][i]["attribute"] + "'>")
+                        }
+                    }
+                    $("#control").append("<button onclick='submodify(\"" + modelname + "\")' class='btn btn-primary pull-right'><i class='glyphicon glyphicon-floppy-disk'>&nbsp;</i>保存</button>")
+                }
+            },
+        })
+
+        $.get("/portal/modelbox/xmldoc?name=" + modelname, function (data, status) {
+            f = JSON.parse(data)
+            $("#xmldoc").html("<textarea id='editxml' style='height:500px;width:100%;display:block'>" + f.filecontent)
+            $("#xmldoc").append("<div style='padding:20px;'><button onclick='editsave(\"" + encodeURIComponent(f.filepath) + "\")' class='btn btn-primary pull-right'><i class='glyphicon glyphicon-floppy-disk'>&nbsp;</i>保存</button></div>")
+
+        })
+
+    }
+
+    function selectinput(num) {
+        var selectgroup = "#selectgroup" + num + " option:selected"
+        var selectvalue = $(selectgroup).text()
+        $("#para_atr" + num).val(selectvalue)
+        var selectstr = ""
+        for (var i = 0; i < node_parents_var[selectvalue].length; i++)
+            selectstr += "<option id='" + num + "_" + node_parents_var[selectvalue][i] + "'>" + node_parents_var[selectvalue][i] + "</option>"
+        $("#selectgroup_attribute" + num).html(selectstr)
+
+    }
+
+    function selectinput_atr(num) {
+        var selectgroup = "#selectgroup_attribute" + num + " option:selected"
+        var selectvalue = $(selectgroup).text()
+        $("#para_atr" + num + "_atr").val(selectvalue)
+
+    }
+
+    /* function showselected(id){
+     return $(id+" option:selected").text()
+     } */
+    function add_attr() {
+        var index = count
+        $("#module_param tbody").append("<tr>\
+			<td><input type='text' class='form-control' id='para" + index + "name' name='atr_" + index + "_name' value=''></td>\
+			<td><input type='text' class='form-control' id='para" + index + "attribute' name='atr_" + index + "_attribute' value=''></td>\
+			<td><input type='text' class='form-control' id='para" + index + "value' name='atr_" + index + "_value' value=''></td>\
+			<td><select id = 'selectgroup" + String(index) + "' class='form-control' onchange='selectinput(" + String(index) + ")'>" + datatype + "</select></td>\
+			<td><button onclick='del_attr(" + String(index) + ")' class='btn btn-primary pull-right'><i class='glyphicon glyphicon-trash'></i></button></td>"
+        )
+        $("#module_param").append("<input type='hidden' id='para_atr" + index + "' name='atr_" + index + "_type' value='PoolInteger'>")
+        count++
+    }
+
+    function del_attr(id) {
+        $("#var_" + id).remove()
+        $("input#para_atr" + id).remove()
+    }
+
+    function editsave(filepath) {
+        var filecontent = document.getElementById("editxml").value
+        var path = filepath
+        var settings = {
+            type: "POST",
+            url: "/jobfarm/editsave",
+            data: {
+                "filecontent": filecontent,
+                "filepath": path,
+            },
+            dataType: "html",
+            success: function (data, status) {
+                if (status == "success") {
+                    alert(data)
+                }
+
+            },
+            headers: {
+                "X-CSRFToken": getCookie('csrftoken'),
+            },
+        };
+        $.ajax(settings);
+    }
+
+    function append(category, module) {
+        $("#infoshow").html("")
+        var node = $('#tt').tree('getSelected');
+        var datajson = $('#tt').tree("getRoot");
+        var SelectedNode = JSON.stringify($('#tt').tree('getSelected'));
+        var jsonstr = JSON.stringify(datajson);
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/modelbox/modelopera",
+            data: {
+                "modeltree": jsonstr,
+                "opera": "append",
+                "category": category,
+                "module": module,
+                "SelectedNode": SelectedNode
+            },// 你的formid
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                $("#tt").tree("reload");
+            },
+            headers: {"X-CSRFToken": getCookie('csrftoken')},
+        })
+    }
+
+    function removeit() {
+        var node = $('#tt').tree('getSelected');
+        var modelname = node.text
+        var r = confirm("你确定要删除吗？")
+        if (r == true) {
+            $('#tt').tree('remove', node.target);
+            var datajson = $('#tt').tree("getRoot")
+            var jsonstr = JSON.stringify(datajson);
+            $.ajax({
+                cache: true,
+                type: "POST",
+                url: "/modelbox/modelopera",
+                data: {"modeltree": jsonstr, "opera": "remove", "modelname": modelname},// 你的formid
+                async: false,
+                error: function (request) {
+                    alert("Connection error");
+                },
+                success: function (data) {
+                    if (data != "file") {
+                        $("#tt").tree("reload");
+                    }
+                    else {
+                        window.location.reload()
+                    }
+                },
+                headers: {"X-CSRFToken": getCookie('csrftoken')},
+            })
+        }
+        else {
+            return
+        }
+    }
+
+    function collapse() {
+        var node = $('#tt').tree('getSelected');
+        $('#tt').tree('collapse', node.target);
+    }
+
+    function expand() {
+        var node = $('#tt').tree('getSelected');
+        $('#tt').tree('expand', node.target);
+    }
+
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie != '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = $.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function submodify(modelname) {
+        var model = modelname
+        var datajson = $('#tt').tree("getRoot")
+        $("#module_param").append("<input type='hidden' value='" + JSON.stringify(datajson) + "' name='modeltree'>")
+        var node = $('#tt').tree('getSelected');
+        $("#module_param").append("<input type='hidden' value='" + JSON.stringify(node) + "' name='SelectedNode'>")
+        $.ajax({
+            cache: false,
+            type: "POST",
+            url: "/modelbox/modelopera",
+            data: $('#module_param').serialize(),// 你的formid
+            async: false,
+            error: function (request) {
+                alert("Connection error");
+            },
+            success: function (data) {
+                //modify_flag=1
+                alert(data)
+                $("#infoshow").html("")
+                $("#tt").tree("reload");
+                $.get("/portal/modelbox/xmldoc?name=" + model, function (data, status) {
+                    f = JSON.parse(data)
+                    $("#xmldoc").html("<textarea id='editxml' style='height:500px;width:100%;display:block'>" + f.filecontent)
+                    $("#xmldoc").append("<button onclick='editsave(\"" + encodeURIComponent(f.filepath) + "\")' class='btn btn-primary pull-right'>保存</button>")
+                })
+            },
+            headers: {"X-CSRFToken": getCookie('csrftoken')},
+        })
+    }
+</script>
+{% endblock %}
+
+

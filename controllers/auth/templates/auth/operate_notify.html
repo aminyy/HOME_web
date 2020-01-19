@@ -1,0 +1,6 @@
+<div class="success-notify-wrapper animated zoomInDown">
+    <div class="alert {{ 'alert-success' if operate else 'alert-danger' }}" role="alert">
+        <strong>{{ result }}</strong> {{ message }}
+        <button onclick="close_success_notify()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+</div>

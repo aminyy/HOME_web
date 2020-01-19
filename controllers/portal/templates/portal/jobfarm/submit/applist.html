@@ -1,0 +1,55 @@
+{% extends "jobfarm_base_cao.html" %}
+{% load staticfiles %}
+{% block title_jobfarm_cao %}
+    应用中心
+{% endblock %}
+{% block body_left_jobfarm_cao %}
+    <ul class="list-group v-menu">
+        <li class="list-group-head"><i class="glyphicon glyphicon-play"></i>&nbsp;模型库</li>
+        <li class="list-group-item"><a href='/jobfarm/m/index'>模型库资源</a></li>
+        <li class="list-group-item"><a href='/jobfarm/modellist'>用户模型管理</a></li>
+        <li class="list-group-head"><span><i class="glyphicon glyphicon-play"></i>&nbsp;作业管理</span></li>
+        <li class="list-group-item"><a href='/jobfarm/history'>查找作业</a></li>
+        <li class="list-group-head"><span><i class="glyphicon glyphicon-play"></i>&nbsp;应用列表</span></li>
+        <li class="list-group-item current"><a href='/jobfarm/application'>全部</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=VIC'>VIC</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=Noah_LSM'>Noah_LSM</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=TOURISTSOURCE'>TOURISTSOURCE</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=THORNTHWAITE'>THORNTHWAITE</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=PRMS'>PRMS</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=MODFLOW'>MODFLOW</a></li>
+        <li class="list-group-item"><a
+                href='/jobfarm/app?appname=GBHM'>GBHM</a></li>
+    </ul>
+{% endblock %}
+{% block body_right_jobfarm_cao %}
+    <div class="list-group">
+        <div class="list-group-item active">
+            <h5 class="list-group-item-heading">应用列表</h5>
+        </div>
+        {% if latest_applicaton_list %}
+            {% for application in latest_applicaton_list %}
+                <div class="list-group-item">
+                    <a href="/jobfarm/app?appname={{ application.app_name }}"><h5
+                            class="list-group-item-heading">{{ application.app_name }}</h5></a>
+                    <p class="list-group-item-text">
+                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span style="font-size: 13px">{{ application.introduction }}</span>
+                        <!--<span>&nbsp;&nbsp; <a
+				href="/jobfarm/application/submit?name={{ application.app_name }}&version={{ application.version }}&exec={{application.exec_name}}">提交作业</a></span> -->
+                    </p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div href="#">
+                <h4 class="list-group-item-heading">没有符合条件的应用</h4>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

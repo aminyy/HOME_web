@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Ssflow" name="Ssflow" author="hzfwhy@lzb.ac.cn" keyword="Runoff, Subsurface" description="Subsurface flowAdds inflow to subsurface reservoirs and computesoutflow to groundwater and to streamflow. ">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nssr" dataType="PoolInteger" size="0" unit="" description="Number of subsurface reservoirs."/>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="hru_ssres" dataType="PoolIntegerArray" size="0" unit="" description="Index of subsurface reservoir receiving excess water from HRU soil zone"/>
+    <var name="ssstor_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial storage in each subsurface reservoir;  estimated based on measured flow"/>
+    <var name="ssrcoef_lin" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient to route subsurface storage to streamflow using the following equation:   ssres_flow = ssrcoef_lin * ssres_stor +  ssrcoef_sq * ssres_stor**2"/>
+    <var name="ssrcoef_sq" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient to route subsurface storage to streamflow using the following equation:   ssres_flow = ssrcoef_lin * ssres_stor +  ssrcoef_sq * ssres_stor**2"/>
+    <var name="ssr2gw_rate" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient to route water from subsurface to groundwater Coefficient in equation used to route water from the  subsurface reservoirs to the groundwater reservoirs:   ssr_to_gw = ssr2gw_rate *  ((ssres_stor / ssrmax_coef)**ssr2gw_exp)"/>
+    <var name="ssrmax_coef" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient in equation used to route water from the subsurface reservoirs to the groundwater reservoirs:   ssr_to_gw = ssr2gw_rate *  ((ssres_stor / ssrmax_coef)**ssr2gw_exp);  recommended value is 1.0"/>
+    <var name="ssr2gw_exp" dataType="PoolDoubleArray" size="0" unit="" description="Coefficient in equation used to route water from the subsurface reservoirs to the groundwater reservoirs:   ssr_to_gw = ssr2gw_rate *   ((ssres_stor / ssrmax_coef)**ssr2gw_exp);  recommended value is 1.0"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="frozen" dataType="PoolIntegerArray" size="0" unit="" description="Flag for frozen ground (0=no; 1=yes)."/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="ssres_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each subsurface reservoir; computed by summing areas of HRUs that contribute to it"/>
+    <var name="soil_to_ssr" dataType="PoolDoubleArray" size="0" unit="" description="The amount of water transferred from the soil zone to a subsurface reservoir for each HRU. [smbal]"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="Pervious area of each HRU"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="ssr_to_gw" dataType="PoolDoubleArray" size="0" unit="" description="Flow from each subsurface reservoir to its associated groundwater reservoir. [ssflow]"/>
+    <var name="ssres_flow" dataType="PoolDoubleArray" size="0" unit="" description="Outflow from each subsurface reservoir"/>
+    <var name="ssres_in" dataType="PoolDoubleArray" size="0" unit="" description="Sum of inflow to subsurface reservoir from all associated HRUs"/>
+    <var name="ssres_stor" dataType="PoolDoubleArray" size="0" unit="" description="Storage in each subsurface reservoir"/>
+    <var name="basin_ssr2gw" dataType="PoolDouble" size="0" unit="" description="Basin average drainage from soil added to groundwater"/>
+    <var name="basin_ssvol" dataType="PoolDouble" size="0" unit="" description="Basin weighted average for subsurface reservoir storage  volume"/>
+    <var name="basin_ssstor" dataType="PoolDouble" size="0" unit="" description="Basin weighted average for subsurface reservoir storage"/>
+    <var name="basin_ssflow" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average for subsurface flow [ssflow]"/>
+  </varMeta>
+</moduleMeta>

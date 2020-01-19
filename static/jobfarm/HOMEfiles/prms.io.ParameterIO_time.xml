@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.io.ParameterIO_time" name="ParameterIO_time" author="hzfwhy@lzb.ac.cn" keyword="parameter" description="ParameterIO_time">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="adjmix_rain" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment factor for rain in a rain/snow mix Monthly factor to adjust rain proportion in a mixed  rain/snow event"/>
+    <var name="cecn_coef" dataType="PoolDoubleArray" size="0" unit="" description="Convection condensation energy coefficient, varied monthly"/>
+    <var name="dday_intcp" dataType="PoolDoubleArray" size="0" unit="" description="Intercept in temperature / degree-day relationship. Intercept in relationship: dd-coef =  dday_intcp + dday_slope*(tmax)+1."/>
+    <var name="dday_slope" dataType="PoolDoubleArray" size="0" unit="" description="Slope in temperature / degree-day relationship. Coefficient in relationship: dd-coef =  dday_intcp + dday_slope*(tmax)+1."/>
+    <var name="ppt_rad_adj" dataType="PoolDoubleArray" size="0" unit="" description="If basin precipitation exceeds this value, solar radiation is mutiplied by the summer or winter precip adjustment factor, depending on the season. "/>
+    <var name="tmax_allrain" dataType="PoolDoubleArray" size="0" unit="" description="If maximum temperature of an HRU is greater than or equal to this value (for each month, January to December),  precipitation is assumed to be rain"/>
+    <var name="tmax_index" dataType="PoolDoubleArray" size="0" unit="" description="Index temperature, by month, used to determine precipitation adjustments to solar radiation, in deg F or C depending  on units of data"/>
+    <var name="tmax_lapse" dataType="PoolDoubleArray" size="0" unit="" description="rray of twelve values representing the change in maximum temperature per 1000 elev_units of elevation change for each month, January to December"/>
+    <var name="tmin_lapse" dataType="PoolDoubleArray" size="0" unit="" description="Array of twelve values representing the change in minimum temperture per 1000 elev_units of  elevation change for each month, January to December"/>
+    <var name="tstorm_mo" dataType="PoolDoubleArray" size="0" unit="" description="Monthly indicator for prevalent storm type (0=frontal  storms prevalent; 1=convective storms prevalent)"/>
+    <var name="TparameterInputPath" dataType="PoolString" size="0" unit="" description="Temperature data parameter InputPath"/>
+  </varMeta>
+</moduleMeta>

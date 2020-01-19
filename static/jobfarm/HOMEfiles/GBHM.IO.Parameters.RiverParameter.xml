@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.RiverParameter" name="riverParameter" author="longyinping11@lzb.ac.cn" keyword="river parameter" description="reading river parameters including length, bed slope, width, depth and roughness of rivers">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="kfsFile" dataType="PoolString" size="0" unit="" description="the file according to which the Pfafstetter coded river network will be generated"/>
+    <var name="riverFilePath" dataType="PoolString" size="0" unit="" description="the file path in which the river parameters are saved"/>
+    <var name="nsub" dataType="PoolInteger" size="0" unit="" description="number of subbasins"/>
+    <var name="upstreamID1" dataType="PoolIntegerArray" size="0" unit="" description="the left upper stream ID of each river"/>
+    <var name="upstreamID2" dataType="PoolIntegerArray" size="0" unit="" description="the right upper stream ID of each river"/>
+    <var name="dx" dataType="PoolDouble2DArray" size="0" unit="" description="length of each reach"/>
+    <var name="s0" dataType="PoolDouble2DArray" size="0" unit="" description="bed slope of each reach"/>
+    <var name="b" dataType="PoolDouble2DArray" size="0" unit="" description="width of each reach"/>
+    <var name="roughness" dataType="PoolDouble2DArray" size="0" unit="" description="manning's roughness of each reach"/>
+    <var name="Dr_river" dataType="PoolDouble2DArray" size="0" unit="" description="depth of each flow interval"/>
+    <var name="row" dataType="PoolDouble3DArray" size="0" unit="" description="the row number of each grid in each flow interval"/>
+    <var name="col" dataType="PoolDouble3DArray" size="0" unit="" description="the colum number of each grid in each flow interval"/>
+    <var name="ngrid" dataType="PoolDouble2DArray" size="0" unit="" description="the number of grids in each flow interval"/>
+    <var name="nflow" dataType="PoolIntegerArray" size="0" unit="" description="the number of flow intervals in each subbasin"/>
+    <var name="subName" dataType="PoolStringArray" size="0" unit="" description="name of each subbasin"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Parameters.SoilParameters" name="soilParameters" author="longyinping11@lzb.ac.cn" keyword="soil parameter" description="reading soil parameters including saturated soil moisture, residual soil moisture, the van Genuchten model parameters and saturated hydraulic conductivity, etc.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="wsatFile" dataType="PoolString" size="0" unit="" description="saturated soil moisture file path"/>
+    <var name="wrsdFile" dataType="PoolString" size="0" unit="" description="residual soil moisture file path"/>
+    <var name="alphaFile" dataType="PoolString" size="0" unit="" description="van Genuchten model's alpha file path"/>
+    <var name="waternFile" dataType="PoolString" size="0" unit="" description="van Genuchten model's n file path"/>
+    <var name="ksatFile" dataType="PoolString" size="0" unit="" description="saturated hydraulic conductivity file path"/>
+    <var name="elev2D" dataType="PoolDouble2DArray" size="0" unit="" description="elevation at each grid of the study area"/>
+    <var name="soilDepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil depth at each grid of the study area"/>
+    <var name="acquiferDepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="average depth of the unconfined acquifer at each grid of the study area"/>
+    <var name="layerDepth3D" dataType="PoolDouble3DArray" size="0" unit="" description="soil depth of each layer at each grid of the study area"/>
+    <var name="wsat3D" dataType="PoolDouble3DArray" size="0" unit="" description="saturated soil moisture of each layer at each grid of the study area"/>
+    <var name="wfld3D" dataType="PoolDouble3DArray" size="0" unit="" description="soil moisture at field capacity of each layer at each grid of the study area"/>
+    <var name="wrsd3D" dataType="PoolDouble3DArray" size="0" unit="" description="residual soil moisture of each layer at each grid of the study area"/>
+    <var name="alpha3D" dataType="PoolDouble3DArray" size="0" unit="" description="van Genuchten model's alpha of each layer at each grid of the study area"/>
+    <var name="watern3D" dataType="PoolDouble3DArray" size="0" unit="" description="van Genuchten model's n of each layer at each grid of the study area"/>
+    <var name="ksat3D" dataType="PoolDouble3DArray" size="0" unit="" description="saturated hydraulic conductivity of each layer at each grid of the study area"/>
+    <var name="kg2D" dataType="PoolDouble2DArray" size="0" unit="" description="hydraulic conductivity of groundwater at each grid of the study area"/>
+    <var name="GWcs2D" dataType="PoolDouble2DArray" size="0" unit="" description="groundwater storage coefficient at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

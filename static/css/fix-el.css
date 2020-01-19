@@ -1,0 +1,97 @@
+.el-container {
+    height: 100% !important;
+    overflow: hidden;
+}
+
+.content-body {
+    overflow: auto !important;
+}
+
+.el-tree {
+    background: transparent !important;
+}
+
+.el-main {
+    padding: 5px !important;
+}
+
+.el-card__header,
+.el-card__body {
+    padding: 5px !important;
+}
+
+.el-tabs__content {
+    overflow-x: auto !important;
+}
+
+.el-row {
+    margin-bottom: 5px !important;
+}
+
+.el-menu--horizontal .el-menu-item,
+.el-menu--horizontal .el-submenu .el-submenu__title {
+    height: 36px !important;
+    line-height: 36px !important;
+}
+
+.el-menu--horizontal .el-submenu>.el-menu {
+    top: 38px !important;
+}
+
+.el-form-item {
+    margin-bottom: 20px !important;
+}
+
+
+/*文字色彩*/
+
+.txt-success {
+    color: #13ce66 !important;
+}
+
+.txt-info {
+    color: #20a0ff !important;
+}
+
+.txt-primary {
+    color: #20a0ff !important;
+}
+
+.txt-warning {
+    color: #f7ba2a !important;
+}
+
+.txt-danger {
+    color: #ff4949 !important;
+}
+
+.txt-gray {
+    color: #666 !important;
+}
+
+/*checkbox*/
+.el-checkbox{
+    margin-right: 20px;
+    margin-left: 0 !important;
+}
+/* .el-button--primary>.fa {
+    color: #FFF !important;
+} */
+
+
+/*dialog*/
+
+.dialog-footer {
+    margin-top: 2em;
+}
+
+.vue-lb-container {
+    z-index: 10002 !important;
+}
+/*table*/
+table{
+    font-size: 14px !important;
+}
+.el-table td, .el-table th{
+    padding: 8px 0 !important;
+}

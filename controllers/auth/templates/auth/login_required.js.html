@@ -1,0 +1,15 @@
+{% set content %}
+{% with next=next %}
+<div class="login-required-notify-wrapper animated zoomInDown">
+    <div class="alert alert-info" role="alert">
+        <strong>未登录</strong> 请<a href="{{ url_for('auth.login', next=next) }}">登录</a>,再进行操作。
+        <button onclick="close_login_required_notify()" type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    </div>
+</div>
+{% endwith %}
+{% endset %}
+if ($("body > .login-required-notify-wrapper").length) {
+    $( "body > .login-required-notify-wrapper" ).show();
+} else {
+    $("body").append('{{ content|inline|safe }}');
+}

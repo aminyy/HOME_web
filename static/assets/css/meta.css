@@ -1,0 +1,72 @@
+.data-list-group {
+    padding-left: 0;
+}
+
+.data-list-group li {
+    list-style-type: none;
+    padding: 3px 0;
+}
+
+.list-content a {
+    color: #333;
+}
+
+.data-list-group li a {
+    width: 330px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.list-content a:hover {
+    color: #f1a400;
+}
+
+
+.list-content i {
+    float: left;
+    color: #f1a400;
+    margin: 3px;
+}
+
+.list-group li {
+    list-style-type: none;
+    padding: 2px 0;
+}
+
+.special-list-data {
+    float: left;
+    margin: 0 3px;
+}
+
+.update-list-group {
+    padding-left: 0;
+}
+
+.update-list-group li {
+    list-style-type: none;
+    padding: 4px 0;
+}
+
+.update-list-group li a {
+    width: 430px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doi-title {
+    font-size: 15px;
+}
+
+.doi-info {
+    color: #999;
+}
+
+.filter-item a {
+    display: inline-block;
+    padding: 4px;
+
+}

@@ -1,0 +1,161 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.cart" -%}
+
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+{% endblock %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'auth/nav_tabs.html' %}
+        </div>
+        <div class="col-md-12">
+            <form action="{{ url_for('auth.add_to_order') }}" method="post">
+                <div class="list-group-toolbar">
+                    <div class="col-md-1">
+                        <label>
+                            <input type="checkbox" id="all">
+                        </label>
+                    </div>
+                    <div class="col-md-6">
+
+                        <button type="submit" class="btn btn-info btn-sm" disabled="disabled" title="选择数据才能点击按钮"
+                                id="order">生成订单
+                        </button>
+                        <div style="display: inline" id="button-text">选择数据才能点击按钮</div>
+                    </div>
+                    <div class="col-md-2">
+                        共享方式
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        操作
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="favorite-list-group-wrapper">
+                    <ul class="list-group" id="cart-check">
+                        {% for item in items %}
+                            <li class="list-group-item">
+                                <div class="col-md-1 fn-clean-grid-left-padding">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name="item_ids" value="{{ item.id }}">
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <h4 class="list-group-item-heading">{{ item.meta.title_cn }}</h4>
+                                    <p class="list-group-item-text">
+                                        <span>作者:{{ item.meta.ds_serv_man }}</span>
+                                        <span>电话:{{ item.meta.ds_serv_phone }}</span>
+                                        <span>邮箱:{{ item.meta.ds_serv_mail }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-2">{{ item.meta.ds_share_type }}</div>
+                                <div class="col-md-2 col-md-offset-1">
+                                    <button type="submit" name="item_ids" value="{{ item.id }}"
+                                       class="btn btn-info btn-xs">申请</button>
+                                    <a href="{{ url_for('auth.cart_delete_data', id=item.id) }}"
+                                       class="btn btn-danger btn-xs">移除</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">暂无数据.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </form>
+            <div class="list-group-toolbar">
+                <div class="pull-right col-md-offset-10">
+                    <span>共有元数据<strong>{{ total }}</strong>条</span>
+                    (<span class="text-danger">{{ current_page }}</span>/{{ total_page }})
+                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                        {% if current_page <= 1 %}
+                            <div class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                            </div>
+                        {% else %}
+                            <a class="btn btn-default"
+                               href="{{ next_page_url(current_page - 1) }}">
+                                <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                            </a>
+                        {% endif %}
+                        {% if current_page >= total_page %}
+                            <div class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                            </div>
+                        {% else %}
+                            <a class="btn btn-default" {{ 'disabled="disabled"' if current_page >= total_page }}
+                               href="{{ next_page_url(current_page + 1) }}">
+                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block foot_script %}
+    <script type="text/javascript">
+        $(function () {
+            $('#all').click(function () {
+                if (this.checked) {
+                    $("#cart-check :checkbox").prop("checked", true);
+                    buttonIsDisabled();
+                } else {
+                    $('#cart-check :checkbox').prop("checked", false);
+                    buttonIsDisabled();
+                }
+            });
+            $('#cart-check :checkbox').click(function () {
+                allchk();
+                buttonIsDisabled();
+            })
+        });
+        function allchk() {
+            var chknum = $('#cart-check :checkbox').size();
+            var chk = 0;
+            $('#cart-check :checkbox').each(function () {
+                if ($(this).prop("checked") == true) {
+                    chk++;
+                }
+            });
+            if (chknum == chk) {
+                $('#all').prop("checked", true);
+            } else {
+                $('#all').prop("checked", false);
+            }
+
+        }
+        function buttonIsDisabled() {
+            var chk = 0;
+            $('#cart-check :checkbox').each(function () {
+                if ($(this).prop("checked") == true) {
+                    chk++;
+                }
+            });
+            if (chk) {
+                $('#order').prop("disabled", false);
+                $('#order').attr('title', '');
+                $('#button-text').hide();
+            } else {
+                $('#order').prop("disabled", true);
+                $('#order').attr('title', '选择数据才能点击按钮');
+                $('#button-text').show();
+
+            }
+
+        }
+
+    </script>
+{% endblock %}

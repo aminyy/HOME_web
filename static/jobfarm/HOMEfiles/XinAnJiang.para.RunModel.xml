@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="XinAnJiang.para.RunModel" name="RunModel">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="recNum" dataType="PoolInteger" size="0" unit="" description="number of the measure data of the study area"/>
+    <var name="parNum" dataType="PoolInteger" size="0" unit="" description="parameter number of the model"/>
+    <var name="lowerX" dataType="PoolDoubleArray" size="0" unit="" description="the lower limit of the parameter"/>
+    <var name="upperX" dataType="PoolDoubleArray" size="0" unit="" description="the upper limit of the parameter"/>
+    <var name="Xi" dataType="PoolDoubleArray" size="0" unit="" description="the parameter value in the evolution"/>
+    <var name="parameters" dataType="PoolDoubleArray" size="0" unit="" description="parameter data of the model"/>
+    <var name="runoffData" dataType="PoolDoubleArray" size="0" unit="" description="measure data of the study area"/>
+    <var name="evaResult" dataType="PoolDouble" size="0" unit="" description="the evaluation result of parameter of the model"/>
+    <var name="xajObj" dataType="PoolObject" size="0" unit="" description="the object of XinAnJiang model"/>
+    <var name="forecastrunoffData" dataType="PoolDoubleArray" size="0" unit="" description="the forecast data of the study area"/>
+  </varMeta>
+</moduleMeta>

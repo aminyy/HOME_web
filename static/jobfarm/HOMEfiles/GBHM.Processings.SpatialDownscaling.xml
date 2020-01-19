@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.SpatialDownscaling" name="spatialDownscaling" author="longyinping11@lzb.ac.cn" keyword="spatial downscaling" description="get values of variables at current simulation grid">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="cellsize" dataType="PoolDouble" size="0" unit="" description="the cellsize value in the ascii file"/>
+    <var name="slope2D" dataType="PoolDouble2DArray" size="0" unit="" description="slope of the study area"/>
+    <var name="slopeLength2D" dataType="PoolDouble2DArray" size="0" unit="" description="length of each hillslope element in the study area"/>
+    <var name="soilDepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil depth at each grid of the study area"/>
+    <var name="acquiferDepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="average depth of the unconfined acquifer at each grid of the study area"/>
+    <var name="layerDepth3D" dataType="PoolDouble3DArray" size="0" unit="" description="soil depth of each layer at each grid of the study area"/>
+    <var name="wsat3D" dataType="PoolDouble3DArray" size="0" unit="" description="saturated soil moisture of each layer at each grid of the study area"/>
+    <var name="wfld3D" dataType="PoolDouble3DArray" size="0" unit="" description="soil moisture at field capacity of each layer at each grid of the study area"/>
+    <var name="wrsd3D" dataType="PoolDouble3DArray" size="0" unit="" description="residual soil moisture of each layer at each grid of the study area"/>
+    <var name="alpha3D" dataType="PoolDouble3DArray" size="0" unit="" description="van Genuchten model's alpha of each layer at each grid of the study area"/>
+    <var name="watern3D" dataType="PoolDouble3DArray" size="0" unit="" description="van Genuchten model's n of each layer at each grid of the study area"/>
+    <var name="ksat3D" dataType="PoolDouble3DArray" size="0" unit="" description="saturated hydraulic conductivity of each layer at each grid of the study area"/>
+    <var name="kg2D" dataType="PoolDouble2DArray" size="0" unit="" description="hydraulic conductivity of groundwater at each grid of the study area"/>
+    <var name="GWcs2D" dataType="PoolDouble2DArray" size="0" unit="" description="groundwater storage coefficient at each grid of the study area"/>
+    <var name="Kcanopy2D" dataType="PoolDouble2DArray" size="0" unit="" description="fraction of vegetation coverage at each grid of the study area"/>
+    <var name="LAImax2D" dataType="PoolDouble2DArray" size="0" unit="" description=" maximum LAI at each grid of the study area"/>
+    <var name="kcrop2D" dataType="PoolDouble2DArray" size="0" unit="" description="crop coefficient at each grid of the study area"/>
+    <var name="root2D" dataType="PoolDouble2DArray" size="0" unit="" description="root depth at each grid of the study area"/>
+    <var name="anik2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil anisotropy ratio at each grid of the study area"/>
+    <var name="Sstmax2D" dataType="PoolDouble2DArray" size="0" unit="" description="maximum surface water detension at each grid of the study area"/>
+    <var name="surfn2D" dataType="PoolDouble2DArray" size="0" unit="" description="surface roughness at each grid of the study area"/>
+    <var name="landcode2D" dataType="PoolInteger2DArray" size="0" unit="" description="landuse code at at each grid of the study area"/>
+    <var name="prec_array" dataType="PoolDouble2DArray" size="0" unit="" description="hourly precipitation at each grid of the study area"/>
+    <var name="Ep_array" dataType="PoolDouble2DArray" size="0" unit="" description="hourly reference(potential) evapotranspiration at each grid of the study area"/>
+    <var name="temper_array" dataType="PoolDouble2DArray" size="0" unit="" description="air temperature at each grid of the study area"/>
+    <var name="Dr_grid" dataType="PoolDouble2DArray" size="0" unit="" description="averaged flow interval depth at each grid of the study area"/>
+    <var name="Drw_grid" dataType="PoolDouble2DArray" size="0" unit="" description="averaged flow interval water depth at each grid of the study area"/>
+    <var name="LAI_array" dataType="PoolDouble2DArray" size="0" unit="" description="LAI at each grid of the study area"/>
+    <var name="w3D" dataType="PoolDouble3DArray" size="0" unit="" description="moisture of each soil layer at each grid of the study area"/>
+    <var name="dgl2D" dataType="PoolDouble2DArray" size="0" unit="" description="depth from soil surface to ground water at each grid of the study area"/>
+    <var name="GWst2D" dataType="PoolDouble2DArray" size="0" unit="" description="ground water storage at each grid of the study area"/>
+    <var name="Cst2D" dataType="PoolDouble2DArray" size="0" unit="" description="canopy intercepted water at each grid of the study area"/>
+    <var name="snowdepth2D" dataType="PoolDouble2DArray" size="0" unit="" description="snow pack water storage at each grid of the study area"/>
+    <var name="sst2D" dataType="PoolDouble2DArray" size="0" unit="" description="soil surface water storage at each grid of the study area"/>
+    <var name="area" dataType="PoolDouble" size="0" unit="" description="area of the current simulation grid (m2)"/>
+    <var name="slp" dataType="PoolDouble" size="0" unit="" description="average slope of the current simulation grid"/>
+    <var name="length" dataType="PoolDouble" size="0" unit="" description="average hillslope length (m) at current simulation grid"/>
+    <var name="Ds" dataType="PoolDouble" size="0" unit="" description="soil depth at current simulation grid"/>
+    <var name="Dg" dataType="PoolDouble" size="0" unit="" description="average depth of the unconfined acquifer at current simulation grid"/>
+    <var name="D" dataType="PoolDoubleArray" size="0" unit="" description="depth of each UZ(Unsaturated Zone)layer(m) at current simulation grid"/>
+    <var name="wsat" dataType="PoolDoubleArray" size="0" unit="" description="saturated soil moisture at current simulation grid"/>
+    <var name="wfld" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture at field capacity of each layer at current simulation grid"/>
+    <var name="wrsd" dataType="PoolDoubleArray" size="0" unit="" description="residual soil moisture at current simulation grid"/>
+    <var name="alpha" dataType="PoolDoubleArray" size="0" unit="" description="van Genuchten model's alpha of each layer at current simulation grid"/>
+    <var name="watern" dataType="PoolDoubleArray" size="0" unit="" description="van Genuchten model's n of each layer at current simulation grid"/>
+    <var name="k0" dataType="PoolDoubleArray" size="0" unit="" description="saturated hydraulic conductivity (mm H2O/hour) for each UZ(Unsaturated Zone)layer at current simulation grid"/>
+    <var name="kg" dataType="PoolDouble" size="0" unit="" description="hydraulic conductivity of groundwater (mm/hour) at current simulation grid"/>
+    <var name="GWcs" dataType="PoolDouble" size="0" unit="" description="groundwater storage coefficient at current simulation grid"/>
+    <var name="Kcanopy" dataType="PoolDouble" size="0" unit="" description="fraction of vegetation coverage at current simulation grid"/>
+    <var name="LAImax" dataType="PoolDouble" size="0" unit="" description="maximum LAI in a year at current simulation grid"/>
+    <var name="kcrop" dataType="PoolDouble" size="0" unit="" description="crop coefficient at current simulation grid"/>
+    <var name="root" dataType="PoolDouble" size="0" unit="" description="root depth(m) at current simulation grid"/>
+    <var name="anik" dataType="PoolDouble" size="0" unit="" description="soil anisotropy ratio at current simulation grid"/>
+    <var name="Sstmax" dataType="PoolDouble" size="0" unit="" description="maximum surface water detension (mm) at current simulation grid"/>
+    <var name="surfn" dataType="PoolDouble" size="0" unit="" description="surface roughness (Manning's coefficient) at current simulation grid"/>
+    <var name="landuse" dataType="PoolString" size="0" unit="" description="landuse type at current simulation grid"/>
+    <var name="prec" dataType="PoolDouble" size="0" unit="" description="hourly precipitation at current simulation grid"/>
+    <var name="Ep" dataType="PoolDouble" size="0" unit="" description="hourly reference(potential) evapotranspiration at current simulation grid"/>
+    <var name="temper" dataType="PoolDouble" size="0" unit="" description="air temperature at current simulation grid"/>
+    <var name="Dr" dataType="PoolDouble" size="0" unit="" description="averaged flow interval depth at current simulation grid"/>
+    <var name="Drw" dataType="PoolDouble" size="0" unit="" description="averaged flow interval water depth at current simulation grid"/>
+    <var name="LAI" dataType="PoolDouble" size="0" unit="" description="LAI at current simulation grid"/>
+    <var name="w" dataType="PoolDoubleArray" size="0" unit="" description="soil moisture for each UZ(Unsaturated Zone)layer at current simulation grid"/>
+    <var name="dgl" dataType="PoolDouble" size="0" unit="" description="depth from soil surface to ground water at current simulation grid"/>
+    <var name="GWst" dataType="PoolDouble" size="0" unit="" description="ground water storage at current simulation grid"/>
+    <var name="Cst" dataType="PoolDouble" size="0" unit="" description="canopy intercepted water at current simulation grid"/>
+    <var name="snowdepth" dataType="PoolDouble" size="0" unit="" description="snow pack water storage at current simulation grid"/>
+    <var name="sst" dataType="PoolDouble" size="0" unit="" description="soil surface water storage at current simulation grid"/>
+  </varMeta>
+</moduleMeta>

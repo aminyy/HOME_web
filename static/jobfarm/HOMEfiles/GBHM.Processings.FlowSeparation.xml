@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.FlowSeparation" name="flowSeparation" author="longyinping11@lzb.ac.cn" keyword="groundwater flow, lateral flow, sheet flow" description="fraction of groundwater flow, lateral flow and sheet flow contributed to the total flow">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="flowSeparationOutFile" dataType="PoolString" size="0" unit="" description="the file path where fractions of groundwater flow, lateral flow and sheet flow are saved"/>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="groundWaterFlow" dataType="PoolDouble" size="0" unit="" description="runoff contributed by groundwater"/>
+    <var name="lateralFlow" dataType="PoolDouble" size="0" unit="" description="runoff contributed by soil water"/>
+    <var name="q_hillslope" dataType="PoolDouble" size="0" unit="" description="runoff contributed by sheet flow"/>
+  </varMeta>
+</moduleMeta>

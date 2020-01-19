@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Smbal" name="Smbal" author="hzfwhy@lzb.ac.cn" keyword="Soilwater" description="Soil moisture accounting.This module does soil moisture accounting, including additionof infiltration, computation of actual evapotranspiration, andseepage to subsurface and groundwater reservoirs.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area"/>
+    <var name="soil_type" dataType="PoolDoubleArray" size="0" unit="" description="HRU soil type (1=sand; 2=loam; 3=clay)"/>
+    <var name="cov_type" dataType="PoolIntegerArray" size="0" unit="" description="Vegetation cover type designation for each HRU (0=bare soil; 1=grasses; 2=shrubs; 3=trees)"/>
+    <var name="dprst_flag" dataType="PoolInteger" size="0" unit="" description="Selection flag for depression storage computation. 0=No; 1=Yes"/>
+    <var name="soil_rechr_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial value for soil recharge zone (upper part of  soil_moist).  Must be less than or equal to soil_moist_init"/>
+    <var name="soil_moist_init" dataType="PoolDoubleArray" size="0" unit="" description="Initial value of available water in soil profile"/>
+    <var name="soil_moist_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum available water holding capacity of soil profile.  Soil profile is surface to bottom of rooting zone"/>
+    <var name="soil_rechr_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum value for soil recharge zone (upper portion  of soil_moist where losses occur as both evaporation  and transpiration"/>
+    <var name="soil2gw_max" dataType="PoolDoubleArray" size="0" unit="" description="Maximum snow infiltration per day Maximum snow infiltration per day"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="frozen" dataType="PoolIntegerArray" size="0" unit="" description="Flag for frozen ground (0=no; 1=yes)."/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="gmelt_to_soil" dataType="PoolDoubleArray" size="0" unit="" description="Ground-melt of snowpack, goes to soi"/>
+    <var name="hru_perv" dataType="PoolDoubleArray" size="0" unit="" description="Pervious area of each HRU"/>
+    <var name="infil" dataType="PoolDoubleArray" size="0" unit="" description="Infiltration for each HRU. [sroff]"/>
+    <var name="snowcov_area" dataType="PoolDoubleArray" size="0" unit="" description="Snow-covered area on an HRU, in decimal fraction of total HRU area. [snow]"/>
+    <var name="transp_on" dataType="PoolIntegerArray" size="0" unit="" description="Indicator for whether transpiration is occurring, 0=no, 1=yes. [potet]"/>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="snow_evap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation and sublimation from snowpack. [snow]"/>
+    <var name="hru_ppt" dataType="PoolDoubleArray" size="0" unit="" description="Precipitation on HRU, rain and snow. [precip]"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="hru_intcpevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from interception on each HR"/>
+    <var name="hru_impervevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from impervious area for each HRU"/>
+    <var name="hru_percent_perv" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of each HRU area that is perviou"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="dprst_evap_hru" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from depression storage for each HRU"/>
+    <var name="basin_actet" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of hru_actet for land HRUs"/>
+    <var name="basin_soil_rechr" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average for soil_rechr"/>
+    <var name="basin_perv_et" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of pervious area ET"/>
+    <var name="basin_soil_to_gw" dataType="PoolDouble" size="0" unit="" description="Basin average excess soil water that flows directly to  groundwater reservoirs"/>
+    <var name="basin_lakeevap" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of lake evaporation"/>
+    <var name="basin_soil_moist" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average for soil_moist"/>
+    <var name="basin_gmelt2soil" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of glacier melt to soil"/>
+    <var name="soil_rechr" dataType="PoolDoubleArray" size="0" unit="" description="Current moisture content of soil recharge zone, ie, the  portion of the soil profile from which evaporation can  take place"/>
+    <var name="soil_moist" dataType="PoolDoubleArray" size="0" unit="" description="Current moisture content of soil profile to the depth  of the rooting zone of the major vegetation type on the  HRU"/>
+    <var name="soil_to_gw" dataType="PoolDoubleArray" size="0" unit="" description="The amount of water transferred from the soil zone to a groundwater reservoir for each HRU. [smbal]"/>
+    <var name="soil_to_ssr" dataType="PoolDoubleArray" size="0" unit="" description="The amount of water transferred from the soil zone to a subsurface reservoir for each HRU. [smbal]"/>
+    <var name="perv_actet" dataType="PoolDoubleArray" size="0" unit="" description="Actual evapotranspiration from pervious areas of HRU"/>
+    <var name="hru_actet" dataType="PoolDoubleArray" size="0" unit="" description="Actual evapotranspiration on HRU, pervious + impervious"/>
+  </varMeta>
+</moduleMeta>

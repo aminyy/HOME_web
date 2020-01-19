@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.DailyStats" name="dailyStats" author="longyinping11@lzb.ac.cn" keyword="daily statistics" description="daily statisctis from hourly 2D value">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Hour</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="value2D_h" dataType="PoolDouble2DArray" size="0" unit="" description="hourly value at each grid of the study area"/>
+    <var name="value2D_d" dataType="PoolDouble2DArray" size="0" unit="" description="daily value at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Temp1sta" name="Temp1sta" author="hzfwhy@lzb.ac.cn" keyword="Temperature" description="Temperature distribution. Distributes temperatures to HRU's using temperature data measured at a stationand a monthly parameter based on the lapse rate with elevation. ">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="ntemp" dataType="PoolInteger" size="0" unit="" description="the number of temperature observation"/>
+    <var name="basin_tsta" dataType="PoolInteger" size="0" unit="" description="Index of main temperature station Index of temperature station used to compute basin  temperature values"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="hru_elev" dataType="PoolDoubleArray" size="0" unit="" description="  Mean elevation for each HRU  "/>
+    <var name="hru_tsta" dataType="PoolIntegerArray" size="0" unit="" description="Index of the base temperature station used for lapse  rate calculations"/>
+    <var name="temp_units" dataType="PoolInteger" size="0" unit="" description="Units for measured temperature (0=Fahrenheit; 1=Celsius)"/>
+    <var name="tmax_adj" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment to maximum temperature for each HRU, estimated  based on slope and aspect"/>
+    <var name="tmin_adj" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment to minimum temperature for each HRU, estimated  based on slope and aspect"/>
+    <var name="tmax_lapse" dataType="PoolDoubleArray" size="0" unit="" description="rray of twelve values representing the change in maximum temperature per 1000 elev_units of elevation change for each month, January to December"/>
+    <var name="tmin_lapse" dataType="PoolDoubleArray" size="0" unit="" description="Array of twelve values representing the change in minimum temperture per 1000 elev_units of  elevation change for each month, January to December"/>
+    <var name="tsta_elev" dataType="PoolDoubleArray" size="0" unit="" description="Elevation of each temperature measurement station"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="tmax" dataType="PoolDoubleArray" size="0" unit="" description="(Maximum temperature )"/>
+    <var name="tmin" dataType="PoolIntegerArray" size="0" unit="" description="(Minimum temperature)"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="basin_temp" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted temperature for timestep &lt; 24"/>
+    <var name="basin_tmax" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted daily maximum temperature"/>
+    <var name="basin_tmin" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted daily minimum temperature"/>
+    <var name="tavgc" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="tavgf" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="tmaxc" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tmaxf" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tminc" dataType="PoolDoubleArray" size="0" unit="" description="Minimum HRU temperature. [temp]"/>
+    <var name="tminf" dataType="PoolDoubleArray" size="0" unit="" description="Minimum HRU temperature. [temp]"/>
+    <var name="tempc" dataType="PoolDoubleArray" size="0" unit="" description="HRU adjusted temperature for timestep &lt; 24"/>
+    <var name="tempf" dataType="PoolDoubleArray" size="0" unit="" description="HRU adjusted temperature for timestep &lt; 24"/>
+    <var name="solrad_tmax" dataType="PoolDouble" size="0" unit="" description="Basin daily maximum temperature adjusted to elevation of solar radiation station"/>
+    <var name="starttime" dataType="PoolDouble" size="0" unit="" description="Basin daily minimum temperature for use with solrad radiation"/>
+    <var name="starttime" dataType="PoolCalendar" size="0" unit="" description="starttime"/>
+  </varMeta>
+</moduleMeta>

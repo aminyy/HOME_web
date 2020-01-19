@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Outputs.AsciiGridOutput" name="asciiGridOutput" author="longyinping11@lzb.ac.cn" keyword="ascii grid output" description="output a 2D array in ascii grid format">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="currentDate" dataType="PoolDate" size="0" unit="" description="the simulation date"/>
+    <var name="baseMap" dataType="PoolDouble2DArray" size="0" unit="" description="a 2D array that dipicts the study area extent"/>
+    <var name="OutputPath" dataType="PoolString" size="0" unit="" description="output path"/>
+    <var name="value" dataType="PoolDouble2DArray" size="0" unit="" description="a 2D array that will be output"/>
+    <var name="nrows" dataType="PoolInteger" size="0" unit="" description="the nrows value in the ascii file"/>
+    <var name="ncols" dataType="PoolInteger" size="0" unit="" description="the ncols value in the ascii file"/>
+    <var name="xllcorner" dataType="PoolDouble" size="0" unit="" description="the xllcorner value in the ascii file"/>
+    <var name="yllcorner" dataType="PoolDouble" size="0" unit="" description="the yllcorner value in the ascii file"/>
+    <var name="cellsize" dataType="PoolDouble" size="0" unit="" description="the cellsize value in the ascii file"/>
+    <var name="nodata" dataType="PoolDouble" size="0" unit="" description="the nodata value in the ascii file"/>
+  </varMeta>
+</moduleMeta>

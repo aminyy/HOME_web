@@ -1,0 +1,88 @@
+{% extends "auth/layout.html" %}
+{% set active_page = "auth.favorite" -%}
+
+{% block head2 %}
+    <link href="/static/assets/css/auth.css" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'auth/nav_tabs.html' %}
+        </div>
+        <div class="col-md-12">
+            <form action="{{ url_for('auth.add_to_order') }}" method="post">
+                <div class="list-group-toolbar">
+                    <div class="col-md-7">
+                        数据
+                    </div>
+                    <div class="col-md-2">
+                        收藏时间
+                    </div>
+                    <div class="col-md-2 col-md-offset-1">
+                        操作
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="favorite-list-group-wrapper">
+                    <ul class="list-group">
+                        {% for favorite in favorites %}
+                            <li class="list-group-item">
+                                <div class="col-md-7">
+                                    <h4 class="list-group-item-heading">{{ favorite.meta.title_cn }}</h4>
+                                    <p class="list-group-item-text">
+                                        <span>作者:{{ favorite.meta.ds_serv_man }}</span>
+                                        <span>电话:{{ favorite.meta.ds_serv_phone }}</span>
+                                        <span>邮箱:{{ favorite.meta.ds_serv_mail }}</span>
+                                    </p>
+                                </div>
+                                <div class="col-md-2">
+                                    {{ favorite.updated.strftime("%Y-%m-%d") if favorite.updated  else '' }}
+                                </div>
+                                <div class="col-md-2 col-md-offset-1">
+                                    <button type="submit" name="favo_id" value="{{ favorite.id }}"
+                                       class="btn btn-info btn-xs">申请数据</button>
+                                    <a href="{{ url_for('auth.delete_favorite', id=favorite.id) }}"
+                                       class="btn btn-danger btn-xs">移除</a>
+                                </div>
+                                <div class="clearfix"></div>
+                            </li>
+                        {% else %}
+                            <li class="list-group-item">暂无数据.</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </form>
+            <div class="list-group-toolbar">
+                <div class="pull-right col-md-offset-10">
+                    <span>共有元数据<strong>{{ total }}</strong>条</span>
+                    (<span class="text-danger">{{ current_page }}</span>/{{ total_page }})
+                    <div class="btn-group btn-group-xs" role="group" aria-label="...">
+                        {% if current_page <= 1 %}
+                            <div class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                            </div>
+                        {% else %}
+                            <a class="btn btn-default"
+                               href="{{ next_page_url(current_page - 1) }}">
+                                <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                            </a>
+                        {% endif %}
+                        {% if current_page >= total_page %}
+                            <div class="btn btn-default disabled">
+                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                            </div>
+                        {% else %}
+                            <a class="btn btn-default" {{ 'disabled="disabled"' if current_page >= total_page }}
+                               href="{{ next_page_url(current_page + 1) }}">
+                                <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

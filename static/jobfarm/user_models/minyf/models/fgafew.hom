@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<model class="net.casnw.home.model.Model" name="fgafew">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="startTime" name="startTime" type=" " value=" "/>
+		<var attribute="endTime" name="endTime" type=" " value=" "/>
+		<var attribute="intervalUnit" name="intervalUnit" type=" " value=" "/>
+		<var attribute="intervalCount" name="intervalCount" type=" " value=" "/>
+		<var attribute="iteratorNum" name="iteratorNum" type=" " value=" "/>
+		<module class="net.casnw.home.thornthwaite.Climate" name="Climate">
+			<var attribute="" name="year" type=" " value=" "/>
+			<var attribute="" name="time" type=" " value=" "/>
+			<var attribute="" name="temp" type=" " value=" "/>
+			<var attribute="" name="precip" type=" " value=" "/>
+			<var attribute="" name="inputName" type=" " value=" "/>
+		</module>
+	</context>
+</model>

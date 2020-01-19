@@ -1,0 +1,17 @@
+{% extends "jobfarm_base_cao.html" %}
+{% load staticfiles %}
+{% block title_jobfarm_cao %}sce授权
+{% endblock %}
+			{% block body_right_jobfarm_cao %}
+				<div class="row searchdiv">
+					<form role="form" class="form-horizontal" id="authInfoForm"
+						action="/jobfarm/{{ authURL }}?time={{ timeint }}"
+						method="POST" name="authInfo">
+						{% csrf_token %}
+						<h4>用户{{username}}，您好！</h4>
+						<h3 class='text-error'>&nbsp;&nbsp;&nbsp;&nbsp;{{authMsg}}</h3>
+						<button type="submit" class="btn btn-primary">{{btnInfo}}</button>
+					</form>
+					<a href="http://gaohansc.scgrid.cn/jobfarm/auth/testaccount" class="btn btn-primary">点击试用</a>
+				</div>
+	{% endblock %}

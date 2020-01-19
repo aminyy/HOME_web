@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.IO.Inputs.BaseMaps" name="baseMaps" author="longyinping11@lzb.ac.cn" keyword="base map" description="reading base maps like DEM, landuse, slope,etc.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="demFile" dataType="PoolString" size="0" unit="" description="the DEM file path"/>
+    <var name="cellareaFile" dataType="PoolString" size="0" unit="" description="the study area extent file path"/>
+    <var name="slopeFile" dataType="PoolString" size="0" unit="" description="the slope file path"/>
+    <var name="slopeLengthFile" dataType="PoolString" size="0" unit="" description="the hillslope element file path"/>
+    <var name="slopeDegreeFile" dataType="PoolString" size="0" unit="" description="the slope(in degree) file path"/>
+    <var name="aspectFile" dataType="PoolString" size="0" unit="" description="the aspect file path"/>
+    <var name="soilTypesFile" dataType="PoolString" size="0" unit="" description="the soil type file path"/>
+    <var name="landuseFile" dataType="PoolString" size="0" unit="" description="the landuse file path"/>
+    <var name="basin2D" dataType="PoolDouble2DArray" size="0" unit="" description="a 2D array that dipicts the study area extent"/>
+    <var name="elevRaster" dataType="PoolObject" size="0" unit="" description="a raster object in which elevation of the study area and the header are saved"/>
+    <var name="elev2D" dataType="PoolDouble2DArray" size="0" unit="" description="elevation of the study area"/>
+    <var name="slope2D" dataType="PoolDouble2DArray" size="0" unit="" description="slope of the study area"/>
+    <var name="slopeLength2D" dataType="PoolDouble2DArray" size="0" unit="" description="length of each hillslope element in the study area"/>
+    <var name="slopeDegree2D" dataType="PoolDouble2DArray" size="0" unit="" description="slope(in degree) of the study area"/>
+    <var name="aspect2D" dataType="PoolDouble2DArray" size="0" unit="" description="aspect of the study area"/>
+    <var name="soilcode2D" dataType="PoolInteger2DArray" size="0" unit="" description="soiltype code at each grid of the study area"/>
+    <var name="landcode2D" dataType="PoolInteger2DArray" size="0" unit="" description="landuse code at at each grid of the study area"/>
+    <var name="nrows" dataType="PoolInteger" size="0" unit="" description="the nrows value in the ascii file"/>
+    <var name="ncols" dataType="PoolInteger" size="0" unit="" description="the ncols value in the ascii file"/>
+    <var name="xllcorner" dataType="PoolDouble" size="0" unit="" description="the xllcorner value in the ascii file"/>
+    <var name="yllcorner" dataType="PoolDouble" size="0" unit="" description="the yllcorner value in the ascii file"/>
+    <var name="cellsize" dataType="PoolDouble" size="0" unit="" description="the cellsize value in the ascii file"/>
+    <var name="nodata" dataType="PoolDouble" size="0" unit="" description="the nodata value in the ascii file"/>
+  </varMeta>
+</moduleMeta>

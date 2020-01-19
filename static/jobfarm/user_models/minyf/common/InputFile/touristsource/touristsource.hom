@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<model name="touristsource" class="net.casnw.home.model.Model">
+	<context class="net.casnw.home.model.TemporalContext" name="TemporalContext">
+		<var attribute="iteratorNum" name="iteratorNum" value="46" type="PoolInteger"/>
+		<module class="net.casnw.home.touristsource.TouristSource" name="TouristSource">
+		  <var attribute="inputName" name="inputName" value="data.csv"/>
+		    <var attribute="year" name="year"/>
+			<var attribute="month" name="month"/>
+            <var attribute="tourist" name="tourist"/>
+            <var attribute="province" name="province"/>
+        </module>
+	    <module class="net.casnw.home.touristsource.tourist" name="toruist">
+		    <var attribute="year" name="year"/>
+			<var attribute="month" name="month"/>
+            <var attribute="tourist" name="tourist"/>
+            <var attribute="province" name="province"/>
+			<var attribute="ts" name="ts"/>
+        </module>
+		<module class="net.casnw.home.touristsource.Output" name="Output">
+            <var attribute="outputName" name="outputName" value="output.dat"/>
+		    <var attribute="year" name="year"/>
+			<var attribute="month" name="month"/>
+            <var attribute="ts" name="ts"/>
+		</module>
+	</context>
+</model>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Snowcomp" name="Snowcomp" author="hzfwhy@lzb.ac.cn" keyword="Snow" description="Snow accounting component.Initiates development of a snowpack and simulates snow accumulation and depletion processes using an energy-budget approach. ">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nradpl" dataType="PoolInteger" size="0" unit="" description="Number of radiation planes."/>
+    <var name="nsol" dataType="PoolInteger" size="0" unit="" description="Number of solar radiation stations."/>
+    <var name="ndepl" dataType="PoolInteger" size="0" unit="" description="Number of snow cover depletion curves."/>
+    <var name="ndeplval" dataType="PoolInteger" size="0" unit="" description="Number of snow cover depletion curves."/>
+    <var name="den_init" dataType="PoolDouble" size="0" unit="" description="Initial density of new-fallen snow"/>
+    <var name="settle_const" dataType="PoolDouble" size="0" unit="" description="Snowpack settlement time constant"/>
+    <var name="melt_look" dataType="PoolInteger" size="0" unit="" description="Julian date to start looking for spring snowmelt stage.  Varies with region depending on length of time that  permanent snowpack exists"/>
+    <var name="melt_force" dataType="PoolInteger" size="0" unit="" description="Julian date to force snowpack to spring snowmelt stage;  varies with region depending on length of time that  permanent snowpack exists"/>
+    <var name="rad_trncf" dataType="PoolDoubleArray" size="0" unit="" description="inputParameter rad_trncf"/>
+    <var name="hru_deplcrv" dataType="PoolIntegerArray" size="0" unit="" description="  Index number for the snowpack areal depletion curve associated with an HRU"/>
+    <var name="emis_noppt" dataType="PoolDouble" size="0" unit="" description="Average emissivity of air on days without precipitation"/>
+    <var name="cecn_coef" dataType="PoolDoubleArray" size="0" unit="" description="Convection condensation energy coefficient, varied monthly"/>
+    <var name="cov_type" dataType="PoolIntegerArray" size="0" unit="" description="Vegetation cover type designation for each HRU (0=bare soil; 1=grasses; 2=shrubs; 3=trees)"/>
+    <var name="den_max" dataType="PoolDouble" size="0" unit="" description="Average maximum snowpack density"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area"/>
+    <var name="potet_sublim" dataType="PoolDouble" size="0" unit="" description="Proportion of potential ET that is sublimated from snow surface"/>
+    <var name="covden_sum" dataType="PoolDoubleArray" size="0" unit="" description="Summer vegetation cover density for the major vegetation type on each HRU"/>
+    <var name="covden_win" dataType="PoolDoubleArray" size="0" unit="" description="Winter vegetation cover density for the major vegetation type on each HRU"/>
+    <var name="albset_rnm" dataType="PoolDouble" size="0" unit="" description="Albedo reset - rain, melt stage Proportion of rain in a rain-snow precipitation event above which the snow albedo is not reset. Applied during  the snowpack melt stage"/>
+    <var name="albset_rna" dataType="PoolDouble" size="0" unit="" description="Albedo reset - rain, accumulation stage Proportion of rain in a rain-snow precipitation event  above which the snow albedo is not reset. Applied during  the snowpack accumulation stage."/>
+    <var name="albset_snm" dataType="PoolDouble" size="0" unit="" description="Albedo reset - snow, melt stage Minimum snowfall, in water equivalent, needed to reset  snow albedo during the snowpack melt stage"/>
+    <var name="albset_sna" dataType="PoolDouble" size="0" unit="" description="Albedo reset - snow, accumulation stage Minimum snowfall, in water equivalent, needed to reset snow albedo during the snowpack accumulation stage"/>
+    <var name="snarea_curve" dataType="PoolDouble2DArray" size="0" unit="" description="Snow area depletion curve values, 11 values for each curve (0.0 to 1.0 in 0.1 increments)"/>
+    <var name="snarea_thresh" dataType="PoolDoubleArray" size="0" unit="" description="If maximum temperature of an HRU is less than or equal to this value, precipitation is assumed to be snow"/>
+    <var name="tmax_allsnow" dataType="PoolDouble" size="0" unit="" description="If HRU maximum temperature is less than or equal to this  value, precipitation is assumed to be snow,  in deg C or F, depending on units of data"/>
+    <var name="freeh2o_cap" dataType="PoolDouble" size="0" unit="" description="Free-water holding capacity of snowpack expressed as a  decimal fraction of the frozen water content of the  snowpack (pk_ice)"/>
+    <var name="tstorm_mo" dataType="PoolDoubleArray" size="0" unit="" description="Monthly indicator for prevalent storm type (0=frontal  storms prevalent; 1=convective storms prevalent)"/>
+    <var name=" groundmelt" dataType="PoolDoubleArray" size="0" unit="" description="Amount of snowpack-water that melts each day to soils"/>
+    <var name="hru_type" dataType="PoolIntegerArray" size="0" unit="" description="Type of each HRU (0=inactive; 1=land; 2=lake; 3=swale)"/>
+    <var name="glacier_flag" dataType="PoolInteger" size="0" unit="" description="Flag incicating presence of a glacier, (0=no; 1=yes)"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH"/>
+    <var name="date_jday" dataType="PoolInteger" size="0" unit="" description="Calendar date"/>
+    <var name="date_jwday" dataType="PoolInteger" size="0" unit="" description="Calendar date_jwday"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="date_year" dataType="PoolInteger" size="0" unit="" description=" Calendar date)"/>
+    <var name="swrad" dataType="PoolDoubleArray" size="0" unit="" description="The computed solar radiation for each HRU [solrad]"/>
+    <var name="net_ppt" dataType="PoolDoubleArray" size="0" unit="" description="HRU precipitation (rain and/or snow) with  interception removed"/>
+    <var name="net_snow" dataType="PoolDoubleArray" size="0" unit="" description="hru_snow minus interception"/>
+    <var name="net_rain" dataType="PoolDoubleArray" size="0" unit="" description="hru_rain minus interception"/>
+    <var name="basin_ppt" dataType="PoolDouble" size="0" unit="" description="basin_ppt"/>
+    <var name="tmaxf" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tminf" dataType="PoolDoubleArray" size="0" unit="" description="Minimum HRU temperature. [temp]"/>
+    <var name="tavgc" dataType="PoolDoubleArray" size="0" unit="" description="Average HRU temperature. [temp]"/>
+    <var name="transp_on" dataType="PoolIntegerArray" size="0" unit="" description="Indicator for whether transpiration is occurring, 0=no, 1=yes. [potet]"/>
+    <var name="potet" dataType="PoolDoubleArray" size="0" unit="" description="Potential evapotranspiration for each HRU. [potet]"/>
+    <var name="prmx" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of rain in a mixed even"/>
+    <var name="pptmix" dataType="PoolIntegerArray" size="0" unit="" description="Precipitation is mixture of rain and snow (0=no; 1=yes)"/>
+    <var name="newsnow" dataType="PoolIntegerArray" size="0" unit="" description="New snow on HRU (0=no; 1=yes)"/>
+    <var name="orad" dataType="PoolDouble" size="0" unit="" description="Measured or computed solar radiation on a horizontal surface"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="basin_horad" dataType="PoolDouble" size="0" unit="" description="Potential shortwave radiation for the basin centroid"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="hru_intcpevap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation from interception on each HR"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="gmelt_to_soil" dataType="PoolDoubleArray" size="0" unit="" description="Ground-melt of snowpack, goes to soi"/>
+    <var name="albedo" dataType="PoolDoubleArray" size="0" unit="" description="Snow surface albedo on an HRU or the fraction of radiation reflected from the snowpack surface"/>
+    <var name="tcal" dataType="PoolDoubleArray" size="0" unit="" description="Net snowpack energy balance on an HRU"/>
+    <var name="snow_evap" dataType="PoolDoubleArray" size="0" unit="" description="Evaporation and sublimation from snowpack. [snow]"/>
+    <var name="snowmelt" dataType="PoolDoubleArray" size="0" unit="" description="Snowmelt from snowpack on an HRU. [snow]"/>
+    <var name="basin_snowmelt" dataType="PoolDouble" size="0" unit="" description="Average snowmelt for total basin area"/>
+    <var name="basin_pweqv" dataType="PoolDouble" size="0" unit="" description="Average snowpack water equivalent for total basin area"/>
+    <var name="basin_snowdepth" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average snow depth"/>
+    <var name="pkwater_equiv" dataType="PoolIntegerArray" size="0" unit="" description=" Snowpack water equivalent on an HRU. [snow]"/>
+    <var name="pk_depth" dataType="PoolDoubleArray" size="0" unit="" description="Snowpack depth on an HRU"/>
+    <var name="snowcov_area" dataType="PoolDoubleArray" size="0" unit="" description="Snow-covered area on an HRU, in decimal fraction of total HRU area. [snow]"/>
+    <var name="pptmix_nopack" dataType="PoolIntegerArray" size="0" unit="" description="Indicator that a rain-snow mix event has occurred with no snowpack present on an HRU. [snow]"/>
+    <var name="basin_snowcov" dataType="PoolDouble" size="0" unit="" description="Average snow-covered area for total basin area"/>
+    <var name="basin_snowevap" dataType="PoolDouble" size="0" unit="" description="Average evaporation and sublimation for total basin area"/>
+    <var name="pkwater_ante" dataType="PoolDoubleArray" size="0" unit="" description="Antecedent snowpack water equivalent on an HRU"/>
+    <var name="basin_pk_precip" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average precip added to snowpack"/>
+  </varMeta>
+</moduleMeta>

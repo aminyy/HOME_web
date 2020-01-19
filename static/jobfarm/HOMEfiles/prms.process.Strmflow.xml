@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Strmflow" name="Strmflow" author="hzfwhy@lzb.ac.cn" keyword="Runoff" description="Calculates daily streamflow, individual storm flows, and daily reservoir routing.Procedures to compute (1) daily streamflow as the sum of surface, subsurface,and ground-water flow contributions, (2) storm runoff totals for storm periods,and (3) daily reservoir routing.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="ngw" dataType="PoolInteger" size="0" unit="" description="Number of Ground water reservoirs."/>
+    <var name="nssr" dataType="PoolInteger" size="0" unit="" description="Number of subsurface reservoirs."/>
+    <var name="basin_area" dataType="PoolDouble" size="0" unit="" description="Total basin area"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="basin_sroff" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average of surface runoff"/>
+    <var name="basin_gwflow" dataType="PoolDouble" size="0" unit="" description="Basin area weighted average of groundwater flow"/>
+    <var name="basin_ssflow" dataType="PoolDouble" size="0" unit="" description="Basin area-weighted average for subsurface flow [ssflow]"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="deltim" dataType="PoolDouble" size="0" unit="" description="Length of the time step)"/>
+    <var name="basin_stflow" dataType="PoolDouble" size="0" unit="" description="Sum of basin_sroff, basin_ssflow and basin_gwflow for  timestep"/>
+    <var name=" basin_cms" dataType="PoolDouble" size="0" unit="" description="Sum of basin_sroff, basin_ssflow and basin_gwflow for  timestep"/>
+    <var name="basin_sroff_cfs" dataType="PoolDouble" size="0" unit="" description="Basin surface runoff for timestep"/>
+    <var name="basin_ssflow_cfs" dataType="PoolDouble" size="0" unit="" description="Basin subsurface flow for timestep"/>
+    <var name="basin_gwflow_cfs" dataType="PoolDouble" size="0" unit="" description="Basin ground-water flow for timestep"/>
+    <var name="basin_cfs" dataType="PoolDouble" size="0" unit="" description="Streamflow from basin"/>
+  </varMeta>
+</moduleMeta>

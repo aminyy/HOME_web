@@ -1,0 +1,175 @@
+{% extends "portal/layout.html" %}
+{% set active_page = "portal.jobfarm" -%}
+
+{% block title %}科普 - {% endblock %}
+
+{% block head2 %}
+<style type="text/css">
+
+
+</style>
+{% endblock %}
+
+{% block nav %}
+<div class="nav-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 fn-clean-grid-right-padding">
+                <div class="category-header">
+                    数据分类
+                </div>
+            </div>
+            <div class="col-md-10">
+                {% include 'portal/nav.html' %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="col-md-12" id="top-line"></div>
+<div style="margin-top: 15px;">
+    <div class="container main-wrap">
+        <div class="col-md-2" style="padding: 0;">
+            {% include 'portal/jobfarm/nav.html' %}
+        </div>
+        <div class="col-md-10">
+            <ul id="myTab" class="nav nav-tabs">
+                <li class="active"><a href="#intro" data-toggle="tab">模型介绍</a></li>
+                <li><a href="#io" data-toggle="tab">模型输入输出</a></li>
+                <li><a href="#submit_job" data-toggle="tab" onclick="app_submit()">作业提交</a></li>
+            </ul>
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade in active" id="intro">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">Noah_LSM模型</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">
+
+                                    <p> <h5> Noah LSM的前身是20世纪80年代中期发展的陆面模式，之后该模式被纳入陆面过程参数化方案比较计划、全球土壤湿度计划和分布式模型比较计划。
+                                </h5></p>
+                                    <p>官网链接 :<a target="_blank"
+                                                href="http://www.ral.ucar.edu/research/land/technology/lsm.php">http://www.ral.ucar.edu/research/land/technology/lsm.php</a>
+                                    </p>
+                                </li>
+                        </div>
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">文件下载</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">Noah_LSM_3.3.tar
+                                    <span class="badge btn btn-default"><a  target="_blank"
+                                            href="/portal/jobfarm/filedown?filename=Noah_LSM_3.3.tar&appname=noah_lsm">下载</a></span>
+                                </li>
+                                <li class="list-group-item">Noah_LSM_USERGUIDE_2.7.1.pdf
+                                    <span class="badge btn btn-default"><a  target="_blank"
+                                            href="/portal/jobfarm/filedown?filename=Noah_LSM_USERGUIDE_2.7.1.pdf&appname=noah_lsm">下载</a></span>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="io">
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输入文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">GENPARM.TBL
+                                    <span class="badge btn btn-primary" onclick="viewfile('GENPARM.TBL')">查看</span></li>
+                                <li class="list-group-item">SOILPARM.TBL
+                                    <span class="badge btn btn-primary" onclick="viewfile('SOILPARM.TBL')">查看</span>
+                                </li>
+                                <li class="list-group-item">URBPARM.TBL
+                                    <span class="badge btn btn-primary" onclick="viewfile('URBPARM.TBL')">查看</span></li>
+                                <li class="list-group-item">VEGPARM.TBL
+                                    <span class="badge btn btn-primary" onclick="viewfile('VEGPARM.TBL')">查看</span></li>
+                                <li class="list-group-item">bondville.dat
+                                    <span class="badge btn btn-primary" onclick="viewfile('bondville.dat')">查看</span>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="panel panel-default" style="margin-top:5px">
+                        <div class="panel-heading">输出文件</div>
+                        <div class="panel-body">
+                            <ul class="list-group" style="margin-bottom:0px">
+                                <li class="list-group-item">OUTPUT.txt
+                                    <span class="badge btn btn-primary" onclick="viewfile('OUTPUT.txt')">查看</span></li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                    <div class="modal fade" id="fileeditModal" tabindex="-1" role="dialog"
+                         aria-labelledby="fileeditModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="fileeditModalLabel"></h4>
+                                </div>
+                                <div class="modal-body" id="fileeditModalcontent"></div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="submit_job">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block foot_script %}
+<script type="text/javascript">
+   $(function () {
+      $('#myTab li:eq(0) a').tab('show');
+   });
+   function app_submit(){
+	  $.get("/portal/jobfarm/app/submit?name=Noah_LSM&version=alpha&exec=Noah_LSM",function(data,status){
+		   $('#submit_job').html(data)
+		  });
+
+   }
+   function viewfile(filename){
+
+		var settings = {
+		        type: "POST",
+		        url:"/portal/jobfarm/fileview",
+		        data:{
+		        	"filename":filename,
+		        	"appname":"noah_lsm",
+		        },
+		        dataType:"json",
+		        success: function(data,status) {
+		        	$("#fileeditModalLabel").html(data.fname)
+		        	$("#fileeditModalcontent").html("<textarea id='fileeditarea' name='' rows='20' cols='85'>"+data.fcontent)
+		        	$('#fileeditModal').modal().css({
+		        	    width: 'auto',
+
+		        	});
+		        	//alert("Data: " + data.fcontent + "\nStatus: " + status);
+
+		        },
+		        headers: {
+		        	"X-CSRFToken":getCookie('csrftoken'),
+		        },
+		    };
+		    $.ajax(settings); }
+</script>
+</script>
+{% endblock %}

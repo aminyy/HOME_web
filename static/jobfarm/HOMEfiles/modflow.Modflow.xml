@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="modflow.Modflow" name="Modflow_2005" author="myf@lzb.ac.cn" keyword="Modflow_2005" description="Modflow_2005 模型整体运行">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="namFile" dataType="PoolString" size="0" unit="" description="nam数据文件路径"/>
+    <var name="filePath" dataType="PoolString" size="0" unit="" description="数据文件路径"/>
+  </varMeta>
+</moduleMeta>

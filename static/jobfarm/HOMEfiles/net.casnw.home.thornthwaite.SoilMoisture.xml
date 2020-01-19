@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="net.casnw.home.thornthwaite.SoilMoisture" name="SoilMoisture" author="Lihui Luo" keyword="Soil Moisture" description="Compute the moisture of soil">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>MONTH</timeScale>
+  <varMeta>
+    <var name="soilMoistStorCap" dataType="PoolDouble" size="0" unit="" description="Soil water storage capacity"/>
+    <var name="potET" dataType="PoolDouble" size="0" unit="" description="Potential Evapotranspiration"/>
+    <var name="temp" dataType="PoolDouble" size="0" unit="" description="Temperature"/>
+    <var name="precip" dataType="PoolDouble" size="0" unit="" description="Precipitation"/>
+    <var name="prestor" dataType="PoolDouble" size="0" unit="" description="Precipitation storage"/>
+    <var name="soilMoistStor" dataType="PoolDouble" size="0" unit="" description="Soil water storage"/>
+    <var name="surfaceRunoff" dataType="PoolDouble" size="0" unit="" description="Surface runoff"/>
+    <var name="pmpe" dataType="PoolDouble" size="0" unit="" description="available liquid water at surface - potential ET"/>
+    <var name="actET" dataType="PoolDouble" size="0" unit="" description="Actual Evapotranspiration"/>
+    <var name="dff" dataType="PoolDouble" size="0" unit="" description="potET - actET"/>
+  </varMeta>
+</moduleMeta>

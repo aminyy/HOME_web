@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="prms.process.Precip" name="Precip" author="hzfwhy@lzb.ac.cn" keyword="Precipitation" description="Precipitation form and distribution.This component determines whether measured precipitationis rain or snow and distributes it to the HRU's.">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>YEAR</timeScale>
+  <varMeta>
+    <var name="ntemp" dataType="PoolInteger" size="0" unit="" description="the number of temperature observation"/>
+    <var name="nrain" dataType="PoolInteger" size="0" unit="" description="the number of rain observation"/>
+    <var name="nhru" dataType="PoolInteger" size="0" unit="" description="Number of HRUs."/>
+    <var name="nstorm" dataType="PoolInteger" size="0" unit="" description="Number of storms."/>
+    <var name="adjmix_rain" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment factor for rain in a rain/snow mix Monthly factor to adjust rain proportion in a mixed  rain/snow event"/>
+    <var name="precip_units" dataType="PoolInteger" size="0" unit="" description="Units for measured precipitation Units for measured precipitation (0=inches; 1=mm)"/>
+    <var name="hru_area" dataType="PoolDoubleArray" size="0" unit="" description="Area of each HRU"/>
+    <var name="rain_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation on each HRU to account for differences in elevation, etc"/>
+    <var name="snow_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation on each HRU to account for differences in elevation, etc"/>
+    <var name="strain_adj" dataType="PoolDouble2DArray" size="0" unit="" description="Monthly factor to adjust measured precipitation to  each HRU to account for differences in elevation,  etc. This factor is for the rain gage used for kinematic or storm routing"/>
+    <var name="temp_units" dataType="PoolInteger" size="0" unit="" description="Units for measured temperature (0=Fahrenheit; 1=Celsius)"/>
+    <var name="hru_psta" dataType="PoolIntegerArray" size="0" unit="" description="Index of the base precipitation station used for lapse rate calculations for each HRU"/>
+    <var name="tmax_allrain" dataType="PoolDoubleArray" size="0" unit="" description="If maximum temperature of an HRU is greater than or equal to this value (for each month, January to December),  precipitation is assumed to be rain"/>
+    <var name="tmax_allsnow" dataType="PoolDouble" size="0" unit="" description="If HRU maximum temperature is less than or equal to this  value, precipitation is assumed to be snow,  in deg C or F, depending on units of data"/>
+    <var name="storm_scale_factor" dataType="PoolDoubleArray" size="0" unit="" description="Adjustment factor for each storm"/>
+    <var name="basin_area_inv" dataType="PoolDouble" size="0" unit="" description="Inverse of total basin area as sum of HRU areas"/>
+    <var name="precip" dataType="PoolIntegerArray" size="0" unit="" description="(precip)"/>
+    <var name="tempc" dataType="PoolDoubleArray" size="0" unit="" description="HRU adjusted temperature for timestep &lt; 24"/>
+    <var name="tempf" dataType="PoolDoubleArray" size="0" unit="" description="HRU adjusted temperature for timestep &lt; 24"/>
+    <var name="route_on" dataType="PoolInteger" size="0" unit="" description="Kinematic routing switch (0=daily; 1=storm period)"/>
+    <var name="tmaxc" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tmaxf" dataType="PoolDoubleArray" size="0" unit="" description="Maximum HRU temperature. [temp]"/>
+    <var name="tminc" dataType="PoolDoubleArray" size="0" unit="" description="Minimum HRU temperature. [temp]"/>
+    <var name="tminf" dataType="PoolDoubleArray" size="0" unit="" description="Minimum HRU temperature. [temp]"/>
+    <var name="solrad_tmax" dataType="PoolDouble" size="0" unit="" description="Basin daily maximum temperature adjusted to elevation of solar radiation station"/>
+    <var name="active_hrus" dataType="PoolInteger" size="0" unit="" description="Number of active HRUs"/>
+    <var name="hru_route_order" dataType="PoolIntegerArray" size="0" unit="" description="Routing order for HRUs"/>
+    <var name="date_year" dataType="PoolInteger" size="0" unit="" description=" Calendar date)"/>
+    <var name="date_mo" dataType="PoolInteger" size="0" unit="" description="Calendar.MONTH)"/>
+    <var name="date_day" dataType="PoolInteger" size="0" unit="" description=" Calendar.DAY_OF_MONTH)"/>
+    <var name="hru_ppt" dataType="PoolDoubleArray" size="0" unit="" description="Precipitation on HRU, rain and snow. [precip]"/>
+    <var name="hru_rain" dataType="PoolDoubleArray" size="0" unit="" description="Rain on HRU. [precip]"/>
+    <var name="hru_snow" dataType="PoolDoubleArray" size="0" unit="" description="Snow on HRU. [precip]"/>
+    <var name="newsnow" dataType="PoolIntegerArray" size="0" unit="" description="New snow on HRU (0=no; 1=yes)"/>
+    <var name="pptmix" dataType="PoolIntegerArray" size="0" unit="" description="Precipitation is mixture of rain and snow (0=no; 1=yes)"/>
+    <var name="prmx" dataType="PoolDoubleArray" size="0" unit="" description="Proportion of rain in a mixed even"/>
+    <var name="basin_rain" dataType="PoolDouble" size="0" unit="" description="Area weighted adjusted average rain for basin"/>
+    <var name="basin_snow" dataType="PoolDouble" size="0" unit="" description="Area weighted adjusted average snow for basin"/>
+    <var name="basin_obs_ppt" dataType="PoolDouble" size="0" unit="" description="Area-weighted measured average precipitation for basin. [precip]"/>
+    <var name="basin_ppt" dataType="PoolDouble" size="0" unit="" description="basin_ppt"/>
+  </varMeta>
+</moduleMeta>

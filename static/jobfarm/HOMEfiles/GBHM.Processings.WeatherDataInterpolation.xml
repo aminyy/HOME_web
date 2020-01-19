@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<moduleMeta class="GBHM.Processings.WeatherDataInterpolation" name="weatherDataInterpolation" author="longyinping11@lzb.ac.cn" keyword="spatial interpolation" description="spatial interpolation of weather data">
+  <spaRefSys>BASIN</spaRefSys>
+  <spaceScale>GRID</spaceScale>
+  <timeScale>Day</timeScale>
+  <varMeta>
+    <var name="precPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of rain gauges"/>
+    <var name="tmeanPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="tmaxPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="tminPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="EpPoints" dataType="PoolObjectArray" size="0" unit="" description="the point object dipicting the spatial information of weather stations"/>
+    <var name="elevRaster" dataType="PoolObject" size="0" unit="" description="a raster object in which elevation of the study area and the header are saved"/>
+    <var name="slopeDegree2D" dataType="PoolDouble2DArray" size="0" unit="" description="slope(in degree) of the study area"/>
+    <var name="aspect2D" dataType="PoolDouble2DArray" size="0" unit="" description="aspect of the study area"/>
+    <var name="prec2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily precipitation at each grid of the study area"/>
+    <var name="Ep2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily reference(potential) evapotranspiration at each grid of the study area"/>
+    <var name="tmean2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily mean air temperature at each grid of the study area"/>
+    <var name="tmax2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily maximum air temperature at each grid of the study area"/>
+    <var name="tmin2D" dataType="PoolDouble2DArray" size="0" unit="" description="daily minimum air temperature at each grid of the study area"/>
+  </varMeta>
+</moduleMeta>

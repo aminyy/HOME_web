@@ -1,0 +1,128 @@
+{% extends "auth/layout.html" %}
+
+{% block head2 %}
+    <style type="text/css">
+        .main {
+            margin-top: 80px;
+        }
+        .reset-passwd {
+            width: 400px;
+        }
+        input {
+            border: 1px solid;
+            border-color: gray;
+            width: 320px;
+            height: 40px;
+        }
+        input:hover {
+            border-color: black;
+            box-shadow: inset 0 1px 1px #888888;
+        }
+        h2 {
+            width: 320px;
+            margin-bottom: 10px;
+        }
+        p {
+            color:gray;
+            margin-bottom: 20px;
+        }
+        .login {
+            margin-left: 70px; 
+            margin-top: -10px; 
+            font-size: 16px;
+            color: #ff0000;
+        }
+        .passwd {
+            height: 90px;
+        }
+        .confirm {
+            height: 80px;
+        }
+        .btn-submit {
+            color:white;
+            width: 320px;
+            height: 40px;
+            border: 0;
+            background-color:red;
+            border-radius: 0;
+        }
+        .btn-submit:hover {
+            background-color:#f05d5a ;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="row main">
+        <div class="col-md-12 col-md-offset-5 reset-passwd">
+            <h2>重设密码</h2>
+            <p style="float:left;">帐号：<span>{{ email }}</span></p>
+            <a href="{{ url_for('auth.login', next='/portal/') }}" class="login">立即登录</a>
+            <form action="{{ url_for('auth.passwd_save') }}" method="post">
+                <div class="passwd">
+                    <input type="password" name="passwd" id="passwd" placeholder="请输入新密码"/>
+                    <input type="hidden" name="email" value="{{ email }}"/>
+                </div>
+                <div class="confirm">
+                    <input type="password" name="confirm" id="confirm" placeholder="请确认新密码"/>
+                </div>
+                <button id="commit" type="submit" class="button btn-submit">提交</button>
+            </form>
+            
+        </div>
+    </div>
+{% endblock %}
+
+{% block foot_script %}
+    <script type="text/javascript">
+        $(function () {
+            $("#passwd").bind('input propertychange', function () {
+                var passwd = $("#passwd").val();
+                if ( passwd.length == 0 ) {
+                    document.getElementById("passwd").style.borderColor = "#f61616";
+                    $(".passwd").append("<p id='passwd-error' style='color:red; font-size:13px;'>密码不能为空！</p>");
+                } else {
+                    $("#passwd-error").remove();
+                    document.getElementById("passwd").style.borderColor = "#888888";
+                }
+                
+            });
+
+            $("#confirm").bind('input propertychange', function () {
+                var passwd = $("#passwd").val();
+                var confirm = $("#confirm").val();
+              
+                var error = $("#confirm-error");
+
+                if (passwd != confirm ) {
+                    if ( error.length == 0) {
+                        document.getElementById("confirm").style.borderColor = "#f61616";
+                        $(".confirm").append("<p id='confirm-error' style='color:red; font-size:13px;'>两次密码输入不一致！</p>");
+                    }
+                } else {
+                    $("#confirm-error").remove();
+                    document.getElementById("confirm").style.borderColor = "#888888";
+                }
+            });
+
+            $("#commit").click(function () {
+                var passwd = $("#passwd").val();
+                var confirm = $("#confirm").val();
+                var passwderror = $("#passwd-error");
+                var confirmerror = $("#confirm-error");
+                if (passwd.length > 0 && passwd == confirm) {
+                    return true;
+                } else {
+                    if ( passwd.length == 0 && passwderror.length == 0 ) {
+                        document.getElementById("passwd").style.borderColor = "#f61616";
+                        $(".passwd").append("<p id='passwd-error' style='color:red; font-size:13px;'>密码不能为空！</p>");
+                    } else if (confirm.length == 0 && confirmerror.length == 0 ){
+                        document.getElementById("confirm").style.borderColor = "#f61616";
+                        $(".confirm").append("<p id='confirm-error' style='color:red; font-size:13px;'>两次密码输入不一致！</p>");
+                    } 
+                    return false;
+                }
+            });
+        });
+    </script>
+{% endblock %}
